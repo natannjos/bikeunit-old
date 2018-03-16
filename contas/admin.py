@@ -23,14 +23,14 @@ class UserAdmin( BaseUserAdmin ):
                 'sexo',
                 'nascimento',
                 'cpf',
-                'password'
+                'password',
+                'idade'
             )
         }),
         ('Endereço', {
             'fields': (
                 'cep',
                 'rua',
-                'complemento',
                 'bairro',
                 'cidade',
                 'estado',
@@ -42,10 +42,10 @@ class UserAdmin( BaseUserAdmin ):
             'fields': ('is_active', 'is_staff', 'is_superuser', 'is_admin', 'groups', 'user_permissions')
         }),
     )
-    list_display = ['username', 'email', 'is_active', 'is_staff',
+    list_display = ['username', 'email', 'idade', 'is_active', 'is_staff',
                     'is_admin', 'date_joined']
     list_filter = ['is_admin']
-    readonly_fields = ('last_login', 'password')
+    readonly_fields = ('last_login', 'password', 'idade')
     search_fields = ('username', 'email')
 
 

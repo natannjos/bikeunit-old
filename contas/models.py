@@ -6,7 +6,8 @@ import re
 
 from localflavor.br.br_states import STATE_CHOICES
 from localflavor.br.models import BRStateField
-
+from datetime import date
+from django.utils.timezone import now
 class User( AbstractBaseUser, PermissionsMixin ):
 
     # Informações Pessoais
@@ -44,21 +45,21 @@ class User( AbstractBaseUser, PermissionsMixin ):
         blank = True, null = True, unique = True
     )
     
-    # Endereço
-    cep_digits_re = re.compile(r'^(\d{5}\-\d{3})$')
-    cep = models.CharField('CEP', max_length = 15, validators = [validators.RegexValidator(phone_digits_re)])
+    # Endereço    
+    cep_digits_re = re.compile(r'^(\d{5})-(\d{3})$')
+    cep = models.CharField('CEP', max_length=10, validators=[
+                           validators.RegexValidator(cep_digits_re)])
     rua = models.CharField('Endereço', max_length=50)
-    complemento = models.TextField('Complemento', max_length=100)
     bairro = models.CharField('Bairro', max_length=50)
     cidade = models.CharField('Cidade', max_length=50)
     estado = BRStateField('Estado', choices=STATE_CHOICES, max_length=2)
-    
    
     # Informações Adicionais
     is_staff=models.BooleanField('Equipe', default=False)
     is_admin = models.BooleanField('Admin', default=False)
     is_active=models.BooleanField('Ativo', default=True)
     date_joined=models.DateTimeField('Data de Entrada', auto_now_add=True)
+
     USERNAME_FIELD='username'
     REQUIRED_FIELDS=['email']
 
@@ -79,23 +80,30 @@ class User( AbstractBaseUser, PermissionsMixin ):
         return str(self).split(" ")[0]
 
     def nice_birth_date(self):
-        nice_time=self.nascimento.strftime("%d/%m/%Y")
+        nice_time = self.nascimento.strftime("%d/%m/%Y")
         return nice_time
 
     @property
-    def age(self):
+    def idade(self):
         today=date.today()
-        born=self.birth_date
-        try:
-            birthday=born.replace(year=today.year)
-        except ValueError:
-            # raised when birth date is February 29 and the current year is not a leap year
-            birthday=born.replace(
-                                  year=today.year, month=born.month + 1, day=1)
-        if birthday > today:
-            return today.year - born.year - 1
-        else:
-            return today.year - born.year
+        if self.nascimento:
+            try:
+                birthday = self.nascimento.replace(year=today.year)
+            except ValueError:
+                # raised when birth date is February 29 and the current year is not a leap year
+                birthday = self.nascimento.replace(
+                                    year=today.year, month=self.nascimento.month + 1, day=1)
+            finally:
+                if birthday > today:
+                    return today.year - self.nascimento.year - 1
+                else:
+                    return today.year - self.nascimento.year
+        return '-'
+
+        def save(self, *args, **kwargs):
+            if self.nascimento == today:
+                self.nascimento = None
+            super(User, self).save(*args, **kwargs) # Call the real save() method
 
         # def get_absolute_url(self):
         #     return reverse_lazy('contas:usuario-info', kwargs={'pk': self.pk})
