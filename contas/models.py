@@ -29,7 +29,10 @@ class User( AbstractBaseUser, PermissionsMixin ):
     convites_recebidos = models.ManyToManyField('self', related_name='convites_recebidos', verbose_name='Convites Recebidos', blank=True)
     convites_enviados = models.ManyToManyField(
         'self', related_name='convites_enviados', verbose_name='Convites Enviados', blank=True)
-    
+    meus_grupos = models.ManyToManyField('grupos.Grupos', related_name='meus_grupos', verbose_name='Meus Grupos', blank=True)
+    pedais_gratis = models.ManyToManyField('grupos.Pedal', related_name='pedais_gratis', verbose_name='Pedais Gratis', blank=True)
+
+
     
 
     email = models.EmailField('Email', unique=True)

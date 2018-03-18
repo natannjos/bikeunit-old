@@ -47,6 +47,15 @@ class UserAdmin( BaseUserAdmin ):
             }
         ),
         
+        ('Pedais e Grupos',
+            {
+                'fields':(
+                    'meus_grupos',
+                    'pedais_gratis',
+                )
+            }
+        ),
+        
         ('Permissões', {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'is_admin', 'groups', 'user_permissions')
         }),
