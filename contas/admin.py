@@ -37,6 +37,15 @@ class UserAdmin( BaseUserAdmin ):
             )
         }
         ),
+        ('Social',
+            {
+                'fields':(
+                    'amigos',
+                    'convites_recebidos',
+                    'convites_enviados',
+                )
+            }
+        ),
         
         ('Permissões', {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'is_admin', 'groups', 'user_permissions')
@@ -45,7 +54,7 @@ class UserAdmin( BaseUserAdmin ):
     list_display = ['username', 'email', 'idade', 'is_active', 'is_staff',
                     'is_admin', 'date_joined']
     list_filter = ['is_admin']
-    readonly_fields = ('last_login', 'password', 'idade')
+    readonly_fields = ('last_login', 'password', 'idade', 'amigos', 'convites_enviados', 'convites_recebidos')
     search_fields = ('username', 'email')
 
 

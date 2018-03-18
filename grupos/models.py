@@ -2,17 +2,20 @@ from django.db import models
 from django.conf import settings
 from django.core.validators import MinValueValidator
 from decimal import Decimal
-
+from django.conf import settings
 # Create your models here.
 class Grupos(models.Model):
     objects = models.Manager()
 
     admin = models.ForeignKey(settings.AUTH_USER_MODEL,
-                              verbose_name='Administrador', on_delete=models.CASCADE)
+                              verbose_name='Administrador', on_delete=models.CASCADE, related_name='admin')
     nome = models.CharField('Nome do grupo', max_length=20, unique=True)
     slug = models.SlugField()
     criacao = models.DateTimeField('Criado em', auto_now_add=True)
     modificacao = models.DateTimeField('Modificado em', auto_now=True)
+
+    participantes = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='Participantes', blank=True, related_name='Participantes')
+    pedais = models.ManyToManyField('grupos.Pedal', verbose_name='Pedais', blank=True)
 
     class Meta:
         verbose_name = 'Grupo'

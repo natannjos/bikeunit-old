@@ -8,6 +8,8 @@ from localflavor.br.br_states import STATE_CHOICES
 from localflavor.br.models import BRStateField
 from datetime import date
 from django.utils.timezone import now
+
+
 class User( AbstractBaseUser, PermissionsMixin ):
 
     # Informações Pessoais
@@ -22,7 +24,14 @@ class User( AbstractBaseUser, PermissionsMixin ):
             )
         ], help_text='Seu nome será usado para identifica-lo de forma única na plataforma'
     )
+
+    amigos = models.ManyToManyField('self', related_name='Amigos', verbose_name='Meus Amigos', blank=True)
+    convites_recebidos = models.ManyToManyField('self', related_name='convites_recebidos', verbose_name='Convites Recebidos', blank=True)
+    convites_enviados = models.ManyToManyField(
+        'self', related_name='convites_enviados', verbose_name='Convites Enviados', blank=True)
     
+    
+
     email = models.EmailField('Email', unique=True)
     
 
