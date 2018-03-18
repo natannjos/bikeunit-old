@@ -41,6 +41,7 @@ INSTALLED_APPS = [
 
     # Meus Apps
     'contas',
+    'grupos'
 ]
 
 MIDDLEWARE = [
