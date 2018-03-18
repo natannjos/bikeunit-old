@@ -47,8 +47,7 @@ class User( AbstractBaseUser, PermissionsMixin ):
     
     # Endereço    
     cep_digits_re = re.compile(r'^(\d{5})-(\d{3})$')
-    cep = models.CharField('CEP', max_length=10, validators=[
-                           validators.RegexValidator(cep_digits_re)])
+    cep = models.CharField('CEP', max_length=10, validators=[validators.RegexValidator(cep_digits_re)])
     rua = models.CharField('Endereço', max_length=50)
     bairro = models.CharField('Bairro', max_length=50)
     cidade = models.CharField('Cidade', max_length=50)
