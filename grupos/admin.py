@@ -5,7 +5,7 @@ from .models import Grupos, Pedal
 # Register your models here.
 class GruposAdmin(admin.ModelAdmin):   
 
-    list_display = ['nome', 'admin', 'criacao', 'modificacao']
+    list_display = ['nome', 'criacao', 'modificacao']
     list_filter = ['nome', 'admin']
     readonly_fields = ('criacao', 'modificacao', 'slug')
     search_fields = ('nome', 'admin')

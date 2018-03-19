@@ -7,8 +7,8 @@ from django.conf import settings
 class Grupos(models.Model):
     objects = models.Manager()
 
-    admin = models.ForeignKey(settings.AUTH_USER_MODEL,
-                              verbose_name='Administrador', on_delete=models.CASCADE, related_name='admin')
+    admin = models.ManyToManyField(settings.AUTH_USER_MODEL,
+                              verbose_name='Administradores', related_name='admin')
     nome = models.CharField('Nome do grupo', max_length=20, unique=True)
     slug = models.SlugField()
     criacao = models.DateTimeField('Criado em', auto_now_add=True)
