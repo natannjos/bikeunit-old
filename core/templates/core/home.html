@@ -1,0 +1,912 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!--================================================================================
+	Item Name: Materialize - Material Design Admin Template
+	Version: 3.1
+	Author: GeeksLabs
+	Author URL: http://www.themeforest.net/user/geekslabs
+================================================================================ -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+    <title>Perfil Usuário</title>
+
+    <!-- Favicons-->
+    <link rel="icon" href="{% static 'images/favicon/favicon-32x32.png' %}" sizes="32x32">
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="{% static 'images/favicon/apple-touch-icon-152x152.png' %}">
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="{% static 'images/favicon/mstile-144x144.png' %}">
+    <!-- For Windows Phone -->
+
+
+    <link href="{% static 'css/materialize.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="{% static 'css/style.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- Custome CSS-->
+    <link href="{% static 'css/custom/custom.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+
+    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+    <link href="{% static 'js/plugins/prism/prism.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="{% static 'js/plugins/perfect-scrollbar/perfect-scrollbar.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="{% static 'js/plugins/chartist-js/chartist.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="{% static 'js/plugins/sweetalert/sweetalert.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+
+    <!--you can use custom css from js/plugins/sweetalert/themes/-->
+    <!--<link href="js/plugins/sweetalert/themes/google/google.css" type="text/css" rel="stylesheet" media="screen,projection">-->
+</head>
+
+<body>
+    <!-- Start Page Loading -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+    <!-- End Page Loading -->
+
+
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+    <!-- START HEADER -->
+    <header id="header" class="page-topbar">
+        <!-- start header nav-->
+        <div class="navbar-fixed">
+            <nav class="navbar-color">
+                <div class="nav-wrapper">
+                    <ul class="left">
+                        <li>
+                            <h1 class="logo-wrapper">
+                                <a href="index.html" class="brand-logo darken-1">
+                                    <img src="{% static 'images/materialize-logo.png' %}" alt="materialize logo">
+                                </a>
+                                <span class="logo-text">Materialize</span>
+                            </h1>
+                        </li>
+                    </ul>
+
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="notifications-dropdown">
+                                <i class="mdi-social-notifications">
+                                    <small class="notification-badge">8</small>
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- notificações -->
+                    <ul id="notifications-dropdown" class="dropdown-content">
+                        <li>
+                            <h5>Notificações Perfil</h5>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#!">
+                                <i class="mdi-action-event"></i>Novos pedais agendados nos grupos que você participa </a>
+                            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 2 horas</time>
+                        </li>
+                        <li>
+                            <a href="#!">
+                                <i class="mdi-action-question-answer"></i> Novas mensagens nos chats</a>
+                            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 3 dias</time>
+                        </li>
+                        <li>
+                            <a href="#!">
+                                <i class="mdi-action-thumb-up"></i> Novas sugestões de Grupos e Pedais feitas por amigos</a>
+                            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 3 dias</time>
+                        </li>
+                        <li>
+                            <a href="#!">
+                                <i class="mdi-content-markunread"></i> Amigos responderam a seus convites</a>
+                            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 3 dias</time>
+                        </li>
+                        <li>
+                            <a href="#!">
+                                <i class="mdi-action-markunread-mailbox"></i>Novos convites de pedais agendados por diversos grupos</a>
+                            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 4 dias</time>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- fim de notificações-->
+    </header>
+    <!-- END HEADER -->
+
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+    <!-- START MAIN -->
+    <div id="main">
+        <!-- START WRAPPER -->
+        <div class="wrapper">
+
+            <!-- MENU-->
+            <aside id="left-sidebar-nav">
+                <ul id="slide-out" class="side-nav fixed leftside-navigation">
+                    <li class="user-details cyan darken-2">
+                        <div class="row">
+                            <div class="col col s4 m4 l4">
+                                <img src="{% static 'images/avatar.jpg' %}" alt="" class="circle responsive-img valign profile-image">
+                            </div>
+                            <div class="col col s8 m8 l8">
+                                <ul id="profile-dropdown" class="dropdown-content">
+                                    <li>
+                                        <a href="#">
+                                            <i class="mdi-action-face-unlock"></i> Perfil</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="mdi-action-assignment-ind"></i>Dados</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="mdi-hardware-keyboard-tab"></i>Sair</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="mdi-navigation-cancel"></i>Excluir Conta</a>
+                                    </li>
+                                </ul>
+                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">John Doe
+                                    <i class="mdi-navigation-arrow-drop-down right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="bold ">
+                        <a href="index.html" class="waves-effect waves-cyan">
+                            <i class="mdi-action-home"></i>Home App</a>
+                    </li>
+                    <li class="bold">
+                        <a href="#modal3" class="modal-trigger waves-cyan">
+                            <i class="mdi-maps-local-library"></i> Home Administrador</a>
+                    </li>
+                    <li class="no-padding">
+                        <ul class="collapsible collapsible-accordion">
+                            <li class="bold">
+                                <a class="collapsible-header waves-effect waves-cyan">
+                                    <i class="mdi-maps-directions-bike"></i> Criar grupo de Pedal</a>
+                                <div class="collapsible-body">
+                                    <ul>
+                                        <li>
+                                            <a class="  modal-trigger  " href="#modal1">Público</a>
+                                        </li>
+                                        <li>
+                                            <a class="  modal-trigger  " href="#modal2">Privado</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="bold">
+                                <a href="" class="waves-effect waves-cyan">
+                                    <i class="mdi-action-assignment-ind"></i> Alterar Dados</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan">
+                    <i class="mdi-navigation-menu"></i>
+                </a>
+            </aside>
+
+
+
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                    <p>O grupo aparecerá na Home do Aplicativo e todos os usuários poderão enviar solicitãção para participar
+                        do grupo.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Não quero fazer um grupo agora</a>
+                    <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">OK, quero fazer um Grupo Público</a>
+                </div>
+            </div>
+
+            <div id="modal2" class="modal">
+                <div class="modal-content">
+                    <p>O grupo não aparecerá na Home do Aplicativo e os membros deverão ser convidados.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Não quero fazer um grupo agora</a>
+                    <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Ok, quero fazer um grupo Privado</a>
+                </div>
+            </div>
+            <div id="modal3" class="modal">
+                <div class="modal-content">
+                    <p>Você ainda não criou um grupo de pedal pra administrar.</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Ok</a>
+
+                </div>
+            </div>
+            <!--FIM MENU-->
+
+
+            <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+            <!-- START CONTENT -->
+            <section id="content" style="min-height: 500px">
+
+
+                <!--breadcrumbs start-->
+                <div id="breadcrumbs-wrapper">
+                    <!-- Search for small screen -->
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <h5 class="breadcrumbs-title">Perfil Usuário</h5>
+                                <ol class="breadcrumbs">
+                                    <li>
+                                        <a href="index.html">GoGo Bike</a>
+                                    </li>
+                                    <li class="active">Perfil Usuário</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--breadcrumbs end-->
+
+
+                <!--start container-->
+                <div class="container">
+                    <div class="section">
+                        <div class="col s12 m8 l9">
+
+                            <!--Inicio da lista perfil usuário-->
+                            <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+
+                                <!--1º item da lista perfil-usuario-->
+                                <li>
+                                    <div class="collapsible-header ">
+                                        <i class="mdi-maps-directions-bike"></i> Grupos de pedal que participo
+                                    </div>
+                                    <div class="collapsible-body row">
+
+                                        
+                                        
+                                        {% for x in range %}
+                                            <div class="product col m3 s12 l3">
+                                                <div class="card" style="margin: 5px 5px 5px 5px">
+                                                    <div class="card-image waves-effect waves-block waves-light">
+                                                        <a href="#">
+                                                            <img src="{% static 'images/logo-quadrado.jpg' %}" alt="product-img">
+                                                        </a>
+                                                    </div>
+                                            
+                                                    <ul class="card-action-buttons">
+                                                        <li>
+                                                            <a class="btn-floating waves-effect waves-light green accent-4 activator">
+                                                                <i class="mdi-social-group-add"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="btn-floating waves-effect waves-light light-blue">
+                                                                <i class="mdi-social-notifications-on"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class=" btn btn-warning-cancel-sair-do-grupo btn-floating waves-effect waves-light red accent-2">
+                                                                <i class="mdi-content-clear"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                            
+                                                    <div class="card-content">
+                                                        <div class="row">
+                                                            <div class="col s4 no-padding">
+                                                                <a href="">
+                                                                    <img src="{% static 'images/' %}" alt="" class="responsive-img">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            
+                                                    <div class="card-reveal">
+                                                        <span class="card-title grey-text text-darken-4">
+                                                            <i class="mdi-navigation-close right"></i> Convide um amigo pra particiar (digite email)
+                                                        </span>
+                                                        <form>
+                                                            <select name="emailsCadastrados" id="emailsCadastrados" class="multiple">
+                                                                <option value="1">fulano@email.com</option>
+                                                                <option value="1">ciclano@email.com</option>
+                                                                <option value="1">beutrano@email.com</option>
+                                                            </select>
+                                                            <button type="submit" class="btn waves-effect waves-light green">Enviar</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                       
+                                    </div>
+                                </li>
+                                <!--fim do 1º item da lista perfil-usuario-->
+
+                                <!--2º item da lista perfil-usuario-->
+                                <li>
+                                    <div class="collapsible-header ">
+                                        <i class="mdi-action-done"></i> Pedais Que Confirmei Presença</div>
+                                    <div class="collapsible-body">
+                                        <div class="row">
+                                            
+                                            {% for x in range %}
+                                                <div class="col s12 m4 l4">
+                                                    <div id="card-alert" class="card deep-purple">
+                                                        <div class="card-content white-text">
+                                                            <img src="{% static 'images/avatar.jpg' %}" alt="avatar" class="alert-circle responsive-img valign profile-image" />
+                                                            <span class="white-text darken-1">
+                                                                <b>Pedal Norte</b>
+                                                            </span>
+                                                            <br>
+                                                            <br>
+                                                            <ul>
+                                                                <li>Quiriri</li>
+                                                                <li>Dia: 10/10</li>
+                                                                <li>60km</li>
+                                                                <li>Terreno misto</li>
+                                                                <li>Concentração: Tal Lugar</li>
+                                                                <li>Às 14:00hs </li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="card-action deep-purple darken-2 center">
+                                                            <a class="btn-flat btn waves-effect light-blue white-text">
+                                                                <i class="mdi-action-question-answer"></i>
+                                                                <span class="letra-pequena"></span>
+                                                            </a>
+                                                            <a class="btn-flat btn waves-effect light-blue white-text activator">
+                                                                <i class="mdi-social-group-add"></i>
+                                                                <span class="letra-pequena"></span>
+                                                            </a>
+                                                            <a class="btn btn-warning-cancel btn-flat btn waves-effect red accent-2 white-text letra-pequena ">
+                                                                <i class="mdi-content-clear left"></i>
+                                                            </a>
+                                                        </div>
+                                                        <div class="card-reveal">
+                                                            <span class="card-title grey-text text-darken-4">
+                                                                <i class="mdi-navigation-close right"></i> Convide um amigo pra particiar (digite email)
+                                                            </span>
+                                                            <form>
+                                                                <select name="emailsCadastrados" id="emailsCadastrados" class="multiple">
+                                                                    <option value="1">fulano@email.com</option>
+                                                                    <option value="1">ciclano@email.com</option>
+                                                                    <option value="1">beutrano@email.com</option>
+                                                                </select>
+                                                
+                                                                <button type="submit" class="btn waves-effect waves-light green " style="margin-top: 150px">Enviar</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </li>
+                                <!--fim do 2º item da lista perfil-usuario-->
+
+                                <!--3ª item de lista perfil usuário-->
+                                <li>
+                                    <div class="collapsible-header ">
+                                        <i class="mdi-content-markunread"></i>Convites Enviados a amigos(Status)
+                                    </div>
+                                    <div class="collapsible-body">
+                                        <div class="col s12 m8 l9">
+                                            <div class="row">
+
+                                                <!-- TITULO DAS TABS -->
+                                                <div class="col s12">
+                                                    <ul class="tabs tab-demo z-depth-1">
+                                                        <li class="tab col s3">
+                                                            <a class="active" href="#test1">Corupá</a>
+                                                        </li>
+                                                        <li class="tab col s3">
+                                                            <a href="#test2">Quiriri</a>
+                                                        </li>
+                                                        <li class="tab col s3">
+                                                            <a href="#test3">Contenda</a>
+                                                        </li>
+                                                        <li class="tab col s3">
+                                                            <a href="#test4">Colombo</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!-- FIM TITULO DAS TABS -->
+
+                                                <!-- CORPO DAS TABS -->
+                                                <div class="col s12">
+                                                    <div id="test1" class="col s12">
+                                                        <div class="col s12 m8 l9">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th data-field="id">Nome</th>
+                                                                        <th data-field="name">Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Morgana Bla</td>
+                                                                        <td>Confirmado</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Fernando Tal</td>
+                                                                        <td>Pendente</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Rodrigo Robertini</td>
+                                                                        <td>Cancelado</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="test2" class="col s12">
+                                                        <div class="col s12 m8 l9">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th data-field="id">Nome</th>
+                                                                        <th data-field="name">Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td> Abrel Santos</td>
+                                                                        <td>Pendente</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Aleluia Das Graças</td>
+                                                                        <td>Cancelado</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Francisquina J</td>
+                                                                        <td>Confirmado</td>
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                    <div id="test3" class="col s12">
+                                                        <div class="col s12 m8 l9">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th data-field="id">Nome</th>
+                                                                        <th data-field="name">Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Roberta F</td>
+                                                                        <td>Pendente</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Ana Trancoso</td>
+                                                                        <td>Pendente</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Flávia A</td>
+                                                                        <td>Confirmado</td>
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div id="test4" class="col s12">
+                                                        <div class="col s12 m8 l9">
+                                                            <table>
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th data-field="id">Nome</th>
+                                                                        <th data-field="name">Status</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Gabriela F</td>
+                                                                        <td>Confirmado</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Paola B</td>
+                                                                        <td>Cancelado</td>
+
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Carlos G</td>
+                                                                        <td>Confirmado</td>
+
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- FIM DO CORPO DAS TABS -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <!--Fim 3º item de lista perfil usuário-->
+
+                                <!--4º item da lista perfil-usuario-->
+
+                                <li>
+                                    <div class="collapsible-header ">
+                                        <i class="mdi-action-thumb-up"></i>Grupos e Pedais Sugeridos por Amigos
+                                    </div>
+                                    <div class="collapsible-body">
+                                        <div class="row">
+                                            <div class="col s12 m4 l3">
+                                                <p>
+                                                    Alguns amigos gostariam que você participasse desses grupos e/ou pedais.
+                                                    <code class=" language-markup"></code>
+                                                </p>
+                                            </div>
+                                            <div class="col s12 m8 l9">
+                                                <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+                                                    {% for x in range %}
+                                                        <li>
+                                                            <div class="collapsible-header">
+                                                                <i class="mdi-content-drafts"></i> Paulinea Sussa
+                                                            </div>
+                                                        
+                                                            <div class="collapsible-body">
+                                                                <div class="container">
+                                                                    <div class="row">
+                                                                        <div class="col s12 m12 l12">
+                                                                            <div class="col s12 m4 l4">
+                                                                                <div id="card-alert" class="card deep-purple">
+                                                                                    <div class="row">
+                                                                                        <div class="col s8 m8 l8">
+                                                                                            <div class="card-content white-text">
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <a class="btn-floating waves-effect waves-light red accent-2">
+                                                                                                            <i class="mdi-social-notifications-on"></i>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                                <span class="card-title white-text darken-1">Quiriri</span>
+                                                                                                <ul>
+                                                                                                    <li>Nível Médio</li>
+                                                                                                    <li>60km</li>
+                                                                                                    <li>Dia:10/10</li>
+                                                                                                    <li>Terreno Misto</li>
+                                                                                                    <li>Concentração: Praça Tal</li>
+                                                                                                    <li>Às 14:00hr</li>
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col s4 m4 l4">
+                                                                                            <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2 letra-pequena preco-card letra-menor preco-card">R$1899,00</a>
+                                                                                        </div>
+                                                                                        <div class="col s12 m12 l12">
+                                                                                            <div class="card-action deep-purple darken-2 center">
+                                                                                                <a class="btn btn-success waves-effect waves-light">
+                                                                                                    <i class="mdi-action-thumb-up"></i>
+                                                                                                </a>
+                                                                                                <a class="btn btn-success waves-effect waves-light">
+                                                                                                    <i class="mdi-action-delete"></i>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <!--fim do 4º item da lista perfil-usuario-->
+
+
+                                <!--5º item da lista perfil-usuario-->
+
+                                <li>
+                                    <div class="collapsible-header ">
+                                        <i class="mdi-action-markunread-mailbox"></i> Pedais Agendados por Diversos Grupos
+                                    </div>
+                                    <div class="collapsible-body">
+                                        <div class="row">
+                                            <div class="col s12 m4 l3">
+                                                <p>
+                                                    Disversos Grupos desejam saber se você se interessa em participar de seus pedais.
+                                                    <code class=" language-markup"></code>
+                                                </p>
+                                            </div>
+                                            <div class="col s12 m8 l9">
+                                                <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+                                                    
+                                                    {% for x in range %}
+                                                        <li>
+                                                            <div class="collapsible-header">
+                                                                <i class="mdi-maps-directions-bike"></i> Pedal Norte
+                                                            </div>
+                                                            <div class="collapsible-body">
+                                                                <div class="container">
+                                                                    <div class="row">
+                                                                        <div class="col s12 m12 l12">
+                                                                            <div class="col s12 m4 l4">
+                                                                                <div id="card-alert" class="card deep-purple">
+                                                                                    <div class="row">
+                                                                                        <div class="col s8 m8 l8">
+                                                                                            <div class="card-content white-text">
+                                                                                                <ul>
+                                                                                                    <li>
+                                                                                                        <a class="btn-floating waves-effect waves-light red accent-2">
+                                                                                                            <i class="mdi-social-notifications-on"></i>
+                                                                                                        </a>
+                                                                                                    </li>
+                                                                                                </ul>
+                                                                                                <span class="card-title white-text darken-1">Quiriri</span>
+                                                                                                <ul>
+                                                                                                    <li>Nível Médio</li>
+                                                                                                    <li>60km</li>
+                                                                                                    <li>Dia:10/10</li>
+                                                                                                    <li>Terreno Misto</li>
+                                                                                                    <li>Concentração: Praça Tal</li>
+                                                                                                    <li>Às 14:00hr</li>
+                                                                                                </ul>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="col s4 m4 l4">
+                                                                                            <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2 letra-pequena preco-card letra-menor preco-card">R$1899,00</a>
+                                                                                        </div>
+                                                                                        <div class="col s12 m12 l12">
+                                                                                            <div class="card-action deep-purple darken-2 center">
+                                                                                                <a class="btn btn-success waves-effect waves-light">
+                                                                                                    <i class="mdi-action-thumb-up"></i>
+                                                                                                </a>
+                                                                                                <a class="btn btn-success waves-effect waves-light">
+                                                                                                    <i class="mdi-action-delete"></i>
+                                                                                                </a>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+
+
+            <!-- START FOOTER -->
+            <footer class="page-footer">
+                <div class="footer-copyright">
+                    <div class="container">
+                        <span>Copyright © 2015
+                            <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs"
+                                target="_blank">GeeksLabs</a> All rights reserved.</span>
+                        <span class="right"> Design and Developed by
+                            <a class="grey-text text-lighten-4" href="http://geekslabs.com/">GeeksLabs</a>
+                        </span>
+                    </div>
+                </div>
+            </footer>
+            <!-- END FOOTER -->
+
+
+
+
+
+            <!-- ================================================
+    Scripts
+    ================================================ -->
+
+            <!-- jQuery Library -->
+            <script type="text/javascript" src="{% static 'js/plugins/jquery-1.11.2.min.js' %}"></script>
+            <!--angularjs-->
+            <script type="text/javascript" src="{% static 'js/plugins/angular.min.js' %}"></script>
+            <!--materialize js-->
+            <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+            <!--prism -->
+            <script type="text/javascript" src="{% static 'js/plugins/prism/prism.js' %}"></script>
+            <!--scrollbar-->
+            <script type="text/javascript" src="{% static 'js/plugins/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+            <!-- chartist -->
+            <script type="text/javascript" src="{% static 'js/plugins/chartist-js/chartist.min.js' %}"></script>
+            <!--sweetalert -->
+            <script type="text/javascript" src="{% static 'js/plugins/sweetalert/sweetalert.min.js' %}"></script>
+            <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+            <script type="text/javascript" src="{% static 'js/plugins.min.js' %}"></script>
+            <!--custom-script.js - Add your own theme custom JS-->
+            <script type="text/javascript" src="{% static 'js/custom-script.js' %}"></script>
+
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    "use strict";
+
+                    $('.btn-message').click(function () {
+                        swal("Here's a message!");
+                    });
+
+                    $('.btn-title-text').click(function () {
+                        swal("Here's a message!", "It's pretty, isn't it?")
+                    });
+
+                    $('.btn-timer').click(function () {
+                        swal({
+                            title: "Auto close alert!",
+                            text: "I will close in 2 seconds.",
+                            timer: 2000,
+                            showConfirmButton: false
+                        });
+                    });
+
+                    $('.btn-success').click(function () {
+                        swal("Good job!", "You clicked the button!", "success");
+                    });
+
+                    $('.btn-warning-confirm').click(function () {
+                        swal({
+                            title: "Você tem ceteza?",
+                            text: "Seu nome será retirado da lista",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: '#DD6B55',
+                            confirmButtonText: 'Sim, quero tirar meu nome da lista!',
+                            closeOnConfirm: false
+                        },
+                            function () {
+                                swal("Excluído!", "Você cancelou presença nesse pedal", "success");
+                            });
+                    });
+
+                    $('.btn-warning-cancel').click(function () {
+                        swal({
+                            title: "Você tem certeza?",
+                            text: "Seu nome sairá da lista para esse pedal!",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: '#DD6B55',
+                            confirmButtonText: 'sim, pode tirar meu nome da lista!',
+                            cancelButtonText: "Continuar no pedal!",
+                            closeOnConfirm: false,
+                            closeOnCancel: false
+                        },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    swal("Excluido!", "Você cancelou presença nesse pedal!", "success");
+                                } else {
+                                    swal("Cancelamento Abortado", "Que bom que você optou por comparecer :)", "error");
+                                }
+                            });
+                    });
+
+                    $('.btn-warning-cancel-sair-do-grupo').click(function () {
+                        swal({
+                            title: "Você tem certeza?",
+                            text: "você realmente deseja sair desse grupo?",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: '#DD6B55',
+                            confirmButtonText: 'sim, quero sair desse grupo!',
+                            cancelButtonText: "Continuar no grupo!",
+                            closeOnConfirm: false,
+                            closeOnCancel: false
+                        },
+                            function (isConfirm) {
+                                if (isConfirm) {
+                                    swal("Excluido!", "Você saiu desse grupo.", "success");
+                                } else {
+                                    swal("Exclusão Abortada", "Que bom que você optou por permanecer no grupo :)", "error");
+                                }
+                            });
+                    });
+
+                    $('.btn-custom-icon').click(function () {
+                        swal({
+                            title: "Sweet!",
+                            text: "Here's a custom image.",
+                            imageUrl: "{% static 'images/favicon/apple-touch-icon-152x152.png' %}"
+                        });
+                    });
+
+                    $('.btn-message-html').click(function () {
+                        swal({
+                            title: "HTML <small>Title</small>!",
+                            text: 'A custom <span style="color:#F8BB86">html<span> message.',
+                            html: true
+                        });
+                    });
+
+                    $('.btn-input').click(function () {
+                        swal({
+                            title: "An input!",
+                            text: 'Write something interesting:',
+                            type: 'input',
+                            showCancelButton: true,
+                            closeOnConfirm: false,
+                            animation: "slide-from-top",
+                            inputPlaceholder: "Write something",
+                        },
+                            function (inputValue) {
+                                if (inputValue === false) return false;
+
+                                if (inputValue === "") {
+                                    swal.showInputError("You need to write something!");
+                                    return false;
+                                }
+
+                                swal("Nice!", 'You wrote: ' + inputValue, "success");
+
+                            });
+                    });
+
+                    $('.btn-theme').click(function () {
+                        swal({
+                            title: "Themes!",
+                            text: "Here's the Twitter theme for SweetAlert!",
+                            confirmButtonText: "Cool!",
+                            customClass: 'twitter'
+                        });
+                    });
+
+                    $('.btn-ajax').click(function () {
+                        swal({
+                            title: 'Tem certeza que deseja sair desse grupo?',
+                            text: 'Se sair, para entrar novamente terá que enviar outra solicitação.',
+                            type: 'info',
+                            showCancelButton: true,
+                            closeOnConfirm: false,
+                            showLoaderOnConfirm: true,
+                        }, function () {
+                            setTimeout(function () {
+                                swal('Você saiu desse grupo!');
+                            }, 2000);
+                        });
+                    });
+
+                });
+            </script>
+</body>
+
+</html>

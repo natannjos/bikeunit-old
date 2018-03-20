@@ -41,7 +41,8 @@ INSTALLED_APPS = [
 
     # Meus Apps
     'contas',
-    'grupos'
+    'grupos',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -105,7 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
 AUTH_USER_MODEL = 'contas.User'
 

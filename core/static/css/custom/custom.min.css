@@ -1,0 +1,24 @@
+﻿body
+{
+    cursor: default
+}
+
+.collapsible-header:after {
+    /* font-family: "Material-Design-Icons"; */
+    content: none;
+    
+    }
+
+.letra-pequena{
+
+ 	font-size: 0.8em
+ }   
+
+.letra-menor{
+
+ 	font-size: 0.7em
+ }   
+
+.preco-card{
+	margin-top: 30px
+ }
