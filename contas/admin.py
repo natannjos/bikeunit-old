@@ -52,6 +52,8 @@ class UserAdmin( BaseUserAdmin ):
                 'fields':(
                     'meus_grupos',
                     'pedais_gratis',
+                    'pedais_agendados',
+                    'historico_de_pedais',
                 )
             }
         ),
@@ -63,7 +65,7 @@ class UserAdmin( BaseUserAdmin ):
     list_display = ['username', 'email', 'idade', 'is_active', 'is_staff',
                     'is_admin', 'date_joined']
     list_filter = ['is_admin']
-    readonly_fields = ('last_login', 'password', 'idade', 'amigos', 'convites_enviados', 'convites_recebidos')
+    readonly_fields = ('last_login', 'password', 'idade', 'amigos', 'convites_enviados', 'convites_recebidos', 'historico_de_pedais')
     search_fields = ('username', 'email')
 
 

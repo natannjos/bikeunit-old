@@ -2,7 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView
 
 
-class Home( TemplateView ):
+class Home(TemplateView):
 
     template_name = 'core/home.html'
 
@@ -10,5 +10,6 @@ class Home( TemplateView ):
         context = super(Home, self).get_context_data(**kwargs)
         context['range'] = range(4)
         return context
-    
+
+
 home = Home.as_view()

@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
-
+from django.urls import reverse_lazy
 from django.core import validators
 import re
 
@@ -14,7 +14,7 @@ class User( AbstractBaseUser, PermissionsMixin ):
 
     # Informações Pessoais
     username = models.CharField(
-        'Nome', max_length=50, unique=True, validators=[
+        'Nome ou email', max_length=50, unique=True, validators=[
             validators.RegexValidator(
                 re.compile(
                     '/(?=^.{2,60}$)^[A-ZÀÁÂĖÈÉÊÌÍÒÓÔÕÙÚÛÇ][a-zàáâãèéêìíóôõùúç]+(?:[ ](?:das?|dos?|de|e|[A-Z][a-z]+))*$/'),
@@ -31,12 +31,10 @@ class User( AbstractBaseUser, PermissionsMixin ):
         'self', related_name='convites_enviados', verbose_name='Convites Enviados', blank=True)
     meus_grupos = models.ManyToManyField('grupos.Grupos', related_name='meus_grupos', verbose_name='Meus Grupos', blank=True)
     pedais_gratis = models.ManyToManyField('grupos.Pedal', related_name='pedais_gratis', verbose_name='Pedais Gratis', blank=True)
-
-
     
+    pedais_agendados = models.ManyToManyField('grupos.Pedal', related_name='pedais_agendados', verbose_name='Pedais Marcados', blank=True)
 
     email = models.EmailField('Email', unique=True)
-    
 
     sexos = (
         ('1', 'Masculino'),
@@ -95,6 +93,11 @@ class User( AbstractBaseUser, PermissionsMixin ):
         return nice_time
 
     @property
+    def historico_de_pedais(self):
+        return self.pedais_agendados.filter(data__lt=date.today())
+        #return list(filter(lambda x: x.data < date.today(), self.pedais_agendados.all()))
+
+    @property
     def idade(self):
         today=date.today()
         if self.nascimento:
@@ -111,10 +114,10 @@ class User( AbstractBaseUser, PermissionsMixin ):
                     return today.year - self.nascimento.year
         return '-'
 
-        def save(self, *args, **kwargs):
-            if self.nascimento == today:
-                self.nascimento = None
-            super(User, self).save(*args, **kwargs) # Call the real save() method
+    def save(self, *args, **kwargs):
+        if self.nascimento == date.today():
+            self.nascimento = None
+        super(User, self).save(*args, **kwargs) # Call the real save() method
 
-        # def get_absolute_url(self):
-        #     return reverse_lazy('contas:usuario-info', kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse_lazy('contas:usuario-info', kwargs={'pk': self.pk})
