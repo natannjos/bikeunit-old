@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--================================================================================
+	Item Name: Materialize - Material Design Admin Template
+	Version: 3.1
+	Author: GeeksLabs
+	Author URL: http://www.themeforest.net/user/geekslabs
+================================================================================ -->
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
+  <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+  <title>Agendar Pedal</title>
+
+  <!-- Favicons-->
+  <link rel="icon" href="images/favicon/favicon-32x32.png" sizes="32x32">
+  <!-- Favicons-->
+  <link rel="apple-touch-icon-precomposed" href="images/favicon/apple-touch-icon-152x152.png">
+  <!-- For iPhone -->
+  <meta name="msapplication-TileColor" content="#00bcd4">
+  <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+  <!-- For Windows Phone -->
+
+
+  <!-- CORE CSS-->
+  
+  <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="css/style.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- Custome CSS-->    
+    <link href="css/custom/custom.min.css" type="text/css" rel="stylesheet" media="screen,projection">
+
+
+  <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+  <link href="js/plugins/prism/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="js/plugins/perfect-scrollbar/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+  <link href="js/plugins/chartist-js/chartist.min.css" type="text/css" rel="stylesheet" media="screen,projection">  
+</head>
+
+<body>
+  <!-- Start Page Loading -->
+  <div id="loader-wrapper">
+      <div id="loader"></div>        
+      <div class="loader-section section-left"></div>
+      <div class="loader-section section-right"></div>
+  </div>
+  <!-- End Page Loading -->
+
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+  <!-- START HEADER -->
+  <header id="header" class="page-topbar">
+        <!-- start header nav-->
+        <div class="navbar-fixed">
+            <nav class="navbar-color">
+                <div class="nav-wrapper">
+                    <ul class="left">                      
+                      <li><h1 class="logo-wrapper"><a href="index.html" class="brand-logo darken-1"><img src="images/materialize-logo.png" alt="materialize logo"></a> <span class="logo-text">Materialize</span></h1></li>
+                    </ul>
+                    <div class="header-search-wrapper hide-on-med-and-down">
+                        <i class="mdi-action-search"></i>
+                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize"/>
+                    </div>
+                    <ul class="right hide-on-med-and-down">
+                        
+                        
+                        <li><a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="notifications-dropdown"><i class="mdi-social-notifications"><small class="notification-badge">5</small></i>
+                        
+                        </a>
+                        </li>                        
+                        
+                    </ul>
+                    
+                    <ul id="notifications-dropdown" class="dropdown-content">
+                      <li>
+                          <h5>Notificações Perfil</h5>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                          <a href="#!"><i class="mdi-action-event"></i>Novos pedais agendados nos grupos que você participa </a>
+                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 2 horas</time>
+                        </li>
+                        <li>
+                          <a href="#!"><i class="mdi-action-question-answer"></i> Novas mensagens nos chats</a>
+                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 3 dias</time>
+                        </li>
+                        <li>
+                          <a href="#!"><i class="mdi-action-thumb-up"></i> Novas sugestões de Grupos e Pedais feitas por amigos</a>
+                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 3 dias</time>
+                        </li>
+                        <li>
+                          <a href="#!"><i class="mdi-content-markunread"></i> Amigos responderam a seus convites</a>
+                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 3 dias</time>
+                        </li>
+                        <li>
+                          <a href="#!"><i class="mdi-action-markunread-mailbox"></i>Novos convites de pedais agendados por diversos grupos</a>
+                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 4 dias</time>
+                        </li>
+                        <li>
+                          <h5>Notificações Administrador</h5>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                          <a href="#!"><i class="mdi-social-person-add"></i> Você recebeu solicitação de novo membro</a>
+                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 2 horas</time>
+                        </li>
+                        <li>
+                          <a href="#!"><i class="mdi-action-thumb-up"></i> Membros Confirmaram presença em pedais</a>
+                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 3 dias</time>
+                        </li>
+                        <li>
+                          <a href="#!"><i class="mdi-action-thumb-down"></i> Membros cancelaram presença em pedais</a>
+                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 3 dias</time>
+                        </li>
+                        <li>
+                          <a href="#!"><i class="mdi-action-markunread-mailbox"></i> Você recebeu convite de Eventos Interpedais</a>
+                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 4 dias</time>
+                        </li>                        
+                        <li>
+                          <a href="#!"><i class="mdi-content-drafts"></i> Grupos aceitaram seu convite para Evento Interpedal</a>
+                          <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 4 dias</time>
+                        </li>   
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- end header nav-->
+    </header>
+  <!-- END HEADER -->
+
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+ <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+    <!-- START MAIN -->
+    <div id="main">
+        <!-- START WRAPPER -->
+        <div class="wrapper">
+
+            <!-- START LEFT SIDEBAR NAV-->
+            <aside id="left-sidebar-nav">
+                <ul id="slide-out" class="side-nav fixed leftside-navigation">
+                <li class="user-details cyan darken-2">
+                    <div class="row">
+                        <div class="col col s4 m4 l4">
+                            <img src="images/avatar.jpg" alt="" class="circle responsive-img valign profile-image">
+                        </div>
+                        <div class="col col s8 m8 l8">
+                            <ul id="profile-dropdown" class="dropdown-content">
+                                <li><a href="#"><i class="mdi-action-face-unlock"></i> Perfil</a>
+                                </li>
+                                <li><a href="#"><i class="mdi-action-assignment-ind"></i>Dados</a>
+                                </li>                                
+                                <li class="divider"></li>                              
+                                <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i>Sair</a>
+                                
+                            </ul>
+                            <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">John Doe<i class="mdi-navigation-arrow-drop-down right"></i></a>
+                            <p class="user-roal">Administrator</p>
+                        </div>
+                    </div>
+                </li>
+                <li class="bold ">
+                  <a href="home-app.html" class="waves-effect waves-cyan">
+                    <i class="mdi-action-home"></i>Home App</a>
+                </li>
+                <li class="bold"><a href="home-grupo-administrador.html" class="waves-effect waves-cyan"><i class="mdi-maps-directions-bike"></i>Home Grupo</a>
+                </li>
+                <li class="bold"><a href="home-administrador-1.html" class="waves-effect waves-cyan"><i class="mdi-maps-local-library"></i> Home Administrador</a>
+                </li>                
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-notification-event-note"></i> Agendar Pedal</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li><a href="css-typography.html">Calendário</a>
+                                    </li>
+                                    <li><a href="historico.html">Histórico</a>
+                                    </li>                                    
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a href="membros-do-grupo.html" class="waves-effect waves-cyan"><i class="mdi-social-people-outline"></i>Membros do Grupo</a>
+                        </li>
+                          <li class="bold">
+                            <a href="criar-grupo-de-pedal.html" class="waves-effect waves-cyan">
+                              <i class="mdi-action-settings"></i> Alterar Dados do Grupo</a>
+                          </li>
+                        <li class="bold"><a href="perfil-usuario-com-grupo.html" class="waves-effect waves-cyan"><i class="mdi-action-account-circle"></i>Voltar Perfil</a>        
+                        </li>                       
+                    </ul>
+                
+            </ul>
+                <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
+            </aside>
+            <!-- END LEFT SIDEBAR NAV-->
+
+            <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+
+      <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+      <!-- START CONTENT -->
+      <section id="content">
+        
+        <!--breadcrumbs start-->
+        <div id="breadcrumbs-wrapper">
+            <!-- Search for small screen -->
+            
+          <div class="container">
+            <div class="row">
+              <div class="col s12 m12 l12">
+                <h5 class="breadcrumbs-title">Agendar Pedal</h5>
+                <ol class="breadcrumbs">
+                    <li><a href="index.html">Pedal Alto da XV</a></li>
+                    <li><a href="#">Home Administrador</a></li>
+                    <li class="active">Agendar Pedal</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--breadcrumbs end-->
+        
+
+        <!--start container-->
+        <div class="container">
+          <div class="section">
+
+            <div class="divider"></div>
+            
+            <div id="contact-page" class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    <div id="map-canvas" data-lat="40.747688" data-lng="-74.004142"></div>
+                </div>
+                <div class="card-content">                    
+                    <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
+                        <i class="mdi-content-mail"></i>
+                    </a>
+
+                    <div class="row">
+                      <div class="col s12 m6">
+                        <form class="contact-form">
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="name" type="text">
+                              <label for="first_name">Nome do Pedal</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="name" type="text">
+                              <label for="first_name">Destino</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="name" type="text">
+                              <label for="first_name">Data</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="name" type="text">
+                              <label for="first_name">Distância</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="name" type="text">
+                              <label for="first_name">Terreno</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <input id="name" type="text">
+                              <label for="first_name">Nível</label>
+                            </div>
+                          </div>
+                           <div class="row">
+                            <div class="input-field col s12">
+                              <input id="name" type="text">
+                              <label for="first_name">Concentração</label>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="input-field col s12">
+                              <textarea id="message" class="materialize-textarea"></textarea>
+                              <label for="message">Mais Informações</label>
+                            </div>
+                            <div class="row">
+                              <div class="input-field col s12">
+                                <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Confirmar
+                                  <i class="mdi-content-send right"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>                      
+                      <div class="col s12 m6">
+                        <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+                          <li>
+                            <div class="collapsible-header"><i class="mdi-editor-attach-money
+                            "></i> Pedal Pago</div>
+                            <div class="collapsible-body" style="">
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                          <input id="name" type="text">
+                                          <label for="first_name"> &nbsp;&nbsp;Valor</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                          <input id="name" type="text">
+                                          <label for="first_name">&nbsp;&nbsp;Vencimento</label>
+                                        </div>
+                                    </div>
+
+
+
+
+                            </div>
+                          </li>
+                          <li class="active">
+                            <div class="collapsible-header active"><i class="mdi-communication-quick-contacts-mail"></i> Evento Interpedais</div>
+                            <div class="collapsible-body" style="display: none;">
+                              <p>Envie um convite para que outros Grupos também participe deste Evento</p>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+
+                </div>
+                <div class="card-reveal">
+                    <span class="card-title grey-text text-darken-4">Você pode enviar a rota por email para membros de seu interesse.<i class="mdi-navigation-close right"></i></span>
+                                  
+                </div>
+            </div>            
+          </div>
+        </div>
+        <!--end container-->
+      </section>
+    </div>
+    <!-- END WRAPPER -->
+
+  </div>
+  <!-- END MAIN -->
+
+
+
+  <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+  <!-- START FOOTER -->
+  <footer class="page-footer">
+    <div class="footer-copyright">
+      <div class="container">
+        <span>Copyright © 2015 <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">GeeksLabs</a> All rights reserved.</span>
+        <span class="right"> Design and Developed by <a class="grey-text text-lighten-4" href="http://geekslabs.com/">GeeksLabs</a></span>
+        </div>
+    </div>
+  </footer>
+  <!-- END FOOTER -->
+
+
+
+    <!-- ================================================
+    Scripts
+    ================================================ -->
+    
+    <!-- jQuery Library -->
+    <script type="text/javascript" src="js/plugins/jquery-1.11.2.min.js"></script>    
+    <!--materialize js-->
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <!--prism-->
+    <script type="text/javascript" src="js/plugins/prism/prism.js"></script>
+    <!--scrollbar-->
+    <script type="text/javascript" src="js/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <!-- chartist -->
+    <script type="text/javascript" src="js/plugins/chartist-js/chartist.min.js"></script>   
+    <!-- google map api -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAZnaZBXLqNBRXjd-82km_NO7GUItyKek"></script>
+    
+    <!--google map-->
+    <script type="text/javascript" src="js/plugins/google-map/google-map-script.js"></script>
+    
+    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    <script type="text/javascript" src="js/plugins.min.js"></script>
+    <!--custom-script.js - Add your own theme custom JS-->
+    <script type="text/javascript" src="js/custom-script.js"></script>
+
+    
+
+</body>
+
+</html>
