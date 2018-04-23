@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
 from django.urls import reverse_lazy
@@ -6,8 +7,6 @@ import re
 
 from localflavor.br.br_states import STATE_CHOICES
 from localflavor.br.models import BRStateField
-from datetime import date
-from django.utils.timezone import now
 
 
 class User( AbstractBaseUser, PermissionsMixin ):
@@ -41,12 +40,12 @@ class User( AbstractBaseUser, PermissionsMixin ):
         ('2', 'Feminino'),
         )
     sexo = models.CharField('Sexo', max_length=1, choices=sexos, blank=True, null=True)
-    
+
     nascimento = models.DateField('Data de Nascimento', blank=True, null=True)
     phone_digits_re=re.compile(r'^[(\.](\d{2})[)\.]?(\d{4,5})[-\.]?(\d{4})$')
     telefone = models.CharField('Telefone', max_length=15, validators=[validators.RegexValidator(phone_digits_re)])
     tel_emergencia = models.CharField('Telefone de emergências', max_length=15, validators=[validators.RegexValidator(phone_digits_re)])
-    
+
     # Documentos
     cpf_digits_re=re.compile(r'^(\d{3})\.(\d{3})\.(\d{3})-(\d{2})$')
     cpf=models.CharField(
@@ -54,7 +53,7 @@ class User( AbstractBaseUser, PermissionsMixin ):
         validators = [validators.RegexValidator(cpf_digits_re)],
         blank = True, null = True, unique = True
     )
-    
+
     # Endereço    
     cep_digits_re = re.compile(r'^(\d{5})-(\d{3})$')
     cep = models.CharField('CEP', max_length=10, validators=[validators.RegexValidator(cep_digits_re)])
@@ -62,7 +61,7 @@ class User( AbstractBaseUser, PermissionsMixin ):
     bairro = models.CharField('Bairro', max_length=50)
     cidade = models.CharField('Cidade', max_length=50)
     estado = BRStateField('Estado', choices=STATE_CHOICES, max_length=2)
-   
+
     # Informações Adicionais
     is_staff=models.BooleanField('Equipe', default=False)
     is_admin = models.BooleanField('Admin', default=False)

@@ -5,4 +5,3 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class UserInfo(LoginRequiredMixin, DetailView):
     pass
-
