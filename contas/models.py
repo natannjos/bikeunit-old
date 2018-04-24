@@ -93,8 +93,8 @@ class User( AbstractBaseUser, PermissionsMixin ):
 
     @property
     def historico_de_pedais(self):
-        return self.pedais_agendados.filter(data__lt=date.today())
         #return list(filter(lambda x: x.data < date.today(), self.pedais_agendados.all()))
+        return self.pedais_agendados.filter(data__lt=date.today())
 
     @property
     def idade(self):
