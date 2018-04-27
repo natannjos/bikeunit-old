@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'contas',
     'grupos',
     'core',
+
+    # Libs
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -107,6 +110,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'core:home'
 
 AUTH_USER_MODEL = 'contas.User'
 
