@@ -154,6 +154,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 try:
-    from .local_settings.py import *
+    from .local_settings import *
 except ImportError:
     pass
