@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     # Libs
     'widget_tweaks',
+    'social_django', 
 ]
 
 MIDDLEWARE = [
@@ -56,6 +57,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # libs
+    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'bikeapp.urls'
@@ -71,6 +75,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+
+                # libs
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -111,6 +119,9 @@ AUTH_PASSWORD_VALIDATORS = [
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
+SOCIAL_AUTH_FACEBOOK_KEY = '171282870238385'  # App ID
+SOCIAL_AUTH_FACEBOOK_SECRET = '0be40379724fdef44ba26e7475e4c8ce'  # App Secret
+
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'core:home'
@@ -118,6 +129,7 @@ LOGIN_REDIRECT_URL = 'core:home'
 AUTH_USER_MODEL = 'contas.User'
 
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     'contas.backends.ModelBackend',
 )

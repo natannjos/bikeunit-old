@@ -25,5 +25,7 @@ urlpatterns = [
                                 'redirect_authenticated_user': True}, name='login'),
 
     path('sair/', auth_views.logout_then_login, name='logout'),
+
+    path('oauth/', include('social_django.urls', namespace='social')),
     
 ]
