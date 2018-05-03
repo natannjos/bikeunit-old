@@ -24,7 +24,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = 'd6528aqd21zk%&3v+*+lzjj&to!l$r%kbti99cj6cr&vf_*3d3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['104.131.69.57', 'testenv.com.br', 'www.testenv.com.br']
 
@@ -43,10 +43,11 @@ INSTALLED_APPS = [
     'contas',
     'grupos',
     'core',
-
+    'api',
+    
     # Libs
     'widget_tweaks',
-    'social_django', 
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -57,9 +58,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    # libs
-    'social_django.middleware.SocialAuthExceptionMiddleware',
 ]
 
 ROOT_URLCONF = 'bikeapp.urls'
@@ -75,10 +73,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
-                # libs
-                'social_django.context_processors.backends',
-                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -122,21 +116,11 @@ AUTH_PASSWORD_VALIDATORS = [
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
-SOCIAL_AUTH_FACEBOOK_KEY = '171282870238385'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '0be40379724fdef44ba26e7475e4c8ce'  # App Secret
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-
 LOGIN_URL = 'login'
 LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'core:home'
 
 AUTH_USER_MODEL = 'contas.User'
-
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.facebook.FacebookOAuth2',
-    'django.contrib.auth.backends.ModelBackend',
-    'contas.backends.ModelBackend',
-)
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -158,3 +142,16 @@ try:
     from .local_settings import *
 except ImportError:
     pass
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+    ),
+}
+
