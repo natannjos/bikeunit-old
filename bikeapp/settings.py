@@ -43,8 +43,7 @@ INSTALLED_APPS = [
     'contas',
     'grupos',
     'core',
-    'api',
-    
+
     # Libs
     'widget_tweaks',
     'rest_framework',
@@ -143,15 +142,21 @@ try:
 except ImportError:
     pass
 
+
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
     
     'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-        # 'rest_framework.authentication.BasicAuthentication',
+        'contas.api.backends.JWTAuth',
+        # 'rest_framework.authentication.TokenAuthentication',
     ),
+
+    'EXCEPTION_HANDLER': 'contas.api.exceptions.core_exception_handler',
+    'NON_FIELD_ERRORS_KEY': 'error',
 }
 

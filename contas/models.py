@@ -1,19 +1,21 @@
-from datetime import date
+from datetime import date, datetime, timedelta
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, UserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.urls import reverse_lazy
 from django.core import validators
 import re
 
 from localflavor.br.br_states import STATE_CHOICES
 from localflavor.br.models import BRStateField
+import jwt
+from django.conf import settings
 
 
 class User( AbstractBaseUser, PermissionsMixin ):
 
     # Informações Pessoais
     username = models.CharField(
-        'Nome ou email', max_length=50, unique=True, validators=[
+        'Nome', max_length=50, unique=True, validators=[
             validators.RegexValidator(
                 re.compile(
                     '/(?=^.{2,60}$)^[A-ZÀÁÂĖÈÉÊÌÍÒÓÔÕÙÚÛÇ][a-zàáâãèéêìíóôõùúç]+(?:[ ](?:das?|dos?|de|e|[A-Z][a-z]+))*$/'),
@@ -21,17 +23,36 @@ class User( AbstractBaseUser, PermissionsMixin ):
                 'este valor deve conter apenas letras e espaços',
                 'invalid'
             )
-        ], help_text='Seu nome será usado para identifica-lo de forma única na plataforma'
-    )
+        ], help_text='Seu nome será usado para identifica-lo de forma única na plataforma')
 
-    amigos = models.ManyToManyField('self', related_name='Amigos', verbose_name='Meus Amigos', blank=True)
-    convites_recebidos = models.ManyToManyField('self', related_name='convites_recebidos', verbose_name='Convites Recebidos', blank=True)
+    amigos = models.ManyToManyField(
+        'self', 
+        related_name='Amigos', 
+        verbose_name='Meus Amigos', 
+        blank=True)
+    convites_recebidos = models.ManyToManyField(
+        'self', 
+        related_name='convites_recebidos', 
+        verbose_name='Convites Recebidos', 
+        blank=True)
     convites_enviados = models.ManyToManyField(
         'self', related_name='convites_enviados', verbose_name='Convites Enviados', blank=True)
-    meus_grupos = models.ManyToManyField('grupos.Grupos', related_name='meus_grupos', verbose_name='Meus Grupos', blank=True)
-    pedais_gratis = models.ManyToManyField('grupos.Pedal', related_name='pedais_gratis', verbose_name='Pedais Gratis', blank=True)
-    
-    pedais_agendados = models.ManyToManyField('grupos.Pedal', related_name='pedais_agendados', verbose_name='Pedais Marcados', blank=True)
+    meus_grupos = models.ManyToManyField(
+        'grupos.Grupos', 
+        related_name='meus_grupos', 
+        verbose_name='Meus Grupos', 
+        blank=True)
+    pedais_gratis = models.ManyToManyField(
+        'grupos.Pedal', 
+        related_name='pedais_gratis', 
+        verbose_name='Pedais Gratis', 
+        blank=True)
+
+    pedais_agendados = models.ManyToManyField(
+        'grupos.Pedal', 
+        related_name='pedais_agendados', 
+        verbose_name='Pedais Marcados', 
+        blank=True)
 
     email = models.EmailField('Email', unique=True)
 
@@ -39,12 +60,23 @@ class User( AbstractBaseUser, PermissionsMixin ):
         ('1', 'Masculino'),
         ('2', 'Feminino'),
         )
-    sexo = models.CharField('Sexo', max_length=1, choices=sexos, blank=True, null=True)
+    sexo = models.CharField(
+        'Sexo', 
+        max_length=1, 
+        choices=sexos, 
+        blank=True, 
+        null=True)
 
     nascimento = models.DateField('Data de Nascimento', blank=True, null=True)
     phone_digits_re=re.compile(r'^[(\.](\d{2})[)\.]?(\d{4,5})[-\.]?(\d{4})$')
-    telefone = models.CharField('Telefone', max_length=15, validators=[validators.RegexValidator(phone_digits_re)])
-    tel_emergencia = models.CharField('Telefone de emergências', max_length=15, validators=[validators.RegexValidator(phone_digits_re)])
+    telefone = models.CharField(
+        'Telefone', 
+        max_length=15, 
+        validators=[validators.RegexValidator(phone_digits_re)])
+    tel_emergencia = models.CharField(
+        'Telefone de emergências', 
+        max_length=15, 
+        validators=[validators.RegexValidator(phone_digits_re)])
 
     # Documentos
     cpf_digits_re=re.compile(r'^(\d{3})\.(\d{3})\.(\d{3})-(\d{2})$')
@@ -54,9 +86,12 @@ class User( AbstractBaseUser, PermissionsMixin ):
         blank = True, null = True, unique = True
     )
 
-    # Endereço    
+    # Endereço
     cep_digits_re = re.compile(r'^(\d{5})-(\d{3})$')
-    cep = models.CharField('CEP', max_length=10, validators=[validators.RegexValidator(cep_digits_re)])
+    cep = models.CharField(
+        'CEP', 
+        max_length=10, 
+        validators=[validators.RegexValidator(cep_digits_re)])
     rua = models.CharField('Endereço', max_length=50)
     bairro = models.CharField('Bairro', max_length=50)
     cidade = models.CharField('Cidade', max_length=50)
@@ -67,9 +102,10 @@ class User( AbstractBaseUser, PermissionsMixin ):
     is_admin = models.BooleanField('Admin', default=False)
     is_active=models.BooleanField('Ativo', default=True)
     date_joined=models.DateTimeField('Data de Entrada', auto_now_add=True)
+    updated_at = models.DateTimeField('Atualizado em', auto_now=True)
 
-    USERNAME_FIELD='username'
-    REQUIRED_FIELDS=['email']
+    USERNAME_FIELD='email'
+    REQUIRED_FIELDS=['username']
 
     objects = UserManager()
 
@@ -80,6 +116,18 @@ class User( AbstractBaseUser, PermissionsMixin ):
 
     def __str__(self):
         return self.username
+
+    @property
+    def token(self):
+        return self._generate_jwt_token()
+
+    def _generate_jwt_token(self):
+        dt = datetime.now() + timedelta(days=60)
+        token = jwt.encode({
+            'id': self.pk,
+            'exp': int(dt.strftime('%s'))
+        }, settings.SECRET_KEY, algorithm='HS256')
+        return token.decode('utf-8')
 
     def get_full_name(self):
         return str(self)

@@ -14,7 +14,7 @@ class UserAdmin( BaseUserAdmin ):
     form = UserAdminForm
     fieldsets = (
         (None, {
-            'fields': ('username', 'email')
+            'fields': ('username', 'email', 'token')
         }),
         ('Informações Pessoais', {
             'fields': (
@@ -25,6 +25,7 @@ class UserAdmin( BaseUserAdmin ):
                 'cpf',
                 'password',
                 'idade'
+
             )
         }),
         ('Endereço', {
@@ -65,7 +66,7 @@ class UserAdmin( BaseUserAdmin ):
     list_display = ['username', 'email', 'idade', 'is_active', 'is_staff',
                     'is_admin', 'date_joined']
     list_filter = ['is_admin']
-    readonly_fields = ('last_login', 'password', 'idade', 'amigos', 'convites_enviados', 'convites_recebidos', 'historico_de_pedais')
+    readonly_fields = ('last_login', 'password', 'idade', 'amigos', 'convites_enviados', 'convites_recebidos', 'historico_de_pedais', 'token')
     search_fields = ('username', 'email')
 
 
