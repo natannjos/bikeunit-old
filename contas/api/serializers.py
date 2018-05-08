@@ -30,6 +30,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
 
 class LoginSerializer(serializers.Serializer):
+    pk = serializers.IntegerField(read_only=True)
     email = serializers.CharField(max_length=255)
     username = serializers.CharField(max_length=255, read_only=True)
     password = serializers.CharField(max_length=128, write_only=True)
@@ -85,7 +86,7 @@ class LoginSerializer(serializers.Serializer):
         # This is the data that is passed to the `create` and `update` methods
         # that we will see later on.
         return {
-            'id': user.pk,
+            'pk': user.pk,
             'email': user.email,
             'username': user.username,
             'token': user.token
@@ -107,7 +108,7 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('pk', 'email', 'username', 'password', 'token',)
+        fields = ('pk','email', 'username', 'password', 'token')
 
         # The `read_only_fields` option is an alternative for explicitly
         # specifying the field with `read_only=True` like we did for password
@@ -116,7 +117,7 @@ class UserSerializer(serializers.ModelSerializer):
         # password field needed the `min_length` and
         # `max_length` properties, but that isn't the case for the token
         # field.
-        read_only_fields = ('token','pk')
+        read_only_fields = ('token', )
 
     def update(self, instance, validated_data):
         """Performs an update on a User."""

@@ -6,7 +6,7 @@ from contas.api.views import RegistrationAPIView, LoginAPIView, UserRetrieveUpda
 app_name='api_auth'
 
 urlpatterns = [
-    path('usuario/', UserRetrieveUpdateAPIView.as_view()),
+    path('usuario/atualiza/', UserRetrieveUpdateAPIView.as_view()),
     path('usuario/registra/', RegistrationAPIView.as_view()),
     path('usuario/login/', LoginAPIView.as_view())
 ]
