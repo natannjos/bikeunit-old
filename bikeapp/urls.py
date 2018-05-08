@@ -10,5 +10,6 @@ urlpatterns = [
                                 'redirect_authenticated_user': True}, name='login'),
     path('sair/', auth_views.logout_then_login, name='logout'),
 
-    path('api/auth/', include('contas.api.urls', namespace='api_auth'))
+    path('api/autenticacao/', include('contas.api.urls', namespace='api_auth')),
+    path('api/', include('perfis.api.urls', namespace='profiles'))
 ]

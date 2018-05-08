@@ -40,9 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Meus Apps
+    'core',
     'contas',
     'grupos',
-    'core',
+    'perfis',
 
     # Libs
     'widget_tweaks',
@@ -156,7 +157,7 @@ REST_FRAMEWORK = {
         # 'rest_framework.authentication.TokenAuthentication',
     ),
 
-    'EXCEPTION_HANDLER': 'contas.api.exceptions.core_exception_handler',
+    'EXCEPTION_HANDLER': 'core.api.exceptions.core_exception_handler',
     'NON_FIELD_ERRORS_KEY': 'error',
 }
 
