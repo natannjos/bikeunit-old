@@ -65,11 +65,12 @@ A resposta do servidor será como segue:
         }
     }
 
-### Update
+### Atualização e Requisição
 
-Para fazer o update de um usuario a seguinte url deverá ser acessada: https://www.testenv.com.br/api/autenticacao/usuario/atualiza/
+Para fazer o update ou a requisição de um usuario a seguinte url deverá ser acessada: https://www.testenv.com.br/api/autenticacao/usuario/atualiza/
 
-**A requisição do update deve ser feita utilizando o método `PUT`.**
+**A alteração deve ser feita utilizando o método `PUT`.**
+**A requisição deve ser feita pelo método `GET`.**
 
 O header da requisição deve conter:
 
