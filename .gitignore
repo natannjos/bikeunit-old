@@ -194,4 +194,4 @@ plugins/android.json
 plugins/ios.json
 www/
 $RECYCLE.BIN/
-.directory/
+.directory
