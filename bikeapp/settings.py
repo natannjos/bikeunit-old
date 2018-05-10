@@ -87,7 +87,7 @@ WSGI_APPLICATION = 'bikeapp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bikeunit',
+        'NAME': 'bikeunit-db',
         'USER': 'admin',
         'PASSWORD': 'password',
         'HOST': 'localhost',
