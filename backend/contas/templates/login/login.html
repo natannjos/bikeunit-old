@@ -1,0 +1,63 @@
+{% extends "core/parent_forms/form-base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+
+{% block additional_js %}
+
+{% endblock additional_js %}
+
+{% block form %}
+{% csrf_token %}
+<div class="row">
+    <div class="input-field col s12 center">
+        <img src="{% static 'images/login-logo.png' %}" alt="" class="circle responsive-img valign profile-image-login">
+        <p class="center login-form-text">Login</p>
+    </div>
+</div>
+<div class="row margin">
+    <div class="input-field col s12">
+        <i class="mdi-social-person-outline prefix"></i>
+        {% render_field form.username id=form.username.auto_id %}
+        <label for="{{ form.username.auto_id }}" class="center-align">{{form.username.label}}</label>
+        {% for error in form.username.errors %}
+        <span class="text-red">{{error}}</span>
+        {% endfor %}
+    </div>
+</div>
+<div class="row margin">
+    <div class="input-field col s12">
+        <i class="mdi-action-lock-outline prefix"></i>
+
+        {% render_field form.password id=form.password.auto_id %}
+        <label for="{{ form.password.auto_id }}">{{form.password.label}}</label>
+
+        {% for error in form.password.errors %}
+        <span class="red-text">{{error}}</span>
+        {% endfor %}
+    </div>
+<div class="row">
+    <div class="input-field col s12 m12 l12  login-text">
+        <input type="checkbox" id="remember-me" />
+        <label for="remember-me">Lembrar</label>
+    </div>
+</div>
+<div class="row">
+    <div class="input-field col s12">
+        <input type="submit" class="btn waves-effect waves-light col s12" value="Login">
+    </div>
+</div>
+
+<div class="row">
+    <div class="input-field col s6 m6 l6">
+        <p class="margin medium-small">
+            <a href="">Criar Conta!</a>
+        </p>
+    </div>
+    <div class="input-field col s6 m6 l6">
+        <p class="margin right-align medium-small">
+            <a href="">Esqueceu a senha?</a>
+        </p>
+    </div>
+</div>
+{% endblock form %}

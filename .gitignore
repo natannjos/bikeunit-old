@@ -47,7 +47,7 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
-
+bikeapp/static/
 # Translations
 *.mo
 *.pot
@@ -176,3 +176,22 @@ db.sqlite3
 local_settings.py
 urls_list.txt
 media/
+
+.idea/
+.sourcemaps/
+.sass-cache/
+.tmp/
+.versions/
+coverage/
+dist/
+node_modules/
+tmp/
+temp/
+hooks/
+platforms/
+plugins/
+plugins/android.json
+plugins/ios.json
+www/
+$RECYCLE.BIN/
+.directory/

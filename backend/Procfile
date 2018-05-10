@@ -1,0 +1,1 @@
+web: gunicorn bikeapp.wsgi --log-file -
