@@ -160,4 +160,3 @@ REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'core.api.exceptions.core_exception_handler',
     'NON_FIELD_ERRORS_KEY': 'error',
 }
-
