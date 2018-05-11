@@ -120,7 +120,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-STATIC_URL = '/static/'
+STATIC_URL = 'bikeapp/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 LOGIN_URL = 'login'
