@@ -5,7 +5,7 @@
   <h1>{{ room.name }}</h1>
   <p class="quiet">
     Qualquer um com essa URL pode entrar na sala e conversar:
-    <code>{{ request.scheme }}://{{ request.get_host }}/{{ room.label }}</code> 
+    <code>{{ request.scheme }}://{{ request.get_host }}/chat/{{ room.label }}</code> 
   </p>
     
       <table id="chat-log">
