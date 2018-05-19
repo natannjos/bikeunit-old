@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% load staticfiles %}
+  <h1>{{ room.name }}</h1>
+  <p class="quiet">
+    Qualquer um com essa URL pode entrar na sala e conversar:
+    <code>{{ request.scheme }}://{{ request.get_host }}/{{ room.label }}</code> 
+  </p>
+    
+      <table id="chat-log">
+        <tbody style="overflow: scroll">
+          {% for message in messages %}
+            <tr>
+              <td>{{ message.formatted_timestamp }}</td>
+              <td>{{ message.user }}</td>
+              <td>{{ message.message }}</td>
+            </tr> 
+          {% endfor %}
+        </tbody>
+        <tfoot>
+        <tr>
+          <td>Diga algo:</td>
+          <td colspan=2>
+          <input id="chat-message-input" type="text" placeholder="message">
+          <input type="button" id="chat-message-submit" value="Enviar">
+          </td>
+        </tfoot>
+      </table>  
+    
+  
+{% endblock content %}
+
+{% block afterbody %}
+<script type="text/javascript" src='{% static "jquery-1.12.1.min.js" %}'></script>
+
+<script>
+
+
+    // When we're using HTTPS, use WSS too.
+    var roomName = {{room_name_json}};
+
+ var chatSocket = new WebSocket(
+     'ws://' + window.location.host +
+     '/ws/chat/' + roomName + '/');
+
+
+ chatSocket.onmessage = function(message) { 
+   var data = JSON.parse(JSON.parse(message.data).message)
+   var chat = $("#chat-log") 
+   var ele = $('<tr></tr>') 
+   
+   ele.append($("<td></td>").text(data.timestamp))
+   ele.append($("<td></td>").text(data.user))
+   ele.append($("<td></td>").text(data.message))
+   chat.append(ele) 
+  };
+
+ chatSocket.onclose = function(e) {
+     console.error('Chat socket closed unexpectedly');
+ };
+
+  document.querySelector('#chat-message-input').focus();
+  document.querySelector('#chat-message-input').onkeyup = function(e) {
+    if (e.keyCode === 13) {  // enter, return
+        document.querySelector('#chat-message-submit').click();
+    }
+  };
+
+document.querySelector('#chat-message-submit').onclick = function(e) { 
+  var messageInputDom = document.querySelector('#chat-message-input');
+  var message = messageInputDom.value; 
+  chatSocket.send(
+    JSON.stringify(
+      { 
+        'message': message 
+      }
+      )
+  ); 
+  messageInputDom.value = '';
+};
+
+</script>
+  
+{% endblock afterbody %}

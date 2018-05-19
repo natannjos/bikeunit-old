@@ -44,10 +44,12 @@ INSTALLED_APPS = [
     'contas',
     'grupos',
     'perfis',
+    'chat',
 
     # Libs
     'widget_tweaks',
     'rest_framework',
+    'channels'
 ]
 
 MIDDLEWARE = [
@@ -172,4 +174,15 @@ REST_FRAMEWORK = {
 
     'EXCEPTION_HANDLER': 'core.api.exceptions.core_exception_handler',
     'NON_FIELD_ERRORS_KEY': 'error',
+}
+
+# Channels settings
+ASGI_APPLICATION = 'bikeapp.routing.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
 }

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Exemplo do Chat</h1>
+  <p class="deck">
+    Este é um demo usando <a href="http://channels.readthedocs.org/en/latest/">
+    Django Channels</a> para implementar um simples servidor de chat baseado em WebSockets
+  </p>
+  <p>
+    <form method="post">
+      {% csrf_token %}
+      <input name='name' id='room-name-input' placeholder="Crie uma nova sala:">
+      <br>
+      <input type="submit" id="room-name-submit" value="Criar">
+    </form>
+  </p>
+  <p class="quiet">
+    Ou, você pode sisitar <code>{{ request.scheme }}://{{ request.get_host }}/nome-que-desejar</code> 
+    para criar um sala nova ou entrar em alguma que você ja conheça.
+  </p>
+
+  <script>
+    document.querySelector('#room-name-input').focus();
+    document.querySelector('#room-name-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#room-name-submit').click();
+        }
+    };
+
+    document.querySelector('#room-name-submit').onclick = function(e) {
+        var roomName = document.querySelector('#room-name-input').value;
+        window.location.pathname = '/chat/' + roomName + '/';
+    };
+  </script>
+{% endblock content %}

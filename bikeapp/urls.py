@@ -11,5 +11,7 @@ urlpatterns = [
     path('sair/', auth_views.logout_then_login, name='logout'),
 
     path('api/autenticacao/', include('contas.api.urls', namespace='api_auth')),
-    path('api/', include('perfis.api.urls', namespace='profiles'))
+    path('api/', include('perfis.api.urls', namespace='profiles')),
+
+    path('chat/', include('chat.urls', namespace='chat'))
 ]
