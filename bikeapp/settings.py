@@ -19,14 +19,16 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'd6528aqd21zk%&3v+*+lzjj&to!l$r%kbti99cj6cr&vf_*3d3'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
+# SECURITY WARNING: don't run with debug turned on in production!
+
+<<<<<<< HEAD:bikeapp/settings.py
 ALLOWED_HOSTS = ['206.189.228.54', 'testenv.com.br', 'www.testenv.com.br']
+=======
+ALLOWED_HOSTS = ['167.99.9.19', 'testenv.com.br', 'www.testenv.com.br']
+>>>>>>> backend:bikeapp/settings.py
 
 
 # Application definition
@@ -86,6 +88,7 @@ WSGI_APPLICATION = 'bikeapp.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+<<<<<<< HEAD:bikeapp/settings.py
 import dj_database_url
 # to facilitate on dokku environment | by resgef
 if os.environ.get('DATABASE_URL', ''):
@@ -102,6 +105,16 @@ else:
             'HOST': '127.0.0.1',
             'PORT': '5432',
         }
+=======
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'bikeunit-db',
+        'USER': 'admin',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '',
+>>>>>>> backend:bikeapp/settings.py
     }
 
 # Password validation
