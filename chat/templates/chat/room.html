@@ -39,9 +39,9 @@
 
     // When we're using HTTPS, use WSS too.
     var roomName = {{room_name_json}};
-
+ var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
  var chatSocket = new WebSocket(
-     'ws://' + window.location.host +
+    ws_scheme + '://' + window.location.host +
      '/ws/chat/' + roomName + '/');
 
 
