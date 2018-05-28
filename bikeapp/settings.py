@@ -44,9 +44,12 @@ INSTALLED_APPS = [
     'contas',
     'grupos',
     'perfis',
+    'chat',
+
     # Libs
     'widget_tweaks',
     'rest_framework',
+    #'pusher'
 ]
 
 MIDDLEWARE = [

@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-
+from chat.views import broadcast
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls',  namespace='core')),
@@ -12,4 +12,6 @@ urlpatterns = [
 
     path('api/autenticacao/', include('contas.api.urls', namespace='api_auth')),
     path('api/', include('perfis.api.urls', namespace='profiles')),
+    path('chat/', include('chat.urls', namespace='chat')),
+    path('ajax/chat/', broadcast)
 ]
