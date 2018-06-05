@@ -18,9 +18,11 @@ pusher = Pusher(
     ssl=ssl
 )
 
+
 class Chat(LoginRequiredMixin, TemplateView):
     login_url = '/admin/login/'
     template_name = 'chat/chat.html'
+
 
 @csrf_exempt
 def broadcast(request, *args, **kwargs):

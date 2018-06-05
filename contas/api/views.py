@@ -6,6 +6,7 @@ from contas.api.serializers import RegistrationSerializer, LoginSerializer, User
 from contas.api.renderers import UserJSONRenderer
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
+
 class RegistrationAPIView(APIView):
     # Allow any user (authenticated or not) to hit this endpoint.
     permission_classes = (AllowAny,)
@@ -15,7 +16,6 @@ class RegistrationAPIView(APIView):
     def post(self, request):
         user = request.data.get('user', {})
 
-        
         # The create serializer, validate serializer, save serializer pattern
         # below is common and you will see it a lot throughout this course and
         # your own work later on. Get familiar with it.
@@ -36,7 +36,6 @@ class LoginAPIView(APIView):
     def post(self, request):
         user = request.data.get('user', {})
 
-
         # Notice here that we do not call `serializer.save()` like we did for
         # the registration endpoint. This is because we don't  have
         # anything to save. Instead, the `validate` method on our serializer
@@ -48,6 +47,7 @@ class LoginAPIView(APIView):
 
 
 class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
+
     permission_classes = (IsAuthenticated,)
     renderer_classes = (UserJSONRenderer,)
     serializer_class = UserSerializer

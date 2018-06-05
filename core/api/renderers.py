@@ -1,6 +1,7 @@
 import json
 from rest_framework.renderers import JSONRenderer
 
+
 class BikeUnitJSONRenderer(JSONRenderer):
     charset = 'utf-8'
     object_label = 'object'
