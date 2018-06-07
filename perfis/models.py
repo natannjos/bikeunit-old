@@ -10,14 +10,12 @@ from datetime import date
 from django.urls import reverse_lazy
 from annoying.fields import AutoOneToOneField
 
-from contas.models import User
-
 class Profile(TimestampedModel):
     
     objects = models.Manager()
 
-    user = AutoOneToOneField(User, primary_key=True, on_delete=models.CASCADE)
-
+    user = AutoOneToOneField('contas.User', primary_key=True, on_delete=models.CASCADE)
+    nome = models.CharField('Nome Completo', max_length=255, unique=True)
     image = models.URLField(blank=True)
     amigos = models.ManyToManyField(
         'self',
@@ -125,10 +123,7 @@ class Profile(TimestampedModel):
                     return today.year - self.nascimento.year
         return '-'
 
-    def save(self, *args, **kwargs):
-        if self.nascimento == date.today():
-            self.nascimento = None
-        super(Profile, self).save(*args, **kwargs) # Call the real save() method
 
     # def get_absolute_url(self):
     #     return reverse_lazy('perfil:usuario-info', kwargs={'pk': self.pk})
+

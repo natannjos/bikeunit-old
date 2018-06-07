@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     # Libs
     'widget_tweaks',
     'rest_framework',
+    'annoying'
     #'pusher'
 ]
 

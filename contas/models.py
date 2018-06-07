@@ -10,6 +10,7 @@ from localflavor.br.models import BRStateField
 import jwt
 from django.conf import settings
 from core.models import TimestampedModel
+from perfis.models import Profile
 
 class User( AbstractBaseUser, PermissionsMixin, TimestampedModel ):
 
@@ -31,6 +32,8 @@ class User( AbstractBaseUser, PermissionsMixin, TimestampedModel ):
     # Informações Adicionais
     is_staff=models.BooleanField('Equipe', default=False)
     is_active=models.BooleanField('Ativo', default=True)
+    date_joined = models.DateTimeField(
+            'Data de Entrada', auto_now_add=True)
 
     USERNAME_FIELD='email'
     REQUIRED_FIELDS=['username']
@@ -59,3 +62,10 @@ class User( AbstractBaseUser, PermissionsMixin, TimestampedModel ):
 
     def get_absolute_url(self):
         return reverse_lazy('contas:usuario-info', kwargs={'pk': self.pk})
+
+def salva_perfil(instance, **kwargs):
+    Profile.objects.get_or_create(user=instance)
+
+models.signals.post_save.connect(
+    salva_perfil, sender=User, dispatch_uid='salva_perfil'
+)
