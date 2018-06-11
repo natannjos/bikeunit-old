@@ -16,10 +16,10 @@ class User( AbstractBaseUser, PermissionsMixin, TimestampedModel ):
 
     # Informações Pessoais
     username = models.CharField(
-        'Nome', max_length=50, unique=True, validators=[
+        'nome', max_length=50, unique=True, validators=[
             validators.RegexValidator(
                 re.compile(
-                    '/(?=^.{2,60}$)^[A-ZÀÁÂĖÈÉÊÌÍÒÓÔÕÙÚÛÇ][a-zàáâãèéêìíóôõùúç]+(?:[ ](?:das?|dos?|de|e|[A-Z][a-z]+))*$/'),
+                    '[-.\w]'),
                 'Informe um nome de usuário válido',
                 'este valor deve conter apenas letras e espaços',
                 'invalid'

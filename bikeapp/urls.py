@@ -6,7 +6,7 @@ from chat.views import broadcast
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls',  namespace='core')),
-    path('login/', auth_views.login, {'template_name': 'contas/login/login.html',
+    path('entrar/', auth_views.login, {'template_name': 'contas/login/login.html',
                                 'redirect_authenticated_user': True}, name='login'),
     path('sair/', auth_views.logout_then_login, name='logout'),
 

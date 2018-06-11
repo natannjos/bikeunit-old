@@ -15,7 +15,7 @@ class Profile(TimestampedModel):
     objects = models.Manager()
 
     user = AutoOneToOneField('contas.User', primary_key=True, on_delete=models.CASCADE)
-    nome = models.CharField('Nome Completo', max_length=255, unique=True)
+    nome = models.CharField('Nome Completo', max_length=255)
     image = models.URLField(blank=True)
     amigos = models.ManyToManyField(
         'self',

@@ -1,0 +1,85 @@
+{% extends "core/parent_forms/form-base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block titulo %}
+    Crie sua conta | BikeUnit
+{% endblock titulo %}
+    
+{% block form %}
+{% csrf_token %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div id="card-alert" class="card {{ message.tags }}">
+            <div class="card-content white-text">
+                <p>{{ message }}</p>
+            </div>
+            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+<div class="row">
+    <div class="input-field col s12 center">
+        <h4>Crie Uma Conta</h4>
+        <p class="center">Participe agora da nossa comunidade!</p>
+    </div>
+</div>
+<div class="row margin">
+    <div class="input-field col s12">
+        <i class="mdi-social-person-outline prefix"></i>
+        {% render_field form.username id=form.username.auto_id %}
+        <label for="{{form.username.id}}" class="center-align">Usuário</label>
+    </div>
+    {% for error in form.username.errors %}
+      <div class="red-text">{{ error }}</div>
+    {% endfor %}
+</div>
+<div class="row margin">
+    <div class="input-field col s12">
+        <i class="mdi-communication-email prefix"></i>
+        {% render_field form.email id=form.email.auto_id %}
+        <label for="{{form.email.id}}" class="center-align">Email</label>
+    </div>
+    {% for error in form.email.errors %}
+        <div class="red-text">{{ error }}</div>
+    {% endfor %}
+</div>
+
+<div class="row margin">
+    <div class="input-field col s12">
+        <i class="mdi-action-lock-outline prefix"></i>
+        {% render_field form.password1 id=form.password1.auto_id %}
+        <label for="{{form.password1.id}}">Senha</label>
+    </div>
+    {% for error in form.password1.errors %}
+        <div class="red-text">{{ error }}</div>
+    {% endfor %}
+</div>
+<div class="row margin">
+    <div class="input-field col s12">
+        <i class="mdi-action-lock-outline prefix"></i>
+        {% render_field form.password2 id=form.password2.auto_id %}
+        <label for="{{form.password2.id}}">Confirmar Senha</label>
+    </div>
+    {% for error in form.password2.errors %}
+        <div class="red-text">{{ error }}</div>
+    {% endfor %}
+</div>
+
+<div class="row">
+    <div class="input-field col s12">
+        <input type="submit" class="btn waves-effect waves-light col s12" value="Criar Conta">
+    </div>
+    <div class="input-field col s12">
+        <p class="margin center medium-small sign-up">Já tem uma conta?
+            <a href="{% url 'login' %}">Entrar</a>
+        </p>
+    </div>
+</div>
+{% endblock form %}
+    
+                

@@ -3,6 +3,11 @@
 {% load widget_tweaks %}
 
 
+{% block titulo %}
+    Login | BikeUnit
+{% endblock titulo %}
+    
+
 {% block additional_js %}
 
 {% endblock additional_js %}
@@ -11,20 +16,29 @@
 {% csrf_token %}
 
 {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="red-text" {% endif %}>
-            <div id="card-alert" class="card {{ message.tags }}">
-                <div class="card-content white-text">
-                    <p>{{ message }}</p>
-                </div>
-                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+    {% for message in messages %}
+        <div id="card-alert" class="card {{ message.tags }}">
+            <div class="card-content white-text">
+                <p>{{ message }}</p>
             </div>
-        </li>
-        {% endfor %}
-    </ul>
+            <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+    {% endfor %}
+{% endif %}
+
+ {% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+    <div id="card-alert" class="card red">
+        <div class="card-content white-text">
+            <p>{{ error }}</p>
+        </div>
+        <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    {% endfor %}
 {% endif %}
     
 <div class="row">
@@ -38,9 +52,6 @@
         <i class="mdi-social-person-outline prefix"></i>
         {% render_field form.username id=form.username.auto_id %}
         <label for="{{ form.username.auto_id }}" class="center-align">{{ form.username.label }}</label>
-        {% for error in form.username.errors %}
-        <span class="text-red">{{error}}</span>
-        {% endfor %}
     </div>
 </div>
 <div class="row margin">
@@ -49,11 +60,9 @@
 
         {% render_field form.password id=form.password.auto_id %}
         <label for="{{ form.password.auto_id }}">{{form.password.label}}</label>
-
-        {% for error in form.password.errors %}
-        <span class="red-text">{{error}}</span>
-        {% endfor %}
+        
     </div>
+<div>
 <div class="row">
     <div class="input-field col s12 m12 l12  login-text">
         <input type="checkbox" id="remember-me" />
@@ -69,7 +78,7 @@
 <div class="row">
     <div class="input-field col s6 m6 l6">
         <p class="margin medium-small">
-            <a href="">Criar Conta!</a>
+            <a href="{% url 'contas:registra-conta' %}">Criar Conta!</a>
         </p>
     </div>
     <div class="input-field col s6 m6 l6">

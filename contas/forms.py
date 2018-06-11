@@ -18,6 +18,26 @@ class UserAdminForm(forms.ModelForm):
         model = User
         fields = ['username', 'email', 'is_active', 'is_staff']
 
+class UserRegister(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super(UserRegister, self).__init__(*args, **kwargs)
+        
+
+    password1 = forms.CharField(label='Senha', widget=forms.PasswordInput)
+    password2 = forms.CharField(
+        label='Confirmação de senha', widget=forms.PasswordInput)
+
+    class Meta:
+        model = User
+        fields = ('email', 'username', 'password1', 'password2')
+
+    def clean_password2(self):
+        # Check that the two password entries match
+        password1 = self.cleaned_data.get("password1")
+        password2 = self.cleaned_data.get("password2")
+        if password1 and password2 and password1 != password2:
+            raise forms.ValidationError("Senhas não correspondem")
+        return password1
 
 class PasswordResetRequestForm(forms.Form):
     email = forms.EmailField(label=("Informe seu Email"))

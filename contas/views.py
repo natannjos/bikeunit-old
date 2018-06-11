@@ -3,7 +3,7 @@ from django.views.generic import CreateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import User
 
-from .forms import PasswordResetRequestForm, SetPasswordForm
+from .forms import PasswordResetRequestForm, SetPasswordForm, UserRegister
 
 from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
@@ -14,15 +14,33 @@ from django.template import loader
 from django.conf import settings
 from django.db.models.query_utils import Q
 from django.core.mail import send_mail
-
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
 
 from django.contrib.auth import authenticate, login, forms, get_user_model
-
+from django.core.exceptions import NON_FIELD_ERRORS
 
 class RegistroDeUsuarioView(CreateView):
 
     model = User
+    template_name = 'contas/login/registro.html'
+    form_class = UserRegister
+    success_url = '/'
+
+    def form_valid(self, form):
+        valid = super(RegistroDeUsuarioView, self).form_valid(form)
+        username, password = form.cleaned_data.get(
+            'username'), form.cleaned_data.get('password1')
+       
+        user = form.save()
+        login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
+        return valid
+
+    def form_invalid(self, form):
+        invalid = super(RegistroDeUsuarioView, self).form_invalid(form)
+
+        return invalid
+        
 
 class ResetPasswordRequestView(FormView):
         # code for template is given below the view's code
