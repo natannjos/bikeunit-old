@@ -9,6 +9,24 @@
 
 {% block form %}
 {% csrf_token %}
+
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="red-text" {% endif %}>
+            <div id="card-alert" class="card {{ message.tags }}">
+                <div class="card-content white-text">
+                    <p>{{ message }}</p>
+                </div>
+                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+    
 <div class="row">
     <div class="input-field col s12 center">
         <img src="{% static 'images/login-logo.png' %}" alt="" class="circle responsive-img valign profile-image-login">
@@ -19,7 +37,7 @@
     <div class="input-field col s12">
         <i class="mdi-social-person-outline prefix"></i>
         {% render_field form.username id=form.username.auto_id %}
-        <label for="{{ form.username.auto_id }}" class="center-align">{{form.username.label}}</label>
+        <label for="{{ form.username.auto_id }}" class="center-align">{{ form.username.label }}</label>
         {% for error in form.username.errors %}
         <span class="text-red">{{error}}</span>
         {% endfor %}
@@ -56,8 +74,9 @@
     </div>
     <div class="input-field col s6 m6 l6">
         <p class="margin right-align medium-small">
-            <a href="">Esqueceu a senha?</a>
+            <a href="{% url 'contas:reset-senha' %}">Esqueceu a senha?</a>
         </p>
     </div>
+
 </div>
 {% endblock form %}

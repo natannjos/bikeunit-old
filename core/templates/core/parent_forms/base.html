@@ -1,0 +1,299 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google. ">
+    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template,">
+    <title>Perfil Usuário</title>
+
+    <!-- Favicons-->
+    <link rel="icon" href="{% static 'images/favicon/favicon-32x32.png' %}" sizes="32x32">
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="{% static 'images/favicon/apple-touch-icon-152x152.png' %}">
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="{% static 'images/favicon/mstile-144x144.png' %}">
+    <!-- For Windows Phone -->
+
+
+    <link href="{% static 'css/materialize.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="{% static 'css/style.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- Custome CSS-->
+    <link href="{% static 'css/custom/custom.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+
+    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+    <link href="{% static 'js/plugins/prism/prism.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="{% static 'js/plugins/perfect-scrollbar/perfect-scrollbar.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="{% static 'js/plugins/chartist-js/chartist.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="{% static 'js/plugins/sweetalert/sweetalert.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+
+    <!--you can use custom css from js/plugins/sweetalert/themes/-->
+    <!--<link href="js/plugins/sweetalert/themes/google/google.css" type="text/css" rel="stylesheet" media="screen,projection">-->
+</head>
+
+<body>
+
+    <!-- //////////////////////////////////////////////////////////////////////////// -->
+
+    <!-- START HEADER -->
+    <header id="header" class="page-topbar">
+        <!-- start header nav-->
+        <div class="navbar-fixed">
+            <nav class="navbar-color">
+                <div class="nav-wrapper">
+                    <ul class="left">
+                        <li>
+                            <h1 class="logo-wrapper">
+                                <a href="index.html" class="brand-logo darken-1">
+                                    <img src="{% static 'images/materialize-logo.png' %}" alt="materialize logo">
+                                </a>
+                                <span class="logo-text">Materialize</span>
+                            </h1>
+                        </li>
+                    </ul>
+
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a href="{% url 'logout' %}">Sair</a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="notifications-dropdown">
+                                <i class="mdi-social-notifications">
+                                    <small class="notification-badge">8</small>
+                                </i>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- notificações -->
+                    <ul id="notifications-dropdown" class="dropdown-content">
+                        <li>
+                            <h5>Notificações Perfil</h5>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#!">
+                                <i class="mdi-action-event"></i>Novos pedais agendados nos grupos que você participa </a>
+                            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 2 horas</time>
+                        </li>
+                        <li>
+                            <a href="#!">
+                                <i class="mdi-action-question-answer"></i> Novas mensagens nos chats</a>
+                            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 3 dias</time>
+                        </li>
+                        <li>
+                            <a href="#!">
+                                <i class="mdi-action-thumb-up"></i> Novas sugestões de Grupos e Pedais feitas por amigos</a>
+                            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 3 dias</time>
+                        </li>
+                        <li>
+                            <a href="#!">
+                                <i class="mdi-content-markunread"></i> Amigos responderam a seus convites</a>
+                            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 3 dias</time>
+                        </li>
+                        <li>
+                            <a href="#!">
+                                <i class="mdi-action-markunread-mailbox"></i>Novos convites de pedais agendados por diversos grupos</a>
+                            <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">Há 4 dias</time>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!-- fim de notificações-->
+    </header>
+
+    {% block menu_lateral %}
+      
+    {% endblock menu_lateral %}
+    
+    {% block conteudo %}
+        
+    {% endblock conteudo %}
+    
+<!-- ================================================
+    Scripts
+    ================================================ -->
+
+<!-- jQuery Library -->
+<script type="text/javascript" src="{% static 'js/plugins/jquery-1.11.2.min.js' %}"></script>
+<!--angularjs-->
+<script type="text/javascript" src="{% static 'js/plugins/angular.min.js' %}"></script>
+<!--materialize js-->
+<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+<!--prism -->
+<script type="text/javascript" src="{% static 'js/plugins/prism/prism.js' %}"></script>
+<!--scrollbar-->
+<script type="text/javascript" src="{% static 'js/plugins/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+<!-- chartist -->
+<script type="text/javascript" src="{% static 'js/plugins/chartist-js/chartist.min.js' %}"></script>
+<!--sweetalert -->
+<script type="text/javascript" src="{% static 'js/plugins/sweetalert/sweetalert.min.js' %}"></script>
+<!--plugins.js - Some Specific JS codes for Plugin Settings-->
+<script type="text/javascript" src="{% static 'js/plugins.min.js' %}"></script>
+<!--custom-script.js - Add your own theme custom JS-->
+<script type="text/javascript" src="{% static 'js/custom-script.js' %}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        "use strict";
+
+        $('.btn-message').click(function () {
+            swal("Here's a message!");
+        });
+
+        $('.btn-title-text').click(function () {
+            swal("Here's a message!", "It's pretty, isn't it?")
+        });
+
+        $('.btn-timer').click(function () {
+            swal({
+                title: "Auto close alert!",
+                text: "I will close in 2 seconds.",
+                timer: 2000,
+                showConfirmButton: false
+            });
+        });
+
+        $('.btn-success').click(function () {
+            swal("Good job!", "You clicked the button!", "success");
+        });
+
+        $('.btn-warning-confirm').click(function () {
+            swal({
+                    title: "Você tem ceteza?",
+                    text: "Seu nome será retirado da lista",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'Sim, quero tirar meu nome da lista!',
+                    closeOnConfirm: false
+                },
+                function () {
+                    swal("Excluído!", "Você cancelou presença nesse pedal", "success");
+                });
+        });
+
+        $('.btn-warning-cancel').click(function () {
+            swal({
+                    title: "Você tem certeza?",
+                    text: "Seu nome sairá da lista para esse pedal!",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'sim, pode tirar meu nome da lista!',
+                    cancelButtonText: "Continuar no pedal!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        swal("Excluido!", "Você cancelou presença nesse pedal!", "success");
+                    } else {
+                        swal("Cancelamento Abortado", "Que bom que você optou por comparecer :)",
+                            "error");
+                    }
+                });
+        });
+
+        $('.btn-warning-cancel-sair-do-grupo').click(function () {
+            swal({
+                    title: "Você tem certeza?",
+                    text: "você realmente deseja sair desse grupo?",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#DD6B55',
+                    confirmButtonText: 'sim, quero sair desse grupo!',
+                    cancelButtonText: "Continuar no grupo!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
+                function (isConfirm) {
+                    if (isConfirm) {
+                        swal("Excluido!", "Você saiu desse grupo.", "success");
+                    } else {
+                        swal("Exclusão Abortada",
+                            "Que bom que você optou por permanecer no grupo :)", "error");
+                    }
+                });
+        });
+
+        $('.btn-custom-icon').click(function () {
+            swal({
+                title: "Sweet!",
+                text: "Here's a custom image.",
+                imageUrl: "{% static 'images/favicon/apple-touch-icon-152x152.png' %}"
+            });
+        });
+
+        $('.btn-message-html').click(function () {
+            swal({
+                title: "HTML <small>Title</small>!",
+                text: 'A custom <span style="color:#F8BB86">html<span> message.',
+                html: true
+            });
+        });
+
+        $('.btn-input').click(function () {
+            swal({
+                    title: "An input!",
+                    text: 'Write something interesting:',
+                    type: 'input',
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    animation: "slide-from-top",
+                    inputPlaceholder: "Write something",
+                },
+                function (inputValue) {
+                    if (inputValue === false) return false;
+
+                    if (inputValue === "") {
+                        swal.showInputError("You need to write something!");
+                        return false;
+                    }
+
+                    swal("Nice!", 'You wrote: ' + inputValue, "success");
+
+                });
+        });
+
+        $('.btn-theme').click(function () {
+            swal({
+                title: "Themes!",
+                text: "Here's the Twitter theme for SweetAlert!",
+                confirmButtonText: "Cool!",
+                customClass: 'twitter'
+            });
+        });
+
+        $('.btn-ajax').click(function () {
+            swal({
+                title: 'Tem certeza que deseja sair desse grupo?',
+                text: 'Se sair, para entrar novamente terá que enviar outra solicitação.',
+                type: 'info',
+                showCancelButton: true,
+                closeOnConfirm: false,
+                showLoaderOnConfirm: true,
+            }, function () {
+                setTimeout(function () {
+                    swal('Você saiu desse grupo!');
+                }, 2000);
+            });
+        });
+
+    });
+</script>
+
+
+{% block scripts_adicionais %}
+    
+{% endblock scripts_adicionais %}
+    
+</body>
+
+</html>

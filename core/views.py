@@ -11,5 +11,8 @@ class Home(LoginRequiredMixin, TemplateView):
         context['range'] = range(4)
         return context
 
+class Contato(TemplateView):
+    template_name = 'core/contato.html'
 
 home = Home.as_view()
+contato = Contato.as_view()

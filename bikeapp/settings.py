@@ -65,6 +65,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'bikeapp.urls'
 
+DEFAULT_FROM_EMAIL = 'natannjos@gmail.com'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -137,6 +139,11 @@ LOGOUT_URL = 'logout'
 LOGIN_REDIRECT_URL = 'core:home'
 
 AUTH_USER_MODEL = 'contas.User'
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'contas.backends.ModelBackend',
+)
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -175,4 +182,14 @@ REST_FRAMEWORK = {
 
     'EXCEPTION_HANDLER': 'core.api.exceptions.core_exception_handler',
     'NON_FIELD_ERRORS_KEY': 'error',
+}
+
+from django.contrib.messages import constants as  message_contants
+
+MESSAGE_TAGS = {
+    message_contants.DEBUG: 'light-blue',
+    message_contants.INFO : 'deep-purple',
+    message_contants.SUCCESS : 'green',
+    message_contants.WARNING : 'orange',
+    message_contants.ERROR : 'red',
 }

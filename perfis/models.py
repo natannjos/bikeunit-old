@@ -124,6 +124,6 @@ class Profile(TimestampedModel):
         return '-'
 
 
-    # def get_absolute_url(self):
-    #     return reverse_lazy('perfil:usuario-info', kwargs={'pk': self.pk})
+    #def get_absolute_url(self):
+    #    return reverse_lazy('perfil:usuario-info', kwargs={'pk': self.pk})
 

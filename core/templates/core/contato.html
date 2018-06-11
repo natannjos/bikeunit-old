@@ -1,0 +1,501 @@
+{% extends "core/parent_forms/base.html" %}
+{% load static %}
+
+{% block menu_lateral %}
+<!-- MENU-->
+<aside id="left-sidebar-nav">
+    <ul id="slide-out" class="side-nav fixed leftside-navigation">
+        <li class="user-details cyan darken-2">
+            <div class="row">
+                <div class="col col s4 m4 l4">
+                    <img src="{% static 'images/avatar.jpg' %}" alt="" class="circle responsive-img valign profile-image">
+                </div>
+                <div class="col col s8 m8 l8">
+                    <ul id="profile-dropdown" class="dropdown-content">
+                        <li>
+                            <a href="#">
+                                <i class="mdi-action-face-unlock"></i> Perfil</a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="mdi-action-assignment-ind"></i>Dados</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{% url 'logout' %}">
+                                <i class="mdi-hardware-keyboard-tab"></i>Sair</a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="mdi-navigation-cancel"></i>Excluir Conta</a>
+                        </li>
+                    </ul>
+                    <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">John Doe
+                        <i class="mdi-navigation-arrow-drop-down right"></i>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="bold ">
+            <a href="index.html" class="waves-effect waves-cyan">
+                <i class="mdi-action-home"></i>Home App</a>
+        </li>
+        <li class="bold">
+            <a href="#modal3" class="modal-trigger waves-cyan">
+                <i class="mdi-maps-local-library"></i> Home Administrador</a>
+        </li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li class="bold">
+                    <a class="collapsible-header waves-effect waves-cyan">
+                        <i class="mdi-maps-directions-bike"></i> Criar grupo de Pedal</a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a class="  modal-trigger  " href="#modal1">Público</a>
+                            </li>
+                            <li>
+                                <a class="  modal-trigger  " href="#modal2">Privado</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="bold">
+                    <a href="" class="waves-effect waves-cyan">
+                        <i class="mdi-action-assignment-ind"></i> Alterar Dados</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan">
+        <i class="mdi-navigation-menu"></i>
+    </a>
+</aside>
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <p>O grupo aparecerá na Home do Aplicativo e todos os usuários poderão enviar solicitãção para participar do grupo.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Não quero fazer um grupo agora</a>
+        <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">OK, quero fazer um Grupo Público</a>
+    </div>
+</div>
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <p>O grupo não aparecerá na Home do Aplicativo e os membros deverão ser convidados.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Não quero fazer um grupo agora</a>
+        <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Ok, quero fazer um grupo Privado</a>
+    </div>
+</div>
+<div id="modal3" class="modal">
+    <div class="modal-content">
+        <p>Você ainda não criou um grupo de pedal pra administrar.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Ok</a>
+
+    </div>
+</div>
+<!--FIM MENU-->
+{% endblock menu_lateral %}
+    
+
+    {% block conteudo %}
+      
+    
+
+    <!-- START MAIN -->
+    <div id="main">
+        <!-- START WRAPPER -->
+        <div class="wrapper">
+
+            <!-- START CONTENT -->
+            <section id="content">
+
+                <!--breadcrumbs start-->
+                <div id="breadcrumbs-wrapper">
+                    <!-- Search for small screen -->
+                    <div class="header-search-wrapper grey hide-on-large-only">
+                        <i class="mdi-action-search active"></i>
+                        <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12 m12 l12">
+                                <h5 class="breadcrumbs-title">Contact Page</h5>
+                                <ol class="breadcrumbs">
+                                    <li>
+                                        <a href="index.html">Dashboard</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Pages</a>
+                                    </li>
+                                    <li class="active">Contact Page</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--breadcrumbs end-->
+
+
+                <!--start container-->
+                <div class="container">
+                    <div class="section">
+
+                        <p class="caption">Have a question? Don't hesitate to send us a message. Our team will be happy to help you.</p>
+
+                        <div class="divider"></div>
+
+                        <div id="contact-page" class="card">
+                            <div class="card-image waves-effect waves-block waves-light">
+                                <div id="map-canvas" data-lat="-25.402255" data-lng="-49.223080"></div>
+                            </div>
+                            <div class="card-content">
+                                <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
+                                    <i class="mdi-editor-mode-edit"></i>
+                                </a>
+
+                                <div class="row">
+                                    <div class="col s12 m6">
+                                        <form class="contact-form">
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input id="name" type="text">
+                                                    <label for="first_name">Name</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input id="email" type="email">
+                                                    <label for="email">Email</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <input id="website" type="text">
+                                                    <label for="website">Website</label>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="input-field col s12">
+                                                    <textarea id="message" class="materialize-textarea"></textarea>
+                                                    <label for="message">Message</label>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="input-field col s12">
+                                                        <button class="btn cyan waves-effect waves-light right" type="submit" name="action">Send
+                                                            <i class="mdi-content-send right"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="col s12 m6">
+                                        <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
+                                            <li>
+                                                <div class="collapsible-header">
+                                                    <i class="mdi-communication-live-help"></i> FAQ</div>
+                                                <div class="collapsible-body" style="">
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+                                                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                                                        ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur
+                                                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+                                                        magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                                                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum
+                                                        dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                                                        quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                                        consequat.</p>
+                                                </div>
+                                            </li>
+                                            <li class="active">
+                                                <div class="collapsible-header active">
+                                                    <i class="mdi-communication-email"></i> Need Help?</div>
+                                                <div class="collapsible-body" style="display: none;">
+                                                    <p>We welcome your inquiries at the email address
+                                                        <a mailto="support@geekslabs.com">support@geekslabs.com</a>.We will get in touch with you soon.</p>
+                                                    <p>As a creative studio we believe no client is too big nor too small to
+                                                        work with us to obtain good advantage.By combining the creativity
+                                                        of artists with the precision of engineers we develop custom solutions
+                                                        that achieve results.
+                                                        <a href="http://themeforest.net/user/geekslabs/portfolio"
+                                                            target="_blank">See our work.</a>
+                                                    </p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="collapsible-header">
+                                                    <i class="mdi-editor-insert-emoticon"></i> Testimonial</div>
+                                                <div class="collapsible-body" style="">
+                                                    <blockquote>Fantastic product, my sites all run super fast and the support is excellent!
+                                                        <br>The website you designed helped a lot! </blockquote>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="card-reveal">
+                                <span class="card-title grey-text text-darken-4">Company Name LLC
+                                    <i class="mdi-navigation-close right"></i>
+                                </span>
+                                <p>Here is some more information about this card.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at ante gravida, finibus
+                                    magna non, faucibus mauris. Nulla ut diam et purus varius commodo id at magna. Donec
+                                    aliquet nulla eu lacus suscipit, id facilisis lorem ultricies.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at ante gravida, finibus
+                                    magna non, faucibus mauris. Nulla ut diam et purus varius commodo id at magna. Donec
+                                    aliquet nulla eu lacus suscipit, id facilisis lorem ultricies.Lorem ipsum dolor sit amet,
+                                    consectetur adipiscing elit. Praesent at ante gravida, finibus magna non, faucibus mauris.
+                                    Nulla ut diam et purus varius commodo id at magna. Donec aliquet nulla eu lacus suscipit,
+                                    id facilisis lorem ultricies.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at ante gravida, finibus
+                                    magna non, faucibus mauris. Nulla ut diam et purus varius commodo id at magna. Donec
+                                    aliquet nulla eu lacus suscipit, id facilisis lorem ultricies.Lorem ipsum dolor sit amet,
+                                    consectetur adipiscing elit. Praesent at ante gravida, finibus magna non, faucibus mauris.
+                                    Nulla ut diam et purus varius commodo id at magna. Donec aliquet nulla eu lacus suscipit,
+                                    id facilisis lorem ultricies.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at ante gravida, finibus
+                                    magna non, faucibus mauris. Nulla ut diam et purus varius commodo id at magna. Donec
+                                    aliquet nulla eu lacus suscipit, id facilisis lorem ultricies.Lorem ipsum dolor sit amet,
+                                    consectetur adipiscing elit. Praesent at ante gravida, finibus magna non, faucibus mauris.
+                                    Nulla ut diam et purus varius commodo id at magna. Donec aliquet nulla eu lacus suscipit,
+                                    id facilisis lorem ultricies.</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent at ante gravida, finibus
+                                    magna non, faucibus mauris. Nulla ut diam et purus varius commodo id at magna. Donec
+                                    aliquet nulla eu lacus suscipit, id facilisis lorem ultricies.</p>
+                                <p>
+                                    <i class="mdi-action-perm-identity cyan-text text-darken-2"></i> Manager Name</p>
+                                <p>
+                                    <i class="mdi-communication-business cyan-text text-darken-2"></i> 125, ABC Street, New Yourk, USA</p>
+                                <p>
+                                    <i class="mdi-action-perm-phone-msg cyan-text text-darken-2"></i> +1 (612) 222 8989</p>
+                                <p>
+                                    <i class="mdi-communication-email cyan-text text-darken-2"></i> support@geekslabs.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end container-->
+            </section>
+            <!-- END CONTENT -->
+
+            <!-- //////////////////////////////////////////////////////////////////////////// -->
+            <!-- START RIGHT SIDEBAR NAV-->
+            <aside id="right-sidebar-nav">
+                <ul id="chat-out" class="side-nav rightside-navigation">
+                    <li class="li-hover">
+                        <a href="#" data-activates="chat-out" class="chat-close-collapse right">
+                            <i class="mdi-navigation-close"></i>
+                        </a>
+                        <div id="right-search" class="row">
+                            <form class="col s12">
+                                <div class="input-field">
+                                    <i class="mdi-action-search prefix"></i>
+                                    <input id="icon_prefix" type="text" class="validate">
+                                    <label for="icon_prefix">Search</label>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="li-hover">
+                        <ul class="chat-collapsible" data-collapsible="expandable">
+                            <li>
+                                <div class="collapsible-header teal white-text active">
+                                    <i class="mdi-social-whatshot"></i>Recent Activity</div>
+                                <div class="collapsible-body recent-activity">
+                                    <div class="recent-activity-list chat-out-list row">
+                                        <div class="col s3 recent-activity-list-icon">
+                                            <i class="mdi-action-add-shopping-cart"></i>
+                                        </div>
+                                        <div class="col s9 recent-activity-list-text">
+                                            <a href="#">just now</a>
+                                            <p>Jim Doe Purchased new equipments for zonal office.</p>
+                                        </div>
+                                    </div>
+                                    <div class="recent-activity-list chat-out-list row">
+                                        <div class="col s3 recent-activity-list-icon">
+                                            <i class="mdi-device-airplanemode-on"></i>
+                                        </div>
+                                        <div class="col s9 recent-activity-list-text">
+                                            <a href="#">Yesterday</a>
+                                            <p>Your Next flight for USA will be on 15th August 2015.</p>
+                                        </div>
+                                    </div>
+                                    <div class="recent-activity-list chat-out-list row">
+                                        <div class="col s3 recent-activity-list-icon">
+                                            <i class="mdi-action-settings-voice"></i>
+                                        </div>
+                                        <div class="col s9 recent-activity-list-text">
+                                            <a href="#">5 Days Ago</a>
+                                            <p>Natalya Parker Send you a voice mail for next conference.</p>
+                                        </div>
+                                    </div>
+                                    <div class="recent-activity-list chat-out-list row">
+                                        <div class="col s3 recent-activity-list-icon">
+                                            <i class="mdi-action-store"></i>
+                                        </div>
+                                        <div class="col s9 recent-activity-list-text">
+                                            <a href="#">Last Week</a>
+                                            <p>Jessy Jay open a new store at S.G Road.</p>
+                                        </div>
+                                    </div>
+                                    <div class="recent-activity-list chat-out-list row">
+                                        <div class="col s3 recent-activity-list-icon">
+                                            <i class="mdi-action-settings-voice"></i>
+                                        </div>
+                                        <div class="col s9 recent-activity-list-text">
+                                            <a href="#">5 Days Ago</a>
+                                            <p>Natalya Parker Send you a voice mail for next conference.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header light-blue white-text active">
+                                    <i class="mdi-editor-attach-money"></i>Sales Repoart</div>
+                                <div class="collapsible-body sales-repoart">
+                                    <div class="sales-repoart-list  chat-out-list row">
+                                        <div class="col s8">Target Salse</div>
+                                        <div class="col s4">
+                                            <span id="sales-line-1"></span>
+                                        </div>
+                                    </div>
+                                    <div class="sales-repoart-list chat-out-list row">
+                                        <div class="col s8">Payment Due</div>
+                                        <div class="col s4">
+                                            <span id="sales-bar-1"></span>
+                                        </div>
+                                    </div>
+                                    <div class="sales-repoart-list chat-out-list row">
+                                        <div class="col s8">Total Delivery</div>
+                                        <div class="col s4">
+                                            <span id="sales-line-2"></span>
+                                        </div>
+                                    </div>
+                                    <div class="sales-repoart-list chat-out-list row">
+                                        <div class="col s8">Total Progress</div>
+                                        <div class="col s4">
+                                            <span id="sales-bar-2"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="collapsible-header red white-text">
+                                    <i class="mdi-action-stars"></i>Favorite Associates</div>
+                                <div class="collapsible-body favorite-associates">
+                                    <div class="favorite-associate-list chat-out-list row">
+                                        <div class="col s4">
+                                            <img src="{% static 'images/avatar.jpg' %}" alt="" class="circle responsive-img online-user valign profile-image">
+                                        </div>
+                                        <div class="col s8">
+                                            <p>Eileen Sideways</p>
+                                            <p class="place">Los Angeles, CA</p>
+                                        </div>
+                                    </div>
+                                    <div class="favorite-associate-list chat-out-list row">
+                                        <div class="col s4">
+                                            <img src="{% static 'images/avatar.jpg' %}" alt="" class="circle responsive-img online-user valign profile-image">
+                                        </div>
+                                        <div class="col s8">
+                                            <p>Zaham Sindil</p>
+                                            <p class="place">San Francisco, CA</p>
+                                        </div>
+                                    </div>
+                                    <div class="favorite-associate-list chat-out-list row">
+                                        <div class="col s4">
+                                            <img src="{% static 'images/avatar.jpg' %}" alt="" class="circle responsive-img offline-user valign profile-image">
+                                        </div>
+                                        <div class="col s8">
+                                            <p>Renov Leongal</p>
+                                            <p class="place">Cebu City, Philippines</p>
+                                        </div>
+                                    </div>
+                                    <div class="favorite-associate-list chat-out-list row">
+                                        <div class="col s4">
+                                            <img src="{% static 'images/avatar.jpg' %}" alt="" class="circle responsive-img online-user valign profile-image">
+                                        </div>
+                                        <div class="col s8">
+                                            <p>Weno Carasbong</p>
+                                            <p>Tokyo, Japan</p>
+                                        </div>
+                                    </div>
+                                    <div class="favorite-associate-list chat-out-list row">
+                                        <div class="col s4">
+                                            <img src="{% static 'images/avater.jpg' %}" alt="" class="circle responsive-img offline-user valign profile-image">
+                                        </div>
+                                        <div class="col s8">
+                                            <p>Nusja Nawancali</p>
+                                            <p class="place">Bangkok, Thailand</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </aside>
+            <!-- LEFT RIGHT SIDEBAR NAV-->
+
+        </div>
+        <!-- END WRAPPER -->
+
+    </div>
+    <!-- END MAIN -->
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<!-- START FOOTER -->
+<footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <span>Copyright © 2015
+                <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">GeeksLabs</a> All rights reserved.</span>
+            <span class="right"> Design and Developed by
+                <a class="grey-text text-lighten-4" href="http://geekslabs.com/">GeeksLabs</a>
+            </span>
+        </div>
+    </div>
+</footer>
+<!-- END FOOTER -->
+{% endblock conteudo %}
+
+
+   
+
+
+{% block scripts_adicionais %} 
+<!-- ================================================
+    Scripts
+    ================================================ -->
+
+<!-- jQuery Library -->
+<script type="text/javascript" src="{% static 'js/plugins/jquery-1.11.2.min.js' %}"></script>
+<!--materialize js-->
+<script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+<!--prism-->
+<script type="text/javascript" src="{% static 'js/plugins/prism/prism.js' %}"></script>
+<!--scrollbar-->
+<script type="text/javascript" src="{% static 'js/plugins/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+<!-- chartist -->
+<script type="text/javascript" src="{% static 'js/plugins/chartist-js/chartist.min.js' %}"></script>
+<!-- google map api -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAAZnaZBXLqNBRXjd-82km_NO7GUItyKek"></script>
+
+<!--google map-->
+<script type="text/javascript" src="{% static 'js/plugins/google-map/google-map-script.js' %}"></script>
+
+<!--plugins.js - Some Specific JS codes for Plugin Settings-->
+<script type="text/javascript" src="{% static 'js/plugins.min.js' %}"></script>
+<!--custom-script.js - Add your own theme custom JS-->
+<script type="text/javascript" src="{% static 'js/custom-script.js' %}"></script>
+{% endblock scripts_adicionais %}
+   

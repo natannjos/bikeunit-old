@@ -63,6 +63,7 @@ class User( AbstractBaseUser, PermissionsMixin, TimestampedModel ):
     def get_absolute_url(self):
         return reverse_lazy('contas:usuario-info', kwargs={'pk': self.pk})
 
+# Cria um perfil correspondente após a conta ser criada
 def salva_perfil(instance, **kwargs):
     Profile.objects.get_or_create(user=instance)
 
