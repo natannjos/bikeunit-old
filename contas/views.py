@@ -31,13 +31,20 @@ class RegistroDeUsuarioView(CreateView):
         valid = super(RegistroDeUsuarioView, self).form_valid(form)
         username, password = form.cleaned_data.get(
             'username'), form.cleaned_data.get('password1')
-       
+
+        
         user = form.save()
+        user.profile.estado = form.cleaned_data['estado']
+        user.profile.cidade = form.cleaned_data['cidade']
+        user.profile.sexo = form.cleaned_data['sexo']
+        user.profile.nascimento = form.cleaned_data['nascimento']
+        user.profile.save()
         login(self.request, user, backend='django.contrib.auth.backends.ModelBackend')
         return valid
 
     def form_invalid(self, form):
         invalid = super(RegistroDeUsuarioView, self).form_invalid(form)
+        print(form.cleaned_data)
 
         return invalid
         

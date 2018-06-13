@@ -16,15 +16,16 @@ class User( AbstractBaseUser, PermissionsMixin, TimestampedModel ):
 
     # Informações Pessoais
     username = models.CharField(
-        'nome', max_length=50, unique=True, validators=[
+        'Apelido / Usuário', max_length=30, unique=True, validators=[
             validators.RegexValidator(
-                re.compile(
-                    '[_.\w]'),
-                'Informe um nome de usuário válido',
-                'este valor deve conter apenas letras e espaços',
-                'invalid'
+                re.compile('^[\w.@+-]+$'),
+                'Informe um nome de usuário válido. '
+                'Este valor deve conter apenas letras, números '
+                'e os caracteres: @/./+/-/_ .'
+                , 'invalid'
             )
-        ], help_text='Seu nome será usado para identifica-lo de forma única na plataforma')
+        ], help_text='Um nome curto que será usado para identificá-lo de forma única na plataforma'
+    )
 
     email = models.EmailField('Email', unique=True)
 

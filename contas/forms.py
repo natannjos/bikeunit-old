@@ -24,6 +24,9 @@ class UserRegister(UserCreationForm):
         super(UserRegister, self).__init__(*args, **kwargs)
 
     estado = BRStateChoiceField()
+    cidade = forms.CharField(label='Cidade')
+    sexo = forms.CharField(label='Sexo')
+    nascimento = forms.DateField(label='Nascimento')
     password1 = forms.CharField(label='Senha', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Confirmação de senha', widget=forms.PasswordInput)
