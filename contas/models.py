@@ -19,7 +19,7 @@ class User( AbstractBaseUser, PermissionsMixin, TimestampedModel ):
         'nome', max_length=50, unique=True, validators=[
             validators.RegexValidator(
                 re.compile(
-                    '[-.\w]'),
+                    '[_.\w]'),
                 'Informe um nome de usuário válido',
                 'este valor deve conter apenas letras e espaços',
                 'invalid'

@@ -5,7 +5,10 @@
 {% block titulo %}
     Crie sua conta | BikeUnit
 {% endblock titulo %}
-    
+
+
+
+
 {% block form %}
 {% csrf_token %}
 
@@ -38,6 +41,7 @@
       <div class="red-text">{{ error }}</div>
     {% endfor %}
 </div>
+
 <div class="row margin">
     <div class="input-field col s12">
         <i class="mdi-communication-email prefix"></i>
@@ -48,6 +52,21 @@
         <div class="red-text">{{ error }}</div>
     {% endfor %}
 </div>
+
+<div class="row margin">
+    <i class="mdi-communication-location-on small prefix" style="padding-left: 10px"></i>
+    <div class="col s10 right">
+        <div class="select-wrapper">
+            <select name="estado" class='browser-default col s4' id="id_estado">
+                <option disabled selected>UF</option>
+            </select>
+            <select name="cidade" class='browser-default col s8' id="id_cidade">
+                <option disabled selected>Município</option>
+            </select>
+        </div>
+    </div>
+</div>
+
 
 <div class="row margin">
     <div class="input-field col s12">
@@ -82,4 +101,57 @@
 </div>
 {% endblock form %}
     
-                
+{% block additional_js %}
+<script>
+    function popupaCidade(id){
+        
+        fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${id}/municipios`, {method: 'GET'})
+        .then(res => res.json())
+        .then(cidades => {
+            cidades.map(
+                cidade => {
+                    let opt = document.createElement('option')
+                    opt.value = cidade.nome
+                    opt.innerHTML = cidade.nome
+                    //cidades.setAttribute('disabled', 'false')
+                    
+                    document.getElementById('id_cidade').appendChild(opt)
+                }
+            )
+        }
+        )
+    }
+
+    fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados', {
+            method: 'GET'
+        })
+        .then(res => res.json())
+        .then(estados => {
+            estados.map( estado => {
+                let opt = document.createElement('option')
+                opt.value = estado.sigla
+                opt.innerHTML = estado.sigla
+                opt.id = estado.id
+                document.getElementById('id_estado').appendChild(opt)
+            }
+            )
+        })
+
+
+        function removeOptions(selectbox) {
+                var i;
+                for(i = selectbox.options.length - 1 ; i > 0 ; i--)
+                {
+                    selectbox.remove(i);
+                }
+            }
+
+
+        let estado = document.getElementById('id_estado')
+        estado.onchange = (e) => {
+                removeOptions(document.getElementById('id_cidade'))
+                let idCidade = estado.options[estado.selectedIndex].id
+                popupaCidade(idCidade)
+            }
+</script>
+{% endblock additional_js %}

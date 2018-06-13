@@ -78,19 +78,13 @@ class Profile(TimestampedModel):
         blank=True, null=True, unique=True
     )
 
-    # Endereço
-    cep_digits_re = re.compile(r'^(\d{5})-(\d{3})$')
-    cep = models.CharField(
-        'CEP',
-        max_length=10,
-        validators=[validators.RegexValidator(cep_digits_re)],
-        blank=True, null=True)
-    rua = models.CharField('Endereço', max_length=50 , blank=True)
-    bairro = models.CharField('Bairro', max_length=50, blank=True)
+
+    is_admin = models.BooleanField('Admin', default=False)
+
+    # Localização
     cidade = models.CharField('Cidade', max_length=50, blank=True)
     estado = BRStateField('Estado', choices=STATE_CHOICES, max_length=2, blank=True)
 
-    is_admin = models.BooleanField('Admin', default=False)
     def __str__(self):
         return self.user.username
 

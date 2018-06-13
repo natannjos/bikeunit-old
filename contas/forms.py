@@ -3,7 +3,8 @@ from django import forms
 
 from .models import User
 
-
+from localflavor.br.forms import BRStateSelect, BRStateChoiceField
+from localflavor.br.br_states import STATE_CHOICES
 
 class UserAdminCreationForm(UserCreationForm):
 
@@ -21,15 +22,15 @@ class UserAdminForm(forms.ModelForm):
 class UserRegister(UserCreationForm):
     def __init__(self, *args, **kwargs):
         super(UserRegister, self).__init__(*args, **kwargs)
-        
 
+    estado = BRStateChoiceField()
     password1 = forms.CharField(label='Senha', widget=forms.PasswordInput)
     password2 = forms.CharField(
         label='Confirmação de senha', widget=forms.PasswordInput)
-
     class Meta:
         model = User
         fields = ('email', 'username', 'password1', 'password2')
+        # fields = UserCreationForm.Meta.fields + ('estado',)
 
     def clean_password2(self):
         # Check that the two password entries match
