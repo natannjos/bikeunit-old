@@ -3,6 +3,11 @@ from django.conf import settings
 from django.core.validators import MinValueValidator
 from decimal import Decimal
 from django.conf import settings
+
+from localflavor.br.br_states import STATE_CHOICES
+from localflavor.br.models import BRStateField
+
+
 # Create your models here.
 class Grupos(models.Model):
     objects = models.Manager()
@@ -13,8 +18,11 @@ class Grupos(models.Model):
     slug = models.SlugField()
     criacao = models.DateTimeField('Criado em', auto_now_add=True)
     modificacao = models.DateTimeField('Modificado em', auto_now=True)
+    
+    estado = BRStateField('Estado', choices=STATE_CHOICES, max_length=2, blank=True, null=True)
+    cidade = models.CharField('Cidade', max_length=50, blank=True)
 
-    participantes = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='Participantes', blank=True, related_name='Participantes')
+    participantes = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='Participantes', blank=True, related_name='participantes')
     pedais = models.ManyToManyField('grupos.Pedal', verbose_name='Pedais', blank=True)
 
     class Meta:
@@ -31,8 +39,7 @@ class Grupos(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = self.slugfy(self.nome)
-        super(Grupos, self).save(*args, **kwargs) # Call the real save() method
-        
+        save = super(Grupos, self).save(*args, **kwargs) # Call the real save() method
 
 class Pedal(models.Model):
     objects = models.Manager()

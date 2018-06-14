@@ -5,11 +5,11 @@ from .models import Grupos, Pedal
 # Register your models here.
 class GruposAdmin(admin.ModelAdmin):   
 
-    list_display = ['nome', 'criacao', 'modificacao']
-    list_filter = ['nome', 'admin']
     readonly_fields = ('criacao', 'modificacao', 'slug')
-    search_fields = ('nome', 'admin')
 
+    list_display = ['nome', 'slug',  'estado', 'cidade']
+    list_filter = ['nome', 'slug', 'admin', 'estado', 'cidade']
+    search_fields = ['nome', 'slug', 'admin', 'estado', 'cidade']
 
 class PedalAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'grupo', 'data', 'hora', 'nivel', 'terreno']
