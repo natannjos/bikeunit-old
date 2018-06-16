@@ -1,0 +1,120 @@
+{% extends "core/parent_forms/base.html" %}
+
+
+{% block menu_lateral %}
+    <aside id="left-sidebar-nav">
+                <ul id="slide-out" class="side-nav fixed leftside-navigation">
+                <li class="user-details cyan darken-2">
+                    <div class="row">
+                        <div class="col col s4 m4 l4">
+                            <img src="images/thaiana.jpg" alt="" class="circle responsive-img valign profile-image">
+                        </div>
+                        <div class="col col s8 m8 l8">
+                            <ul id="profile-dropdown" class="dropdown-content">
+                                <li><a href="#"><i class="mdi-action-face-unlock"></i> Perfil</a>
+                                </li>
+                                <li><a href="#"><i class="mdi-action-assignment-ind"></i>Dados</a>
+                                </li>                                
+                                <li class="divider"></li>                              
+                                <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i>Sair</a>
+                              
+                            </ul>
+                            <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">Thaiana Sousa<i class="mdi-navigation-arrow-drop-down right"></i></a>                            
+                        </div>
+                    </div>
+                </li>
+                <li class="bold "><a href="home-app.html" class="waves-effect waves-cyan"><i class="mdi-action-home"></i>Home App</a>
+                </li>
+                <li class="bold"><a href="" class="waves-effect waves-cyan"><i class="mdi-maps-local-library"></i> Home Administrador</a>
+                </li>
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-maps-directions-bike"></i> Criar grupo de Pedal</a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li>                                
+                                    <a  href="criar-grupo-de-pedal.html">Público</a>                         
+                                    </li>
+                                    <li>
+                                    <a  href="criar-grupo-de-pedal.html">Privado</a>
+                                    </li>                                
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="bold"><a href="alterar-dados-cadastrais.html" class="waves-effect waves-cyan"><i class="mdi-action-assignment-ind"></i> Alterar Dados</a>
+                        </li>
+                        <li class="bold"><a href="perfil-usuario-com-grupo.html" class="waves-effect waves-cyan"><i class="mdi-action-account-circle"></i>Voltar Perfil</a>        
+                        </li>  
+                    </ul>
+                </li>
+                </ul>
+                <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
+        </aside>
+{% endblock menu_lateral %}
+    
+
+{% block conteudo %}
+    {% if meus_grupos %}
+<div id="main">
+    <!-- START WRAPPER -->
+    <div class="wrapper">
+<section id="content">
+
+    <!--breadcrumbs start-->
+    <div id="breadcrumbs-wrapper">
+        <!-- Search for small screen -->
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <h5 class="breadcrumbs-title">Home Administrador</h5>
+                    <ol class="breadcrumbs">
+                        <li>
+                            <a href="home-app.html">Bikeunit</a>
+                        </li>
+                        <li class="active">Home Administrador</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--breadcrumbs end-->
+    <!-- END LEFT SIDEBAR NAV-->
+
+    <!-- Inicio dos pedais que o Adm possui-->
+    <div id="card-widgets">
+        <div class="row">
+
+            <div class="col s12 m12 l12">
+
+                {% for grupo in meus_grupos %}
+
+                <div class="col s12 m6 l4">
+                    <div id="profile-card" class="card">
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <img class="activator" src="{{ grupo.capa.url }}" alt="capa grupo">
+                        </div>
+                        <div class="card-content">
+                            <img src="{{ grupo.logo.url }}" alt="logo do grupo" class="circle responsive-img activator card-profile-image">
+                            <span class="card-title activator grey-text text-darken-4">{{grupo.nome}}</span>
+                            <p>
+                            <i class="mdi-social-public cyan-text text-darken-2"></i>
+                            Grupo {% if grupo.publico %}
+                              Público
+                            {% else %}
+                              Privado
+                            {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <!-- Fim dos pedais que o Adm possui-->
+
+</section>
+
+    {% endif %}
+{% endblock conteudo %}

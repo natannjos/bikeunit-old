@@ -14,7 +14,10 @@ class Grupos(models.Model):
 
     admin = models.ManyToManyField(settings.AUTH_USER_MODEL,
                               verbose_name='Administradores', related_name='admin')
+
     nome = models.CharField('Nome do grupo', max_length=20, unique=True)
+    capa = models.ImageField('Capa', blank=True, null=True, upload_to='grupos/capas')
+    logo = models.ImageField('Logo', blank=True, null=True, upload_to='grupos/logos')
     slug = models.SlugField()
     criacao = models.DateTimeField('Criado em', auto_now_add=True)
     modificacao = models.DateTimeField('Modificado em', auto_now=True)
@@ -24,6 +27,8 @@ class Grupos(models.Model):
 
     participantes = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name='Participantes', blank=True, related_name='participantes')
     pedais = models.ManyToManyField('grupos.Pedal', verbose_name='Pedais', blank=True)
+
+    publico = models.BooleanField('Público', default=True)
 
     class Meta:
         verbose_name = 'Grupo'

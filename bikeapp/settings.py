@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     # Libs
     'widget_tweaks',
     'rest_framework',
-    'annoying'
+    'annoying',
+    'easy_thumbnails',
     #'pusher'
 ]
 
@@ -129,6 +130,9 @@ AUTH_PASSWORD_VALIDATORS = [
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # Extra places for collectstatic to find static files.
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
@@ -183,6 +187,7 @@ REST_FRAMEWORK = {
     'EXCEPTION_HANDLER': 'core.api.exceptions.core_exception_handler',
     'NON_FIELD_ERRORS_KEY': 'error',
 }
+
 
 from django.contrib.messages import constants as  message_contants
 
