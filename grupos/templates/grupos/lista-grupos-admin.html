@@ -7,7 +7,7 @@
                 <li class="user-details cyan darken-2">
                     <div class="row">
                         <div class="col col s4 m4 l4">
-                            <img src="images/thaiana.jpg" alt="" class="circle responsive-img valign profile-image">
+                            <img src="{{ user.profile.image.url }}" alt="" class="circle responsive-img valign profile-image">
                         </div>
                         <div class="col col s8 m8 l8">
                             <ul id="profile-dropdown" class="dropdown-content">
@@ -19,11 +19,11 @@
                                 <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i>Sair</a>
                               
                             </ul>
-                            <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">Thaiana Sousa<i class="mdi-navigation-arrow-drop-down right"></i></a>                            
+                            <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">{{ user.profile.nome }}<i class="mdi-navigation-arrow-drop-down right"></i></a>                            
                         </div>
                     </div>
                 </li>
-                <li class="bold "><a href="home-app.html" class="waves-effect waves-cyan"><i class="mdi-action-home"></i>Home App</a>
+                <li class="bold "><a href="{% url 'core:home' %}" class="waves-effect waves-cyan"><i class="mdi-action-home"></i>Home App</a>
                 </li>
                 <li class="bold"><a href="" class="waves-effect waves-cyan"><i class="mdi-maps-local-library"></i> Home Administrador</a>
                 </li>
@@ -32,12 +32,12 @@
                         <li class="bold"><a class="collapsible-header waves-effect waves-cyan"><i class="mdi-maps-directions-bike"></i> Criar grupo de Pedal</a>
                             <div class="collapsible-body">
                                 <ul>
-                                    <li>                                
-                                    <a  href="criar-grupo-de-pedal.html">Público</a>                         
+                                    <li>
+                                    <a  href="criar-grupo-de-pedal.html">Público</a>
                                     </li>
                                     <li>
                                     <a  href="criar-grupo-de-pedal.html">Privado</a>
-                                    </li>                                
+                                    </li>
                                 </ul>
                             </div>
                         </li>
@@ -54,14 +54,13 @@
     
 
 {% block conteudo %}
-    {% if meus_grupos %}
 <div id="main">
     <!-- START WRAPPER -->
     <div class="wrapper">
-<section id="content">
-
-    <!--breadcrumbs start-->
-    <div id="breadcrumbs-wrapper">
+        <section id="content">
+            
+            <!--breadcrumbs start-->
+            <div id="breadcrumbs-wrapper">
         <!-- Search for small screen -->
         <div class="container">
             <div class="row">
@@ -79,16 +78,17 @@
     </div>
     <!--breadcrumbs end-->
     <!-- END LEFT SIDEBAR NAV-->
-
+    
     <!-- Inicio dos pedais que o Adm possui-->
     <div id="card-widgets">
         <div class="row">
-
+            
             <div class="col s12 m12 l12">
+                {% if meus_grupos %}
+               
+                    {% for grupo in meus_grupos %}
 
-                {% for grupo in meus_grupos %}
-
-                <div class="col s12 m6 l4">
+                    <div class="col s12 m6 l4">
                     <div id="profile-card" class="card">
                         <div class="card-image waves-effect waves-block waves-light">
                             <img class="activator" src="{{ grupo.capa.url }}" alt="capa grupo">
@@ -102,13 +102,18 @@
                               Público
                             {% else %}
                               Privado
-                            {% endif %}
+                              {% endif %}
                             </p>
                         </div>
                     </div>
-                </div>
+                    </div>
 
-                {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <h3>Você ainda não é admin de nenhum grupo</h3>
+                    <a href="" class="btn waves-effect waves-light blue">Criar Grupo</a>
+                {% endif %}
+
             </div>
         </div>
     </div>
@@ -116,5 +121,4 @@
 
 </section>
 
-    {% endif %}
 {% endblock conteudo %}
