@@ -3,11 +3,7 @@ from .models import Profile
 # Register your models here.
 
 class ProfileAdmin(admin.ModelAdmin):
-    readonly_fields = ['amigos',
-                       'convites_recebidos',
-                       'convites_enviados',
-                       'meus_grupos',
-                       'pedais_gratis',
+    readonly_fields = ['meus_grupos',
                        'pedais_agendados',
                        ]
 

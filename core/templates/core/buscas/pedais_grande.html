@@ -1,0 +1,81 @@
+{% for grupo in grupos_da_cidade %}
+<div id="profile-page-wall-post" class="card">
+    <div class="card-profile-title" style="margin-top:20px; margin-left: 10px">
+        <div class="row">
+            <div class="col s2 m1 l1">
+                <img src="{{ grupo.admin.first.profile.image.url }}" alt="grupo-admin" class="circle responsive-img valign profile-post-uer-image">
+            </div>
+            <div class="col s10">
+                <span class="grey-text text-darken-1 ultra-small">Admin do grupo</span>
+                <p class="grey-text text-darken-4 margin">{{grupo.admin.first.profile.nome}}</p>
+                <span class="grey-text text-darken-1 ultra-small">Grupo criado em {{ grupo.criacao.date|date:"d/M/Y" }}</span>
+            </div>
+            <div class="col s1 right-align">
+                <i class="mdi-navigation-expand-more"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12 l6">
+                <p>Olá! Gostaria de fazer parte desse grupo?</p>
+            </div>
+        </div>
+    </div>
+    <!--grupo-->
+    <!--Pedais Agendados-->
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ grupo.capa.url }}" alt="sample">
+                    <img src="{{ grupo.logo.url }}" alt="profile image" class="circle z-depth-2 " style="
+                                        width:100px;
+                                        position: absolute;
+                                        top: 260px;
+                                        left: 10px;
+                                        border-radius: 50%;
+                                        ">
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col s12 m12 l12 offset-l2">
+                            <div class="col s12 l12 center-align">
+                                <h4 class="card-title grey-text text-darken-4 activator" style="margin-right: 200px;">{{ grupo.nome }}</h4>
+                            </div>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                            <h4 class="card-title grey-text text-darken-4 ">{% if grupo.pedais.realizados.count %} {{ grupo.pedais.realizados.count }} {% else %} 0 {% endif %}</h4>
+                            <p class="medium-small grey-text ">Pedais Realizados</p>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                            <h4 class="card-title grey-text text-darken-4">
+                                {% if grupo.pedais_ativos.count %} {{ grupo.pedais_ativos.count }} {% else %} 0 {% endif %}
+                            </h4>
+                            <p class="medium-small grey-text">Pedais Agendados</p>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                            <h4 class="card-title grey-text text-darken-4">{{ grupo.participantes.all.count }}</h4>
+                            <p class="medium-small grey-text">Membros</p>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <a class="btn btn-success waves-effect waves-light">
+                            <i class="mdi-action-thumb-up"></i>
+                        </a>
+                        <a class="btn btn-success waves-effect waves-light">
+                            <i class="mdi-action-delete"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <iframe src="iframe-timeline-tela-grande.html" class="col s12 m12 l12" style="height: 460px; border: none; "></iframe> -->
+    <!-- <iframe src="iframe-timeline-tela-pequena.html" class="col s12 m12 l12" style="height: 460px; border: none; "></iframe> -->
+    <!--fim do lado direito-->
+</div>
+
+{% empty %}
+<div id="profile-page-wall-post" class="card">
+    <h3>Não há grupos cadastrados em {{cidade}}</h3>
+    {% endfor %}

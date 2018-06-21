@@ -17,29 +17,12 @@ class Profile(TimestampedModel):
     user = AutoOneToOneField('contas.User', primary_key=True, on_delete=models.CASCADE)
     nome = models.CharField('Nome Completo', max_length=255)
     image = models.ImageField('Foto', blank=True, null=True, upload_to='perfis/foto')
-    amigos = models.ManyToManyField(
-        'self',
-        related_name='Amigos',
-        verbose_name='Meus Amigos',
-        blank=True)
-    convites_recebidos = models.ManyToManyField(
-        'self',
-        related_name='convites_recebidos',
-        verbose_name='Convites Recebidos',
-        blank=True)
-    convites_enviados = models.ManyToManyField(
-        'self', related_name='convites_enviados', verbose_name='Convites Enviados', blank=True)
+
     meus_grupos = models.ManyToManyField(
         'grupos.Grupos',
         related_name='meus_grupos',
         verbose_name='Meus Grupos',
         blank=True)
-    pedais_gratis = models.ManyToManyField(
-        'grupos.Pedal',
-        related_name='pedais_gratis',
-        verbose_name='Pedais Gratis',
-        blank=True)
-
     pedais_agendados = models.ManyToManyField(
         'grupos.Pedal',
         related_name='pedais_agendados',
@@ -69,15 +52,6 @@ class Profile(TimestampedModel):
         max_length=15,
         validators=[validators.RegexValidator(phone_digits_re)],
         blank=True)
-
-    # Documentos
-    cpf_digits_re = re.compile(r'^(\d{3})\.(\d{3})\.(\d{3})-(\d{2})$')
-    cpf = models.CharField(
-        'CPF', max_length=14,
-        validators=[validators.RegexValidator(cpf_digits_re)],
-        blank=True, null=True, unique=True
-    )
-
 
     is_admin = models.BooleanField('Admin', default=False)
 

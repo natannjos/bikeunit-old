@@ -108,491 +108,382 @@
 
     {% block conteudo %}
     <!-- START MAIN -->
-    <div id="main">
-        <!-- START WRAPPER -->
-        <div class="wrapper">
+<div id="main">
+    <!-- START WRAPPER -->
+    <div class="wrapper">
+        <!-- MENU-->
+
+        <aside id="left-sidebar-nav">
+            <ul id="slide-out" class="side-nav fixed leftside-navigation">
+                <li class="user-details cyan darken-2">
+                    <div class="row">
+                        <div class="col col s4 m4 l4">
+                            <img src="{{ user.profile.image.url }}" alt="" class="circle responsive-img valign profile-image">
+                        </div>
+                        <div class="col col s8 m8 l8">
+                            <ul id="profile-dropdown" class="dropdown-content">
+                                <li>
+                                    <a href="#">
+                                        <i class="mdi-action-face-unlock"></i> Perfil</a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="mdi-action-assignment-ind"></i>Dados</a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="mdi-hardware-keyboard-tab"></i>Sair</a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="mdi-navigation-cancel"></i>Excluir Conta</a>
+                                </li>
+                            </ul>
+                            <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">{{ user.profile.nome }}
+                                <i class="mdi-navigation-arrow-drop-down right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <li class="bold">
+                            <a class="collapsible-header waves-effect waves-cyan">
+                                <i class="mdi-maps-directions-bike"></i> Criar grupo de Pedal</a>
+                        </li>
+                        <li class="bold">
+                            <a href="alterar-dados-cadastrais.html" class="waves-effect waves-cyan">
+                                <i class="mdi-action-assignment-ind"></i> Alterar Dados Usuário</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan">
+                <i class="mdi-navigation-menu"></i>
+            </a>
+        </aside>
+        <!--FIM MENU-->
+        <!-- //////////////////////////////////////////////////////////////////////////// -->
+        <!-- START CONTENT -->
+        <section id="content" style="min-height: 500px">
+            <!--breadcrumbs start-->
+            <div id="breadcrumbs-wrapper">
+                <!-- Search for small screen -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <h5 class="breadcrumbs-title">Perfil Usuário</h5>
+                            <ol class="breadcrumbs">
+                                <li>
+                                    <a href="{% url 'core:home' %}">Bikeunit</a>
+                                </li>
+                                <li class="active">Perfil Usuário</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--breadcrumbs end-->
+            <!-- END LEFT SIDEBAR NAV-->
+            <div class="row">
+                <!-- INÍCIO DA SECTION DE LISTAS -->
+                <section id="listas" class="col s12 m6 l4">
+                    <!--lista-->
+                    <ul class="collapsible popout" data-collapsible="accordion" watch>
+                        <!--1º item-->
+                        <li ng-repeat="single in collapsibleElements">
+                            <div class="collapsible-header">
+                                <i class="{{single.icon}} mdi-communication-location-on"></i>Pesquise Grupos por Localização
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row margin">
+                                    <div class="col s10 right">
+                                        <div class="select-wrapper">
+                                                <select name="estado" class='browser-default col s4' id="id_estado">
+                                                    <option disabled selected>UF</option>
+                                                </select>
+                                                <select name="cidade" class='browser-default col s8' id="id_cidade">
+                                                    <option disabled selected>Município</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <!--fim 1º item-->
+                        {% if meus_grupos %}
+                        <!--2º item-->
+                            <li ng-repeat="single in collapsibleElements">
+                                <div class="collapsible-header $(" #range_02 ").ionRangeSlider({               });">
+
+                                    <i class="{{single.icon}} mdi-maps-directions-bike"></i>Grupos de Pedal que Participo
+                                </div>
+                                <div class="collapsible-body row lista-com-scroll">
+                                    <!--conteudo-->
+                                    <!--inicio iframe-->
+                                    <!--1º grupo-->
+                                    {% for grupo in meus_grupos %}
+                                    <div class="col s12 m12 l12">
+                                        <div id="profile-card" class="card">
+                                            <div class="card-image waves-effect waves-block waves-light">
+                                                <img class="activator" src="{{ grupo.logo.capa }}" alt="user background">
+                                            </div>
+
+                                            <div class="card-content">
+                                                <div class="row">
+
+                                                    <img src="{{ grupo.logo.url }}" alt="" class="circle responsive-img activator card-profile-image">
 
 
-            <!-- //////////////////////////////////////////////////////////////////////////// -->
+                                                    <div style="text-align: right; margin-top: -50px;">
+                                                        <span class="card-title activator grey-text text-darken-4"> {{ grupo.nome. }}</span>
+                                                    </div>
 
-            <!-- START CONTENT -->
-            <section id="content" style="min-height: 500px">
+                                                </div>
 
 
-                <!--breadcrumbs start-->
-                <div id="breadcrumbs-wrapper">
-                    <!-- Search for small screen -->
+                                                <div class="row" style="text-align: center;">
+                                                    <a class="btn-floating waves-effect waves-light light-blue">
+                                                        <i class="mdi-social-notifications-on"></i>
+                                                    </a>
+                                                    <a class="btn-floating waves-effect waves-light green accent-4">
+                                                        <i class="mdi-social-person-add"></i>
+                                                    </a>
+                                                    <a class="btn-floating waves-effect waves-light red accent-2">
+                                                        <i class="mdi-action-delete"></i>
+                                                    </a>
+                                                </div>
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col s12 m12 l12">
-                                <h5 class="breadcrumbs-title">Perfil Usuário</h5>
-                                <ol class="breadcrumbs">
-                                    <li>
-                                        <a href="index.html">GoGo Bike</a>
-                                    </li>
-                                    <li class="active">Perfil Usuário</li>
-                                </ol>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+
+
+                                </div>
+                            </li>
+                            <!--fim 2º item-->
+                        {% endif %}
+                        <!--3º item-->
+
+                        {% if pedais_agendados %}
+                        <li ng-repeat="single in collapsibleElements">
+                            <div class="collapsible-header">
+                                <i class="{{single.icon}} mdi-action-done"></i>Pedais que Confirmei Presença
+                            </div>
+                            <div class="collapsible-body row lista-com-scroll">
+                                <!--conteúdo-->
+                                <!--1º pedal confirmado-->
+                                {% for pedal in pedais_agendados %}
+                                <div class="col s12 m12 l12">
+                                    <div id="card-alert" class="card deep-purple">
+                                        <div class="card-content white-text">
+                                            <div class="row">
+                                                <span style="float: left;">
+                                                    <img src="{{ pedal.grupo.logo.url }}" alt="avatar" class="alert-circle responsive-img valign profile-image" />
+                                                    <span class="white-text darken-1">
+                                                        <b>{{ pedal.grupo.nome }}</b>
+                                                    </span>
+                                                </span>
+                                                <ul class="card-action-buttons" style="float: right;">
+                                                    <li>
+                                                        <a class="btn-floating waves-effect  waves-light red accent-2">
+                                                            <i class="mdi-action-info activator"></i>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <span class="card-title white-text darken-1" style="clear: both;">{{ pedal.destino }}</span>
+                                            <ul>
+                                                <li>Dia: {{ pedal.data }}</li>
+                                                <li>Às {{ pedal.hora }}hs </li>
+                                                <li>{{ pedal.quilometragem}}km</li>
+                                                <li>Terreno {{ pedal.terreno }}</li>
+                                                <li>Concentração: {{ pedal.concentracao }}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-action deep-purple darken-2 center">
+                                            <a class="btn-flat btn waves-effect light-blue white-text activator">
+                                                <i class="mdi-social-group-add"></i>
+                                                <span class="letra-pequena"></span>
+                                            </a>
+                                            <a class="btn btn-warning-cancel btn-flat btn waves-effect red accent-2 white-text letra-pequena ">
+                                                <i class="mdi-content-clear left"></i>
+                                            </a>
+                                        </div>
+                                        <div class="card-reveal">
+                                            <span class="card-title grey-text text-darken-4">
+                                                <i class="mdi-navigation-close right"></i> Aviso</span>
+                                            <p>{{ pedal.info }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                  
+                                {% endfor %}
+                            </div>
+                        </li>
+                        <!--fim 3º item-->
+                        {% endif %}
+                        
+                        {% if convites_enviados %}
+                        <!--4º item-->
+                        <li ng-repeat="single in collapsibleElements">
+                            <div class="collapsible-header">
+                                <i class="{{single.icon}} mdi-content-markunread"></i>Status Convites Enviados
+                            </div>
+                            <div class="collapsible-body row lista-com-scroll">
+
+                                <div class="col s12 m12 l12">
+                                    <ul id="task-card" class="collection with-header">
+
+                                        <li class="collection-item dismissable">
+                                            <span class="task-cat teal" style="margin-left:0px;">CONFIRMADO</span>
+                                            <h6>Fulano de tal </h6>
+                                            <label for="task1">Participar Grupo Alto da XV.
+                                            </label>
+
+
+                                        </li>
+
+                                        <li class="collection-item dismissable">
+                                            <span class="task-cat teal" style="margin-left:0px;">CONFIRMADO</span>
+                                            <h6>Fulano de tal </h6>
+                                            <label for="task1">Participar Pedal Jusita.
+                                            </label>
+                                            <label for="task1">Grupo Pedal Alto da XV
+                                            </label>
+
+                                        </li>
+                                        <li class="collection-item dismissable">
+                                            <span class="task-cat pink" style="margin-left:0px;">PENDENTE</span>
+                                            <h6>Fulano de Nome Grande </h6>
+                                            <label for="task1">Participar Pedal Quiriri.
+                                            </label>
+                                            <label for="task1">Grupo Pedal Norte
+                                            </label>
+
+
+                                        </li>
+
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </li>
+                        <!--fim 4º item-->
+                        {% endif %}
+
+
+                    </ul>
+                </section>
+                <!-- FIM DA SECTION DE LISTAS -->
+                <!-- INICIO DA TIMELINE -->
+                <!--INICIO TIMELINE TELA GRANDE-->
+
+                <!-- Timeline tela grande-->
+                <section id="timeline-grande" class="col s12 m4 l8 timeline" style="overflow-y: scroll; max-height: 1000px">
+                    
+                </section>
+                <!--FIM TIMELINE TELA GRANDE-->
+                <!--INICIO DA TIMELINE TELA PEQUENA-->
+                {% comment %} 
+                <section id="timeline" class="col s12 m4 l8 hide-on-med-and-up timeline" style="overflow-y: scroll; max-height: 1000px">
+ {% for grupo in grupos_da_cidade %}
+
+<div id="profile-page-wall-post" class="card">
+    <div class="card-profile-title">
+        <div class="row">
+            <div class="col s2 m1 l1">
+                <img src="{{ grupo.admin.first.profile.image.url }}" alt="" class="circle responsive-img valign profile-post-uer-image">
+            </div>
+            <div class="col s10">
+                <p class="grey-text text-darken-4 margin">{{ grupo.admin.first.profile.nome }}</p>
+                <span class="grey-text text-darken-1 ultra-small">Grupo criado em {{ grupo.criacao.date|date:"d/M/Y" }}</span>
+            </div>
+            <div class="col s1 right-align">
+                <i class="mdi-navigation-expand-more"></i>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 m12 l6">
+                <p>Olá! Gostaria de fazer parte desse grupo?</p>
+            </div>
+        </div>
+    </div>
+    <!--grupo-->
+    <!--Pedais Agendados-->
+    <div class="row">
+        <div class="col s12 m12 l12">
+            <div class="card">
+                <div class="card-image">
+                    <img src="{{ grupo.capa.url }}" alt="sample">
+                    <img src="{{ grupo.logo.url }}" alt="profile image" class="circle z-depth-2 " style="  width:60px;
+                                                                                                                                position: absolute;
+                                                                                                                                top: 120px;
+                                                                                                                                left: 10px;
+                                                                                                                                border-radius: 50%;
+                                                                                                                                ">
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        <div class="col s12 m12 l12 offset-l2">
+                            <div class="col s12 l12 center-align">
+                                <h4 class="card-title grey-text text-darken-4 activator" style="margin-right: -10px;">{{ grupo.nome }}</h4>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <!--breadcrumbs end-->
-
-
-                <!--start container-->
-                <div class="container">
-                    <div class="section">
-                        <div class="col s12 m8 l9">
-                            <!--Inicio da lista perfil usuário-->   
-                            <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
-
-                                <!--1º item da lista perfil-usuario-->
-                                <li>
-                                    <div class="collapsible-header ">
-                                        <i class="mdi-maps-directions-bike"></i> Grupos de pedal que participo
-                                    </div>
-                                    <div class="collapsible-body row">
-                                        {% for x in range %}
-                                            <div class="product col m3 s12 l3">
-                                                <div class="card" style="margin: 5px 5px 5px 5px">
-                                                    <div class="card-image waves-effect waves-block waves-light">
-                                                        <a href="#">
-                                                            <img src="{% static 'images/logo-quadrado.jpg' %}" alt="product-img">
-                                                        </a>
-                                                    </div>
-
-                                                    <ul class="card-action-buttons">
-                                                        <li>
-                                                            <a class="btn-floating waves-effect waves-light green accent-4 activator">
-                                                                <i class="mdi-social-group-add"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class="btn-floating waves-effect waves-light light-blue">
-                                                                <i class="mdi-social-notifications-on"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a class=" btn btn-warning-cancel-sair-do-grupo btn-floating waves-effect waves-light red accent-2">
-                                                                <i class="mdi-content-clear"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-
-                                                    <div class="card-content">
-                                                        <div class="row">
-                                                            <div class="col s4 no-padding">
-                                                                <a href="">
-                                                                    <img src="{% static 'images/' %}" alt="" class="responsive-img">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="card-reveal">
-                                                        <span class="card-title grey-text text-darken-4">
-                                                            <i class="mdi-navigation-close right"></i> Convide um amigo pra particiar (digite email)
-                                                        </span>
-                                                        <form>
-                                                            <select name="emailsCadastrados" id="emailsCadastrados" class="multiple">
-                                                                <option value="1">fulano@email.com</option>
-                                                                <option value="1">ciclano@email.com</option>
-                                                                <option value="1">beutrano@email.com</option>
-                                                            </select>
-                                                            <button type="submit" class="btn waves-effect waves-light green">Enviar</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-
-                                    </div>
-                                </li>
-                                <!--fim do 1º item da lista perfil-usuario-->
-
-                                <!--2º item da lista perfil-usuario-->
-                                <li>
-                                    <div class="collapsible-header ">
-                                        <i class="mdi-action-done"></i> Pedais Que Confirmei Presença</div>
-                                    <div class="collapsible-body">
-                                        <div class="row">
-
-                                            {% for x in range %}
-                                                <div class="col s12 m4 l4">
-                                                    <div id="card-alert" class="card deep-purple">
-                                                        <div class="card-content white-text">
-                                                            <img src="{% static 'images/avatar.jpg' %}" alt="avatar" class="alert-circle responsive-img valign profile-image" />
-                                                            <span class="white-text darken-1">
-                                                                <b>Pedal Norte</b>
-                                                            </span>
-                                                            <br>
-                                                            <br>
-                                                            <ul>
-                                                                <li>Quiriri</li>
-                                                                <li>Dia: 10/10</li>
-                                                                <li>60km</li>
-                                                                <li>Terreno misto</li>
-                                                                <li>Concentração: Tal Lugar</li>
-                                                                <li>Às 14:00hs </li>
-                                                            </ul>
-                                                        </div>
-                                                        <div class="card-action deep-purple darken-2 center">
-                                                            <a class="btn-flat btn waves-effect light-blue white-text">
-                                                                <i class="mdi-action-question-answer"></i>
-                                                                <span class="letra-pequena"></span>
-                                                            </a>
-                                                            <a class="btn-flat btn waves-effect light-blue white-text activator">
-                                                                <i class="mdi-social-group-add"></i>
-                                                                <span class="letra-pequena"></span>
-                                                            </a>
-                                                            <a class="btn btn-warning-cancel btn-flat btn waves-effect red accent-2 white-text letra-pequena ">
-                                                                <i class="mdi-content-clear left"></i>
-                                                            </a>
-                                                        </div>
-                                                        <div class="card-reveal">
-                                                            <span class="card-title grey-text text-darken-4">
-                                                                <i class="mdi-navigation-close right"></i> Convide um amigo pra particiar (digite email)
-                                                            </span>
-                                                            <form>
-                                                                <select name="emailsCadastrados" id="emailsCadastrados" class="multiple">
-                                                                    <option value="1">fulano@email.com</option>
-                                                                    <option value="1">ciclano@email.com</option>
-                                                                    <option value="1">beutrano@email.com</option>
-                                                                </select>
-
-                                                                <button type="submit" class="btn waves-effect waves-light green " style="margin-top: 150px">Enviar</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </li>
-                                <!--fim do 2º item da lista perfil-usuario-->
-
-                                <!--3ª item de lista perfil usuário-->
-                                <li>
-                                    <div class="collapsible-header ">
-                                        <i class="mdi-content-markunread"></i>Convites Enviados a amigos(Status)
-                                    </div>
-                                    <div class="collapsible-body">
-                                        <div class="col s12 m8 l9">
-                                            <div class="row">
-
-                                                <!-- TITULO DAS TABS -->
-                                                <div class="col s12">
-                                                    <ul class="tabs tab-demo z-depth-1">
-                                                        <li class="tab col s3">
-                                                            <a class="active" href="#test1">Corupá</a>
-                                                        </li>
-                                                        <li class="tab col s3">
-                                                            <a href="#test2">Quiriri</a>
-                                                        </li>
-                                                        <li class="tab col s3">
-                                                            <a href="#test3">Contenda</a>
-                                                        </li>
-                                                        <li class="tab col s3">
-                                                            <a href="#test4">Colombo</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <!-- FIM TITULO DAS TABS -->
-
-                                                <!-- CORPO DAS TABS -->
-                                                <div class="col s12">
-                                                    <div id="test1" class="col s12">
-                                                        <div class="col s12 m8 l9">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th data-field="id">Nome</th>
-                                                                        <th data-field="name">Status</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>Morgana Bla</td>
-                                                                        <td>Confirmado</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Fernando Tal</td>
-                                                                        <td>Pendente</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Rodrigo Robertini</td>
-                                                                        <td>Cancelado</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="test2" class="col s12">
-                                                        <div class="col s12 m8 l9">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th data-field="id">Nome</th>
-                                                                        <th data-field="name">Status</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td> Abrel Santos</td>
-                                                                        <td>Pendente</td>
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Aleluia Das Graças</td>
-                                                                        <td>Cancelado</td>
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Francisquina J</td>
-                                                                        <td>Confirmado</td>
-
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-
-                                                    <div id="test3" class="col s12">
-                                                        <div class="col s12 m8 l9">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th data-field="id">Nome</th>
-                                                                        <th data-field="name">Status</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>Roberta F</td>
-                                                                        <td>Pendente</td>
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Ana Trancoso</td>
-                                                                        <td>Pendente</td>
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Flávia A</td>
-                                                                        <td>Confirmado</td>
-
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                    <div id="test4" class="col s12">
-                                                        <div class="col s12 m8 l9">
-                                                            <table>
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th data-field="id">Nome</th>
-                                                                        <th data-field="name">Status</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td>Gabriela F</td>
-                                                                        <td>Confirmado</td>
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Paola B</td>
-                                                                        <td>Cancelado</td>
-
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>Carlos G</td>
-                                                                        <td>Confirmado</td>
-
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- FIM DO CORPO DAS TABS -->
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <!--Fim 3º item de lista perfil usuário-->
-
-                                <!--4º item da lista perfil-usuario-->
-
-                                <li>
-                                    <div class="collapsible-header ">
-                                        <i class="mdi-action-thumb-up"></i>Grupos e Pedais Sugeridos por Amigos
-                                    </div>
-                                    <div class="collapsible-body">
-                                        <div class="row">
-                                            <div class="col s12 m4 l3">
-                                                <p>
-                                                    Alguns amigos gostariam que você participasse desses grupos e/ou pedais.
-                                                    <code class=" language-markup"></code>
-                                                </p>
-                                            </div>
-                                            <div class="col s12 m8 l9">
-                                                <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
-                                                    {% for x in range %}
-                                                        <li>
-                                                            <div class="collapsible-header">
-                                                                <i class="mdi-content-drafts"></i> Paulinea Sussa
-                                                            </div>
-
-                                                            <div class="collapsible-body">
-                                                                <div class="container">
-                                                                    <div class="row">
-                                                                        <div class="col s12 m12 l12">
-                                                                            <div class="col s12 m4 l4">
-                                                                                <div id="card-alert" class="card deep-purple">
-                                                                                    <div class="row">
-                                                                                        <div class="col s8 m8 l8">
-                                                                                            <div class="card-content white-text">
-                                                                                                <ul>
-                                                                                                    <li>
-                                                                                                        <a class="btn-floating waves-effect waves-light red accent-2">
-                                                                                                            <i class="mdi-social-notifications-on"></i>
-                                                                                                        </a>
-                                                                                                    </li>
-                                                                                                </ul>
-                                                                                                <span class="card-title white-text darken-1">Quiriri</span>
-                                                                                                <ul>
-                                                                                                    <li>Nível Médio</li>
-                                                                                                    <li>60km</li>
-                                                                                                    <li>Dia:10/10</li>
-                                                                                                    <li>Terreno Misto</li>
-                                                                                                    <li>Concentração: Praça Tal</li>
-                                                                                                    <li>Às 14:00hr</li>
-                                                                                                </ul>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col s4 m4 l4">
-                                                                                            <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2 letra-pequena preco-card letra-menor preco-card">R$1899,00</a>
-                                                                                        </div>
-                                                                                        <div class="col s12 m12 l12">
-                                                                                            <div class="card-action deep-purple darken-2 center">
-                                                                                                <a class="btn btn-success waves-effect waves-light">
-                                                                                                    <i class="mdi-action-thumb-up"></i>
-                                                                                                </a>
-                                                                                                <a class="btn btn-success waves-effect waves-light">
-                                                                                                    <i class="mdi-action-delete"></i>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                                <!--fim do 4º item da lista perfil-usuario-->
-
-
-                                <!--5º item da lista perfil-usuario-->
-
-                                <li>
-                                    <div class="collapsible-header ">
-                                        <i class="mdi-action-markunread-mailbox"></i> Pedais Agendados por Diversos Grupos
-                                    </div>
-                                    <div class="collapsible-body">
-                                        <div class="row">
-                                            <div class="col s12 m4 l3">
-                                                <p>
-                                                    Disversos Grupos desejam saber se você se interessa em participar de seus pedais.
-                                                    <code class=" language-markup"></code>
-                                                </p>
-                                            </div>
-                                            <div class="col s12 m8 l9">
-                                                <ul class="collapsible collapsible-accordion" data-collapsible="accordion">
-
-                                                    {% for x in range %}
-                                                        <li>
-                                                            <div class="collapsible-header">
-                                                                <i class="mdi-maps-directions-bike"></i> Pedal Norte
-                                                            </div>
-                                                            <div class="collapsible-body">
-                                                                <div class="container">
-                                                                    <div class="row">
-                                                                        <div class="col s12 m12 l12">
-                                                                            <div class="col s12 m4 l4">
-                                                                                <div id="card-alert" class="card deep-purple">
-                                                                                    <div class="row">
-                                                                                        <div class="col s8 m8 l8">
-                                                                                            <div class="card-content white-text">
-                                                                                                <ul>
-                                                                                                    <li>
-                                                                                                        <a class="btn-floating waves-effect waves-light red accent-2">
-                                                                                                            <i class="mdi-social-notifications-on"></i>
-                                                                                                        </a>
-                                                                                                    </li>
-                                                                                                </ul>
-                                                                                                <span class="card-title white-text darken-1">Quiriri</span>
-                                                                                                <ul>
-                                                                                                    <li>Nível Médio</li>
-                                                                                                    <li>60km</li>
-                                                                                                    <li>Dia:10/10</li>
-                                                                                                    <li>Terreno Misto</li>
-                                                                                                    <li>Concentração: Praça Tal</li>
-                                                                                                    <li>Às 14:00hr</li>
-                                                                                                </ul>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="col s4 m4 l4">
-                                                                                            <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2 letra-pequena preco-card letra-menor preco-card">R$1899,00</a>
-                                                                                        </div>
-                                                                                        <div class="col s12 m12 l12">
-                                                                                            <div class="card-action deep-purple darken-2 center">
-                                                                                                <a class="btn btn-success waves-effect waves-light">
-                                                                                                    <i class="mdi-action-thumb-up"></i>
-                                                                                                </a>
-                                                                                                <a class="btn btn-success waves-effect waves-light">
-                                                                                                    <i class="mdi-action-delete"></i>
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-
-                            </ul>
+                        <div class="col s4 m4 l4 center-align">
+                            <h4 class="card-title grey-text text-darken-4 ">
+                                {% if grupo.realizados.count %} {{ grupo.realizados.count }} {% else %} 0 {% endif %}
+                            </h4>
+                            <p class="medium-small grey-text ">Pedais Realizados</p>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                            <h4 class="card-title grey-text text-darken-4">
+                                {% if grupo.pedais_ativos.count %} {{ grupo.pedais_ativos.count }} {% else %} 0 {% endif %}
+                            </h4>
+                            <p class="medium-small grey-text">Pedais Agendados</p>
+                        </div>
+                        <div class="col s4 m4 l4 center-align">
+                            <h4 class="card-title grey-text text-darken-4">{{ grupo.participantes.all.count }}</h4>
+                            <p class="medium-small grey-text">Membros</p>
                         </div>
                     </div>
+                    <div style="text-align: center;">
+                        <a class="btn btn-success waves-effect waves-light">
+                            <i class="mdi-action-thumb-up"></i>
+                        </a>
+                        <a class="btn btn-success waves-effect waves-light">
+                            <i class="mdi-action-delete"></i>
+                        </a>
+                    </div>
                 </div>
-            </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% empty %}
+<div id="profile-page-wall-post" class="card">
+    Não há grupos cadastrados na cidade solicitada
+</div>
+{% endfor %}
+                </section>
+                {% endcomment %}
+                <!--FIM DA TIMELINE TELA PEQUENA-->
+
+                <!-- FIM DA TIMELINE -->  
+                
+            </div>
+        </section>
+        </div>
         </div>
         <!-- START FOOTER -->
         <footer class="page-footer">
             <div class="footer-copyright">
                 <div class="container">
-                    <span>Copyright © 2015
+                    <span>Copyright © 2018
                         <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs"
                             target="_blank">GeeksLabs</a> All rights reserved.</span>
                     <span class="right"> Design and Developed by
@@ -605,6 +496,42 @@
     </div>
 {% endblock conteudo %}
 
+{% block scripts_adicionais %}
+  <script>
 
+    $(function () {
 
+        $.ajax({
+            type: 'GET',
+            url: '{% url "core:atualiza" %}',
+            data: {
+                'cidade': '{{ user.profile.cidade }}'
+            },
+            success: function (data) {
+                console.log(data)
+                $("#timeline-grande").html(data)
+            },
+        })
+    })
+        
+
+    $(function() {
+        
+        $('#id_cidade').on('change', function(e){
+           
+           $.ajax({
+               type: 'GET',
+               url: '{% url "core:atualiza" %}',
+               data: {
+                   'cidade':e.target.value
+                },
+               success: function(data){
+                   console.log(data)
+                    $("#timeline-grande").html(data)
+               },
+            })
+    })
+    })
     
+</script>
+{% endblock scripts_adicionais %}

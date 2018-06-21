@@ -56,3 +56,54 @@ $(document).ready(function(){
   });
 });
 
+
+// Busca de localidade
+function popupaCidade(id) {
+
+    fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${id}/municipios`, { method: 'GET' })
+        .then(res => res.json())
+        .then(cidades => {
+            cidades.map(
+                cidade => {
+                    let opt = document.createElement('option')
+                    opt.value = cidade.nome
+                    opt.innerHTML = cidade.nome
+                    //cidades.setAttribute('disabled', 'false')
+
+                    document.getElementById('id_cidade').appendChild(opt)
+                }
+            )
+        }
+        )
+}
+
+fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados', {
+    method: 'GET'
+})
+    .then(res => res.json())
+    .then(estados => {
+        estados.map(estado => {
+            let opt = document.createElement('option')
+            opt.value = estado.sigla
+            opt.innerHTML = estado.sigla
+            opt.id = estado.id
+            document.getElementById('id_estado').appendChild(opt)
+        }
+        )
+    })
+
+
+function removeOptions(selectbox) {
+    var i;
+    for (i = selectbox.options.length - 1; i > 0; i--) {
+        selectbox.remove(i);
+    }
+}
+
+
+let estado = document.getElementById('id_estado')
+estado.onchange = (e) => {
+    removeOptions(document.getElementById('id_cidade'))
+    let idCidade = estado.options[estado.selectedIndex].id
+    popupaCidade(idCidade)
+}

@@ -46,6 +46,14 @@ class Grupos(models.Model):
         self.slug = self.slugfy(self.nome)
         save = super(Grupos, self).save(*args, **kwargs) # Call the real save() method
 
+    @property
+    def pedais_ativos(self):
+        return self.pedais.filter(ativo=True)
+    
+    @property
+    def realizados(self):
+        return self.pedais.filter(ativo=False)
+
 class Pedal(models.Model):
     objects = models.Manager()
 
@@ -56,6 +64,8 @@ class Pedal(models.Model):
     quilometragem = models.DecimalField('Quilometragem', max_digits=6, decimal_places=2, validators=[MinValueValidator(Decimal('0'))])
     destino = models.CharField('Destino', max_length=25)
     info = models.TextField('Informações Adicinais')
+
+    pago = models.BooleanField('Pedal Pago', default=False)
 
     niveis = (
         ('1', 'Iniciante'),
@@ -73,7 +83,7 @@ class Pedal(models.Model):
 
     criacao = models.DateTimeField('Criado em', auto_now_add=True)
     modificacao = models.DateTimeField('Modificado em', auto_now=True)
-
+    ativo = models.BooleanField('Ativo', default=True)
     class Meta:
         db_table = ''
         managed = True
