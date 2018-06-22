@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 class BuscaGruposLocalidadeAjax(LoginRequiredMixin, TemplateView):
     
-    template_name = 'core/buscas/pedais_grande.html'
+    template_name = 'core/buscas/busca_por_cidade.html'
 
     def get_context_data(self, **kwargs):
         context = super(BuscaGruposLocalidadeAjax, self).get_context_data(**kwargs)
