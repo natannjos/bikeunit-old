@@ -25,8 +25,8 @@ urlpatterns = [
     path('ajax/chat/', broadcast),
 
     # URLs dos apps
-    path('contas/', include('contas.urls', namespace='contas')),
-    path('grupos/', include('grupos.urls', namespace='grupos'))
+    path('conta/', include('contas.urls', namespace='contas')),
+    path('grupo/', include('grupos.urls', namespace='grupos'))
 
 ]
 

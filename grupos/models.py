@@ -92,3 +92,7 @@ class Pedal(models.Model):
 
     def __str__(self):
         return 'Pedal de {} - {}'.format(self.data, self.destino)
+
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('grupos:grupo_info', kwargs={'slug': self.slug})
