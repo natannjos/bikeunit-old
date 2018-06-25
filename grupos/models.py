@@ -6,7 +6,7 @@ from django.conf import settings
 
 from localflavor.br.br_states import STATE_CHOICES
 from localflavor.br.models import BRStateField
-
+from perfis.models import Profile
 
 # Create your models here.
 class Grupos(models.Model):
@@ -44,15 +44,32 @@ class Grupos(models.Model):
 
     def save(self, *args, **kwargs):
         self.slug = self.slugfy(self.nome)
-        save = super(Grupos, self).save(*args, **kwargs) # Call the real save() method
+        super(Grupos, self).save(*args, **kwargs) # Call the real save() method
 
     @property
     def pedais_ativos(self):
-        return self.pedais.filter(ativo=True)
+        return self.pedais.filter(ativo=True).order_by('-modificacao')
     
     @property
     def realizados(self):
-        return self.pedais.filter(ativo=False)
+        return self.pedais.filter(ativo=False).order_by('-criacao')
+
+def add_grupo_a_lista_de_grupos_do_admin(instance):
+    for user in instance.admin.all():
+        perfil = Profile.objects.get(user=user)
+        perfil.meus_grupos.add(instance)
+        perfil.save()
+        instance.participantes.add(user)
+
+def roda_acao_apos_commit(instance, **kwargs):
+    from django.db import transaction 
+    transaction.on_commit(
+        lambda: add_grupo_a_lista_de_grupos_do_admin(instance))
+
+models.signals.post_save.connect(
+    roda_acao_apos_commit, sender=Grupos, dispatch_uid='roda_acao_apos_commit'
+)
+
 
 class Pedal(models.Model):
     objects = models.Manager()
@@ -64,9 +81,9 @@ class Pedal(models.Model):
     quilometragem = models.DecimalField('Quilometragem', max_digits=6, decimal_places=2, validators=[MinValueValidator(Decimal('0'))])
     destino = models.CharField('Destino', max_length=25)
     info = models.TextField('Informações Adicinais')
-
+    publico = models.BooleanField('Público', default=False)
     pago = models.BooleanField('Pedal Pago', default=False)
-
+    participantes = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name="Participantes")
     niveis = (
         ('1', 'Iniciante'),
         ('1', 'Médio'),

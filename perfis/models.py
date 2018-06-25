@@ -23,10 +23,24 @@ class Profile(TimestampedModel):
         related_name='meus_grupos',
         verbose_name='Meus Grupos',
         blank=True)
+
+    grupos_deletados = models.ManyToManyField(
+        'grupos.Grupos',
+        related_name='grupos_deletados',
+        verbose_name='Grupos Deletados',
+        blank=True
+    )
+
     pedais_agendados = models.ManyToManyField(
         'grupos.Pedal',
         related_name='pedais_agendados',
         verbose_name='Pedais Marcados',
+        blank=True)
+
+    pedais_deletados = models.ManyToManyField(
+        'grupos.Pedal',
+        related_name='pedais_deletados',
+        verbose_name='Pedais Excluidos',
         blank=True)
 
     sexos = (

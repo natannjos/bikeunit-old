@@ -5,7 +5,6 @@ from django.http import HttpResponseForbidden
 
 from django.db.models import Count
 
-
 class BuscaGruposLocalidadeAjax(LoginRequiredMixin, ListView):
 
     template_name = 'core/buscas/busca_por_cidade.html'
@@ -23,8 +22,20 @@ class BuscaGruposLocalidadeAjax(LoginRequiredMixin, ListView):
         queryset = super(BuscaGruposLocalidadeAjax, self).get_queryset()
         user = self.request.user
         if self.request.GET.get('primeira'):
-            queryset = Grupos.objects.filter(
-                cidade=user.profile.cidade, estado=user.profile.estado, publico=True).annotate(num_pedais=Count('pedais')).order_by('-num_pedais')
+
+            # grupos_com_pedais_agendados = grupo for grupo in user.profile.meus_grupos.all() if grupo.pedais_ativos.all()
+            
+            grupos_com_pedais_agendados = user.profile.meus_grupos.filter(
+                pedais__ativo=True).annotate(num_pedais=Count('pedais')).order_by('-num_pedais')
+
+            # convites_para_participar_grupo
+            # convites_para_participar_pedal
+            
+            grupos_da_cidade_do_usuario = Grupos.objects.filter(
+                cidade=user.profile.cidade, estado=user.profile.estado).annotate(num_pedais=Count('pedais')).order_by('-num_pedais')
+
+            queryset = grupos_com_pedais_agendados | grupos_da_cidade_do_usuario
+
         else:
             queryset = Grupos.objects.filter(cidade=self.request.GET.get(
                 'cidade'), publico=True).annotate(num_pedais=Count('pedais')).order_by('-num_pedais')

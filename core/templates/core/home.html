@@ -188,13 +188,13 @@
             <!-- END LEFT SIDEBAR NAV-->
             <div class="row">
                 <!-- INÍCIO DA SECTION DE LISTAS -->
-                <section id="listas" class="col s12 m6 l4">
+                <section id="listas" class="col s12 m6 l4 section" >
                     <!--lista-->
                     <ul class="collapsible popout" data-collapsible="accordion" watch>
                         <!--1º item-->
                         <li ng-repeat="single in collapsibleElements">
                             <div class="collapsible-header">
-                                <i class="{{single.icon}} mdi-communication-location-on"></i>Pesquise Grupos por Localização
+                                <i class="{{single.icon}} mdi-communication-location-on"></i>Pesquise Grupos por Cidade
                             </div>
                             <div class="collapsible-body">
                                 <div class="row margin">
@@ -227,7 +227,7 @@
                                     <div class="col s12 m12 l12">
                                         <div id="profile-card" class="card">
                                             <div class="card-image waves-effect waves-block waves-light">
-                                                <img class="activator" src="{{ grupo.logo.capa }}" alt="user background">
+                                                <img class="activator" src="{{ grupo.capa.url }}" alt="user background">
                                             </div>
 
                                             <div class="card-content">
@@ -260,8 +260,6 @@
                                         </div>
                                     </div>
                                     {% endfor %}
-
-
                                 </div>
                             </li>
                             <!--fim 2º item-->
@@ -297,10 +295,10 @@
                                             </div>
                                             <span class="card-title white-text darken-1" style="clear: both;">{{ pedal.destino }}</span>
                                             <ul>
-                                                <li>Dia: {{ pedal.data }}</li>
-                                                <li>Às {{ pedal.hora }}hs </li>
-                                                <li>{{ pedal.quilometragem}}km</li>
-                                                <li>Terreno {{ pedal.terreno }}</li>
+                                                <li>Dia: {{ pedal.data|date:" d/j/Y - l" }}</li>
+                                                <li>Às {{ pedal.hora|time:"H:i" }} hs </li>
+                                                <li>Distância: {{ pedal.quilometragem}}km</li>
+                                                <li>Terreno: {{ pedal.get_terreno_display }}</li>
                                                 <li>Concentração: {{ pedal.concentracao }}</li>
                                             </ul>
                                         </div>
@@ -320,13 +318,13 @@
                                         </div>
                                     </div>
                                 </div>
-                                  
+
                                 {% endfor %}
                             </div>
                         </li>
                         <!--fim 3º item-->
                         {% endif %}
-                        
+
                         {% if convites_enviados %}
                         <!--4º item-->
                         <li ng-repeat="single in collapsibleElements">
@@ -378,7 +376,7 @@
 
                     </ul>
                 </section>
-                
+
                 <div id="timeline">
 
                 </div>
@@ -424,9 +422,9 @@
 
 
     $(function() {
-        
+
         $('#id_cidade').on('change', function(e){
-           
+
            $.ajax({
                type: 'GET',
                url: '{% url "core:atualiza" %}',
@@ -440,7 +438,6 @@
             })
         })
     })
-
-  
 </script>
+
 {% endblock scripts_adicionais %}

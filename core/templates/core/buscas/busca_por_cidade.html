@@ -1,77 +1,215 @@
 
-<section class="col s12 m4 l8 timeline hide-on-med-and-down" style="overflow-y: scroll; max-height: 1000px;">
+<section class="col s12 m4 l8 timeline hide-on-med-and-down ps-scrollbar-y" style="overflow-y: scroll; max-height: 1000px;">
         {% for grupo in grupos_da_cidade %}
-        <div id="profile-page-wall-post" class="card novo-grupo">
-              <div class="card-profile-title">
-                <div class="row" style="margin:10px">
-                  <div class="col s2 m1 l1">
-                        <img src="{{ grupo.admin.first.profile.image.url }}" alt="grupo-admin" class="circle responsive-img valign profile-post-uer-image">
-                    </div>
-                    <div class="col s10">
-                        <span class="grey-text text-darken-1 ultra-small">Admin do grupo</span>
-                        <p class="grey-text text-darken-4 margin">{{grupo.admin.first.profile.nome}}</p>
-                        <span class="grey-text text-darken-1 ultra-small">Grupo criado em {{ grupo.criacao.date|date:"d/M/Y" }}</span>
-                    </div>
-                    <div class="col s1 right-align">
-                        <i class="mdi-navigation-expand-more"></i>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col s12 m12 l6">
-                        <p>Olá! Gostaria de fazer parte desse grupo?</p>
-                    </div>
-                </div>
-            </div>
-            <!--grupo-->
-            <!--Pedais Agendados-->
-            <div class="row">
-                <div class="col s12 m12 l12">
-                    <div class="card">
-                        <div class="card-image">
-                            <img src="{{ grupo.capa.url }}" alt="sample">
-                            <img src="{{ grupo.logo.url }}" alt="profile image" class="circle z-depth-2 " style="
-                                                width:100px;
-                                                position: relative;
-                                                top:-10px;
-                                                left: 5px;
-                                                border-radius: 50%;">
-                        <h4 class="card-title grey-text text-darken-4 activator hide-on-med-and-down" style="margin-left: 250px;">{{ grupo.nome }}</h4>
-
-                        </div>
-                        <div class="card-content">
-                            <div class="row">
-                                <div class="col s4 m4 l4 center-align">
-                                    <h4 class="card-title grey-text text-darken-4 ">{% if grupo.pedais.realizados.count %} {{ grupo.pedais.realizados.count }} {% else %} 0 {% endif %}</h4>
-                                    <p class="medium-small grey-text ">Pedais Realizados</p>
+            {% if grupo not in user.profile.grupos_deletados.all %}
+                {% for pedal in grupo.pedais_ativos %}
+                    {% if pedal not in user.profile.pedais_deletados.all %}
+                        <div id="profile-page-wall-post" class="card" style="width: 100%; height:100%; box-sizing: content-box">
+                            <div class="card-profile-title">
+                                <div class="row" style="margin:10px">
+                                    <div class="col s2 m1 l1">
+                                        <img src="{{ grupo.admin.first.profile.image.url }}" alt="" class="circle responsive-img valign profile-post-uer-image">
+                                    </div>
+                                    <div class="col s10">
+                                        <p class="grey-text text-darken-4 margin">{{grupo.admin.first.profile.nome}}</p>
+                                        <span class="grey-text text-darken-1 ultra-small">Grupo criado em {{ grupo.criacao.date|date:"d/M/Y" }}</span>
+                                    </div>
+                                    <div class="col s1 right-align">
+                                        <i class="mdi-navigation-expand-more"></i>
+                                    </div>
                                 </div>
-                                <div class="col s4 m4 l4 center-align">
-                                    <h4 class="card-title grey-text text-darken-4">
-                                        {% if grupo.pedais_ativos.count %} {{ grupo.pedais_ativos.count }} {% else %} 0 {% endif %}
-                                    </h4>
-                                    <p class="medium-small grey-text">Pedais Agendados</p>
-                                </div>
-                                <div class="col s4 m4 l4 center-align">
-                                    <h4 class="card-title grey-text text-darken-4">{{ grupo.participantes.all.count }}</h4>
-                                    <p class="medium-small grey-text">Membros</p>
+                                <div class="row">
+                                    <div class="col s12 m12 l12">
+                                        <p>Olá! Gostaria de fazer parte desse pedal? </p>
+                                    </div>
                                 </div>
                             </div>
-                            <div style="text-align: center;">
-                                <a class="btn btn-success waves-effect waves-light">
-                                    <i class="mdi-action-thumb-up"></i>
-                                </a>
-                                <a class="btn btn-success waves-effect waves-light">
-                                    <i class="mdi-action-delete"></i>
-                                </a>
+                            <!--convite-->
+
+                            <!-- START WRAPPER -->
+                            <div class="wrapper">
+                                <!-- START CONTENT -->
+                                <!--start container-->
+                                <div class="container">
+                                    <div class="section">
+                                        <!--Pedais Agendados todo-->
+                                        <div class="row">
+                                            <!--pedal agendado tela grande-->
+                                            <div class="col s12 m8 l7 ">
+
+
+                                                <div class="card">
+                                                    <div class="card-image" style="margin:0px">
+                                                        <img src="{{grupo.capa.url}}" alt="sample">
+
+                                                        <!--logo tela grande-->
+                                                        <img src="{{grupo.logo.url}}" alt="profile image" class="circle z-depth-2 hide-on-med-and-down " style="
+                                                            width:100px;
+                                                            position: relative;
+                                                            top: -10px;
+                                                            left: 10px;
+                                                            border-radius: 50%;
+                                                            ">
+                                                        <!--fim logo tela grande-->
+                                                        <!--Nome do Grupo p/ tela grande-->
+                                                        <h4 class="card-title grey-text text-darken-4 activator hide-on-med-and-down" style=" margin-left: 130px">{{grupo.nome}}</h4>
+                                                    </div>
+                                                    <div class="card-content">
+                                                        <div class="row">
+                                                            <div class="col s14 m12 l12">
+                                                                <div class="col s12 m4 l4 center-align">
+                                                                    <h4 class="card-title grey-text text-darken-4" style="margin:0px">{% if grupo.realizados.count %} {{ grupo.realizados.count }} {% else %} 0 {% endif %}</h4>
+                                                                    <p class="medium-small grey-text ">Pedais Realizados</p>
+                                                                </div>
+                                                                <div class="col s14 m4 l4 center-align">
+                                                                    <h4 class="card-title grey-text text-darken-4" style="margin:0px">{% if grupo.pedais_ativos.count %} {{ grupo.pedais_ativos.count }} {% else %} 0 {% endif %}</h4>
+                                                                    <p class="medium-small grey-text">Pedais Agendados</p>
+                                                                </div>
+                                                                <div class="col s14 m4 l4 center-align">
+                                                                    <h4 class="card-title grey-text text-darken-4" style="margin:0px">{{ grupo.participantes.count }}</h4>
+                                                                    <p class="medium-small grey-text">Membros</p>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--fim pedal agendado tela grande-->
+
+                                            <!--Pedal Agendado cartão lilas-->
+                                            <div class="col s12 m4 l5">
+                                                <div id="card-alert" class="card deep-purple" style="height:406px">
+                                                    <div class="row">
+                                                        <div class="col s12 m12 l12">
+                                                            <div class="card-content white-text">
+                                                                <ul class="card-action-buttons">
+                                                                    <li>
+                                                                        <a class="btn-floating waves-effect  waves-light red accent-2">
+                                                                            <i class="mdi-action-info activator"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                                <span class="card-title white-text darken-1">{{pedal.destino}}</span>
+                                                                <ul>
+                                                                    <li>Nível: {{ pedal.get_nivel_display }}</li>
+                                                                    <li>Distância: {{ pedal.quilometragem|floatformat }} km</li>
+                                                                    <li>Dia:{{ pedal.data|date:" d/j/Y - l" }}</li>
+                                                                    <li>Terreno {{ pedal.get_terreno_display }}</li>
+                                                                    <li>Concentração: {{ pedal.concentracao }}</li>
+                                                                    <li>Às {{ pedal.hora|time:"H:i" }} hs </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                        {% if pedal.pago %}
+                                                        <div class="col s4 m4 l4">
+                                                            <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2 letra-pequena preco-card letra-menor preco-card"
+                                                                style="position: relative; left:-20px">{{pedal.preco}}</a>
+                                                        </div>
+                                                        {% endif %}
+                                                        <div class="col s12 m12 l12">
+                                                            <div class="card-action deep-purple darken-2 center">
+                                                                <a class="btn btn-success waves-effect waves-light">
+                                                                    <i class="mdi-action-thumb-up"></i>
+                                                                </a>
+                                                                <a class="btn btn-success waves-effect waves-light">
+                                                                    <i class="mdi-action-delete"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-reveal">
+                                                        <span class="card-title grey-text text-darken-4">
+                                                            <i class="mdi-navigation-close right"></i> Aviso</span>
+                                                        <p>{{ pedal.info }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--Fim Pedal Agendado-->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END CONTENT -->
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                {% if user not in grupo.participantes.all %}
+                <div id="profile-page-wall-post" class="card novo-grupo">
+                        <div class="card-profile-title">
+                        <div class="row" style="margin:10px">
+                            <div class="col s2 m1 l1">
+                                <img src="{{ grupo.admin.first.profile.image.url }}" alt="grupo-admin" class="circle responsive-img valign profile-post-uer-image">
+                            </div>
+                            <div class="col s10">
+                                <span class="grey-text text-darken-1 ultra-small">Admin do grupo</span>
+                                <p class="grey-text text-darken-4 margin">{{grupo.admin.first.profile.nome}}</p>
+                                <span class="grey-text text-darken-1 ultra-small">Grupo criado em {{ grupo.criacao.date|date:"d/M/Y" }}</span>
+                            </div>
+                            <div class="col s1 right-align">
+                                <i class="mdi-navigation-expand-more"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col s12 m12 l6">
+                                <p>Olá! Gostaria de fazer parte desse grupo?</p>
                             </div>
                         </div>
                     </div>
+                    <!--grupo-->
+                    <!--Pedais Agendados-->
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <div class="card">
+                                <div class="card-image">
+                                    <img src="{{ grupo.capa.url }}" alt="sample">
+                                    <img src="{{ grupo.logo.url }}" alt="profile image" class="circle z-depth-2 " style="
+                                                        width:100px;
+                                                        position: relative;
+                                                        top:-10px;
+                                                        left: 5px;
+                                                        border-radius: 50%;">
+                                <h4 class="card-title grey-text text-darken-4 activator hide-on-med-and-down" style="margin-left: 250px;">{{ grupo.nome }}</h4>
+        
+                                </div>
+                                <div class="card-content">
+                                    <div class="row">
+                                        <div class="col s4 m4 l4 center-align">
+                                            <h4 class="card-title grey-text text-darken-4 ">{% if grupo.pedais.realizados.count %} {{ grupo.pedais.realizados.count }} {% else %} 0 {% endif %}</h4>
+                                            <p class="medium-small grey-text ">Pedais Realizados</p>
+                                        </div>
+                                        <div class="col s4 m4 l4 center-align">
+                                            <h4 class="card-title grey-text text-darken-4">
+                                                {% if grupo.pedais_ativos.count %} {{ grupo.pedais_ativos.count }} {% else %} 0 {% endif %}
+                                            </h4>
+                                            <p class="medium-small grey-text">Pedais Agendados</p>
+                                        </div>
+                                        <div class="col s4 m4 l4 center-align">
+                                            <h4 class="card-title grey-text text-darken-4">{{ grupo.participantes.all.count }}</h4>
+                                            <p class="medium-small grey-text">Membros</p>
+                                        </div>
+                                    </div>
+                                    <div style="text-align: center;">
+                                        <a class="btn btn-success waves-effect waves-light">
+                                            <i class="mdi-action-thumb-up"></i>
+                                        </a>
+                                        <a class="btn btn-success waves-effect waves-light">
+                                            <i class="mdi-action-delete"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <!-- <iframe src="iframe-timeline-tela-grande.html" class="col s12 m12 l12" style="height: 460px; border: none; "></iframe> -->
+                    <!-- <iframe src="iframe-timeline-tela-pequena.html" class="col s12 m12 l12" style="height: 460px; border: none; "></iframe> -->
+                    <!--fim do lado direito-->
                 </div>
-            </div>
-
-            <!-- <iframe src="iframe-timeline-tela-grande.html" class="col s12 m12 l12" style="height: 460px; border: none; "></iframe> -->
-            <!-- <iframe src="iframe-timeline-tela-pequena.html" class="col s12 m12 l12" style="height: 460px; border: none; "></iframe> -->
-            <!--fim do lado direito-->
-        </div>
+                {% endif %}
+            {% endif %}
+        
         {% empty %}
         <div><h3>Parece que o pessoal de {{ cidade  }} anda meio preguiçoso</h3></div>
         {% endfor %}
@@ -82,7 +220,7 @@
                 <a class="page" href="{{page}}">{{page}}</a>
             </li>
             {% endfor %}
-        </ul>   
+        </ul>
         {% endif %}
 </section>
 
@@ -174,7 +312,7 @@
                 <a class="page" href="{{page}}">{{page}}</a>
             </li>
             {% endfor %}
-        </ul>   
+        </ul>
         {% endif %}
 </section>
 
