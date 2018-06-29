@@ -8,6 +8,9 @@ from localflavor.br.br_states import STATE_CHOICES
 from localflavor.br.models import BRStateField
 from perfis.models import Profile
 
+from django.db import transaction
+from decimal import Decimal
+
 # Create your models here.
 class Grupos(models.Model):
     objects = models.Manager()
@@ -29,6 +32,9 @@ class Grupos(models.Model):
     pedais = models.ManyToManyField('grupos.Pedal', verbose_name='Pedais', blank=True)
 
     publico = models.BooleanField('Público', default=True)
+    convites_enviados = models.ManyToManyField(
+        'ConviteDeGrupo', verbose_name='Convites Enviados', related_name='convites_enviados', blank=True)
+    convites_aguardando_aprovacao = models.ManyToManyField('ConviteDeGrupo', verbose_name='Convites Aguardando Aprovação', related_name='convites_aguardando_aprovacao', blank=True)
 
     class Meta:
         verbose_name = 'Grupo'
@@ -58,21 +64,100 @@ def add_grupo_a_lista_de_grupos_do_admin(instance):
     for user in instance.admin.all():
         perfil = Profile.objects.get(user=user)
         perfil.meus_grupos.add(instance)
+        perfil.id_admin = True
         perfil.save()
         instance.participantes.add(user)
 
-def roda_acao_apos_commit(instance, **kwargs):
-    from django.db import transaction 
+def atualiza_membros_apos_commit(instance, **kwargs):
     transaction.on_commit(
         lambda: add_grupo_a_lista_de_grupos_do_admin(instance))
 
 models.signals.post_save.connect(
-    roda_acao_apos_commit, sender=Grupos, dispatch_uid='roda_acao_apos_commit'
+    atualiza_membros_apos_commit, sender=Grupos, dispatch_uid='atualizaparticipantes_apos_commit'
 )
 
+class ConviteDeGrupo(models.Model):
+    objects = models.Manager()
+    criador = models.ForeignKey('perfis.Profile',
+                                related_name='criador_do_convite',
+                                on_delete=models.SET_NULL,
+                                verbose_name="Quem convidou",
+                                null=True
+                                )
+    grupo_que_convidou = models.ForeignKey('Grupos', related_name='grupo_que_convidou', on_delete=models.CASCADE, verbose_name='Grupo que convidou')
+    convidado = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='convidado', on_delete=models.CASCADE, verbose_name='Convidado')
+    
+    PENDENTE = 0
+    ACEITO = 1
+    APROVADO = 2
+    REGEITADO = 3
+    status_choices = (
+        (PENDENTE, 'Pendente'),
+        (ACEITO, 'Aceito'),
+        (APROVADO, 'Aprovado'),
+        (REGEITADO, 'Regeitado'),
+    )
+
+    status = models.SmallIntegerField('Status', choices=status_choices, default=PENDENTE)
+    criacao = models.DateTimeField('Criação', auto_now_add=True)
+
+    class Meta:
+        verbose_name = 'Convite de Grupo'
+        verbose_name_plural = 'Convites de Grupo'
+
+    def __str__(self):
+        return '{} convida {} para {}'.format(self.criador, self.convidado, self.grupo_que_convidou)
+
+
+def adiciona_convite_a_lista_do_usuario_e_do_grupo(convite):
+    convite.convidado.profile.convites_de_grupo_recebidos.add(convite)
+    convite.grupo_que_convidou.convites_enviados.add(convite)
+
+def adiciona_convite_a_lista_aguardamdo_aprovacao(convite):
+    convite.grupo_que_convidou.convites_aguardando_aprovacao.add(convite)
+
+def adiciona_usuario_ao_grupo(convite):
+    convite.grupo_que_convidou.participantes.add(convite.convidado)
+    convite.convidado.profile.meus_grupos.add(convite.grupo_que_convidou)
+    convite.delete()
+
+def adiciona_usuario_ao_grupo_apos_confirmacao(instance, created, **kwargs):
+    if created:
+        transaction.on_commit(
+            lambda: adiciona_convite_a_lista_do_usuario_e_do_grupo(instance))
+
+    if instance.criador.is_admin and instance.status == ConviteDeGrupo.ACEITO:
+        transaction.on_commit(
+            lambda: adiciona_usuario_ao_grupo(instance)
+        )
+        return
+
+    if instance.status == ConviteDeGrupo.ACEITO:
+        transaction.on_commit(
+            lambda: adiciona_convite_a_lista_aguardamdo_aprovacao(instance))
+
+    if instance.status == ConviteDeGrupo.APROVADO:
+         transaction.on_commit(
+             lambda: adiciona_usuario_ao_grupo(instance)
+         )
+         return 
+
+    if instance.status == ConviteDeGrupo.REGEITADO:
+        instance.delete()
+    
+
+models.signals.post_save.connect(
+    adiciona_usuario_ao_grupo_apos_confirmacao, sender=ConviteDeGrupo, dispatch_uid='adiciona_usuario_ao_grupo_apos_confirmacao'
+)
 
 class Pedal(models.Model):
     objects = models.Manager()
+    criador = models.ForeignKey('perfis.Profile', 
+        related_name='criador', 
+        on_delete=models.SET_NULL, 
+        verbose_name='Criador', 
+        limit_choices_to={'is_admin':True},
+        null=True)
 
     grupo = models.ForeignKey('Grupos',  on_delete=models.CASCADE, verbose_name='Grupo')
     data = models.DateField('Data', blank=True, null=True)   
@@ -83,7 +168,8 @@ class Pedal(models.Model):
     info = models.TextField('Informações Adicinais')
     publico = models.BooleanField('Público', default=False)
     pago = models.BooleanField('Pedal Pago', default=False)
-    participantes = models.ManyToManyField(settings.AUTH_USER_MODEL, verbose_name="Participantes")
+    preco = models.DecimalField('Preço', max_digits=8, decimal_places=2, default=Decimal(0.0))
+    participantes = models.ManyToManyField('perfis.Profile', verbose_name="Participantes", related_name='participantes', blank=True)
     niveis = (
         ('1', 'Iniciante'),
         ('1', 'Médio'),
@@ -113,3 +199,20 @@ class Pedal(models.Model):
     def get_absolute_url(self):
         from django.core.urlresolvers import reverse
         return reverse('grupos:grupo_info', kwargs={'slug': self.slug})
+
+
+def atualiza_modelos_apos_commit(instance, created):
+    if created:
+        instance.participantes.add(instance.criador)
+        instance.criador.pedais_agendados.add(instance)
+    
+    instance.grupo.pedais.add(instance)
+
+def add_criador_em_participantes(instance, created, **kwargs):
+    transaction.on_commit(
+        lambda: atualiza_modelos_apos_commit(instance, created)
+    )
+
+models.signals.post_save.connect(
+    add_criador_em_participantes, sender=Pedal, dispatch_uid='add_criador_em_participantes'
+)

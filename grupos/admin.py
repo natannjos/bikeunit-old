@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Grupos, Pedal
+from .models import Grupos, Pedal, ConviteDeGrupo
 
 
 # Register your models here.
@@ -23,6 +23,8 @@ class PedalAdmin(admin.ModelAdmin):
         'nivel',
         'terreno',
     )
+
     
 admin.site.register(Grupos, GruposAdmin)
 admin.site.register(Pedal, PedalAdmin)
+admin.site.register(ConviteDeGrupo)

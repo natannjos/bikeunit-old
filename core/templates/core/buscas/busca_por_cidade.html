@@ -1,4 +1,4 @@
-
+{% load static %}
 <section class="col s12 m4 l8 timeline hide-on-med-and-down ps-scrollbar-y" style="overflow-y: scroll; max-height: 1000px;">
         {% for grupo in grupos_da_cidade %}
             {% if grupo not in user.profile.grupos_deletados.all %}
@@ -8,7 +8,13 @@
                             <div class="card-profile-title">
                                 <div class="row" style="margin:10px">
                                     <div class="col s2 m1 l1">
-                                        <img src="{{ grupo.admin.first.profile.image.url }}" alt="" class="circle responsive-img valign profile-post-uer-image">
+                                        <img src="
+                                        {% if grupo.admin.first.profile.image %}
+                                            {{ grupo.admin.first.profile.image.url }}
+                                        {% else %}
+                                            {% static 'images/default-user-image.png' %}
+                                        {% endif %}
+                                        "alt="" class="circle responsive-img valign profile-post-uer-image">
                                     </div>
                                     <div class="col s10">
                                         <p class="grey-text text-darken-4 margin">{{grupo.admin.first.profile.nome}}</p>
@@ -35,7 +41,7 @@
                                         <!--Pedais Agendados todo-->
                                         <div class="row">
                                             <!--pedal agendado tela grande-->
-                                            <div class="col s12 m8 l7 ">
+                                            <div class="col s12 m6 l6 ">
 
 
                                                 <div class="card">
@@ -76,53 +82,51 @@
                                                 </div>
                                             </div>
                                             <!--fim pedal agendado tela grande-->
-
                                             <!--Pedal Agendado cartão lilas-->
-                                            <div class="col s12 m4 l5">
+                                            <div class="col s12 m6 l6">
                                                 <div id="card-alert" class="card deep-purple" style="height:406px">
                                                     <div class="row">
-                                                        <div class="col s12 m12 l12">
-                                                            <div class="card-content white-text">
-                                                                <ul class="card-action-buttons">
-                                                                    <li>
-                                                                        <a class="btn-floating waves-effect  waves-light red accent-2">
-                                                                            <i class="mdi-action-info activator"></i>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                                <span class="card-title white-text darken-1">{{pedal.destino}}</span>
-                                                                <ul>
-                                                                    <li>Nível: {{ pedal.get_nivel_display }}</li>
-                                                                    <li>Distância: {{ pedal.quilometragem|floatformat }} km</li>
-                                                                    <li>Dia:{{ pedal.data|date:" d/j/Y - l" }}</li>
-                                                                    <li>Terreno {{ pedal.get_terreno_display }}</li>
-                                                                    <li>Concentração: {{ pedal.concentracao }}</li>
-                                                                    <li>Às {{ pedal.hora|time:"H:i" }} hs </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        {% if pedal.pago %}
-                                                        <div class="col s4 m4 l4">
-                                                            <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2 letra-pequena preco-card letra-menor preco-card"
-                                                                style="position: relative; left:-20px">{{pedal.preco}}</a>
-                                                        </div>
-                                                        {% endif %}
-                                                        <div class="col s12 m12 l12">
-                                                            <div class="card-action deep-purple darken-2 center">
-                                                                <a class="btn btn-success waves-effect waves-light">
-                                                                    <i class="mdi-action-thumb-up"></i>
-                                                                </a>
-                                                                <a class="btn btn-success waves-effect waves-light">
-                                                                    <i class="mdi-action-delete"></i>
-                                                                </a>
-                                                            </div>
+                                                    <div class="col s9 m9 l9">
+                                                        <div class="card-content white-text">
+                                                        <ul class="card-action-buttons">
+                                                            <li>
+                                                            <a class="btn-floating waves-effect  waves-light red accent-2">
+                                                                <i class="mdi-action-info activator"></i>
+                                                            </a>
+                                                            </li>
+                                                        </ul>
+                                                        <span class="card-title white-text darken-1">{{pedal.destino}}</span>
+                                                        <ul>
+                                                            <li>Nível: {{pedal.get_nivel_display}}</li>
+                                                            <li>Distância: {{pedal.quilometragem}}km</li>
+                                                            <li>Dia: {{pedal.data|date:"d/m/Y - D"}}</li>
+                                                            <li>Terreno {{pedal.get_terreno_display}}</li>
+                                                            <li>Concentração: {{pedal.concentracao}}</li>
+                                                            <li>Às {{pedal.hora|time:"H:i"}} hrs</li>
+                                                        </ul>
                                                         </div>
                                                     </div>
+                                                    {% if pedal.pago %}
+                                                    <div class="col s3 m3 l3">
+                                                        <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2 letra-pequena preco-card letra-menor preco-card" >R${{pedal.preco}}</a>
+                                                    </div>
+                                                    {% endif %}
+                                                    <div class="col s12 m12 l12">
+                                                        <div class="card-action deep-purple darken-2 center">
+                                                        <a class="btn btn-success waves-effect waves-light">
+                                                            <i class="mdi-action-thumb-up"></i>
+                                                        </a>
+                                                        <a class="btn btn-success waves-effect waves-light">
+                                                            <i class="mdi-action-delete"></i>
+                                                        </a>
+                                                        </div>
+                                                    </div>
+                                                    </div>
                                                     <div class="card-reveal">
-                                                        <span class="card-title grey-text text-darken-4">
-                                                            <i class="mdi-navigation-close right"></i> Aviso</span>
-                                                        <p>{{ pedal.info }}
-                                                        </p>
+                                                    <span class="card-title grey-text text-darken-4">
+                                                        <i class="mdi-navigation-close right"></i> Aviso</span>
+                                                    <p>{{pedal.info}}
+                                                    </p>
                                                     </div>
                                                 </div>
                                             </div>
@@ -140,7 +144,12 @@
                         <div class="card-profile-title">
                         <div class="row" style="margin:10px">
                             <div class="col s2 m1 l1">
-                                <img src="{{ grupo.admin.first.profile.image.url }}" alt="grupo-admin" class="circle responsive-img valign profile-post-uer-image">
+                                <img src="
+                                {% if grupo.admin.first.profile.image %}
+                                    {{ grupo.admin.first.profile.image.url }}
+                                {% else %}
+                                    {% static 'images/default-user-image.png' %}
+                                {% endif %}" alt="grupo-admin" class="circle responsive-img valign profile-post-uer-image">
                             </div>
                             <div class="col s10">
                                 <span class="grey-text text-darken-1 ultra-small">Admin do grupo</span>
@@ -217,7 +226,7 @@
         <ul class="pagination center-align">
             {% for page in paginator.page_range %}
             <li class="{% if page_obj.number == page %} active {% else %}waves-effect {% endif %}">
-                <a class="page" href="{{page}}">{{page}}</a>
+                <a class="page" href="{{ page }}">{{page}}</a>
             </li>
             {% endfor %}
         </ul>
@@ -231,7 +240,12 @@
                 <div class="card-profile-title">
                     <div class="row">
                         <div class="col s2 m1 l1">
-                            <img src="{{ grupo.admin.first.profile.image.url }}" alt="" class="circle responsive-img valign profile-post-uer-image">
+                            <img src="
+                            {% if grupo.admin.first.profile.image %}
+                                {{ grupo.admin.first.profile.image.url }}
+                            {% else %}
+                                {% static 'images/default-user-image.png' %}
+                            {% endif %}" alt="" class="circle responsive-img valign profile-post-uer-image">
                         </div>
                         <div class="col s10">
                             <p class="grey-text text-darken-4 margin">{{grupo.admin.first.profile.nome}}</p>

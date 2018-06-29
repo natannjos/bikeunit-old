@@ -23,8 +23,6 @@ class BuscaGruposLocalidadeAjax(LoginRequiredMixin, ListView):
         user = self.request.user
         if self.request.GET.get('primeira'):
 
-            # grupos_com_pedais_agendados = grupo for grupo in user.profile.meus_grupos.all() if grupo.pedais_ativos.all()
-            
             grupos_com_pedais_agendados = user.profile.meus_grupos.filter(
                 pedais__ativo=True).annotate(num_pedais=Count('pedais')).order_by('-num_pedais')
 
@@ -32,7 +30,7 @@ class BuscaGruposLocalidadeAjax(LoginRequiredMixin, ListView):
             # convites_para_participar_pedal
             
             grupos_da_cidade_do_usuario = Grupos.objects.filter(
-                cidade=user.profile.cidade, estado=user.profile.estado).annotate(num_pedais=Count('pedais')).order_by('-num_pedais')
+                cidade=user.profile.cidade, estado=user.profile.estado, publico=True).annotate(num_pedais=Count('pedais')).order_by('-num_pedais')
 
             queryset = grupos_com_pedais_agendados | grupos_da_cidade_do_usuario
 

@@ -31,6 +31,8 @@ class Profile(TimestampedModel):
         blank=True
     )
 
+    convites_de_grupo_recebidos = models.ManyToManyField('grupos.ConviteDeGrupo', verbose_name='Convites de Grupo', related_name='convites_de_grupo_recebidos')
+
     pedais_agendados = models.ManyToManyField(
         'grupos.Pedal',
         related_name='pedais_agendados',
