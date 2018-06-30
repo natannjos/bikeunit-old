@@ -1,413 +1,432 @@
-{% extends "core/parent_forms/base.html" %}
-{% load static %}
-    <!-- END HEADER -->
+{% extends "core/parent_forms/base.html" %} {% load static %}
+
+<!-- END HEADER -->
 
 
 {% block menu_lateral %}
-    <!-- MENU-->
-    <aside id="left-sidebar-nav">
-        <ul id="slide-out" class="side-nav fixed leftside-navigation">
-            <li class="user-details cyan darken-2">
-                <div class="row">
-                    <div class="col col s4 m4 l4">
-                        <img src="{% static 'images/avatar.jpg' %}" alt="" class="circle responsive-img valign profile-image">
-                    </div>
-                    <div class="col col s8 m8 l8">
-                        <ul id="profile-dropdown" class="dropdown-content">
+
+<!-- MENU-->
+<aside id="left-sidebar-nav">
+    <ul id="slide-out" class="side-nav fixed leftside-navigation">
+        <li class="user-details cyan darken-2">
+            <div class="row">
+                <div class="col col s4 m4 l4">
+                    <img src="{% static 'images/avatar.jpg' %}" alt="" class="circle responsive-img valign profile-image">
+                </div>
+                <div class="col col s8 m8 l8">
+                    <ul id="profile-dropdown" class="dropdown-content">
+                        <li>
+                            <a href="#">
+                                <i class="mdi-action-face-unlock"></i> Perfil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="mdi-action-assignment-ind"></i>Dados
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="{% url 'logout' %}">
+                                <i class="mdi-hardware-keyboard-tab"></i>Sair
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="mdi-navigation-cancel"></i>Excluir Conta
+                            </a>
+                        </li>
+                    </ul>
+                    <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">John Doe
+
+                        <i class="mdi-navigation-arrow-drop-down right"></i>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="bold ">
+            <a href="index.html" class="waves-effect waves-cyan">
+                <i class="mdi-action-home"></i>Home App
+            </a>
+        </li>
+        <li class="bold">
+            <a href="#modal3" class="modal-trigger waves-cyan">
+                <i class="mdi-maps-local-library"></i> Home Administrador
+            </a>
+        </li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li class="bold">
+                    <a class="collapsible-header waves-effect waves-cyan">
+                        <i class="mdi-maps-directions-bike"></i> Criar grupo de Pedal
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
                             <li>
-                                <a href="#">
-                                    <i class="mdi-action-face-unlock"></i> Perfil</a>
+                                <a class="  modal-trigger  " href="#modal1">Público</a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <i class="mdi-action-assignment-ind"></i>Dados</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="{% url 'logout' %}">
-                                    <i class="mdi-hardware-keyboard-tab"></i>Sair</a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    <i class="mdi-navigation-cancel"></i>Excluir Conta</a>
+                                <a class="  modal-trigger  " href="#modal2">Privado</a>
                             </li>
                         </ul>
-                        <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">John Doe
-                            <i class="mdi-navigation-arrow-drop-down right"></i>
-                        </a>
                     </div>
-                </div>
-            </li>
-            <li class="bold ">
-                <a href="index.html" class="waves-effect waves-cyan">
-                    <i class="mdi-action-home"></i>Home App</a>
-            </li>
-            <li class="bold">
-                <a href="#modal3" class="modal-trigger waves-cyan">
-                    <i class="mdi-maps-local-library"></i> Home Administrador</a>
-            </li>
-            <li class="no-padding">
-                <ul class="collapsible collapsible-accordion">
-                    <li class="bold">
-                        <a class="collapsible-header waves-effect waves-cyan">
-                            <i class="mdi-maps-directions-bike"></i> Criar grupo de Pedal</a>
-                        <div class="collapsible-body">
-                            <ul>
-                                <li>
-                                    <a class="  modal-trigger  " href="#modal1">Público</a>
-                                </li>
-                                <li>
-                                    <a class="  modal-trigger  " href="#modal2">Privado</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="bold">
-                        <a href="" class="waves-effect waves-cyan">
-                            <i class="mdi-action-assignment-ind"></i> Alterar Dados</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan">
-            <i class="mdi-navigation-menu"></i>
-        </a>
-    </aside>
-
-    <div id="modal1" class="modal">
-        <div class="modal-content">
-            <p>O grupo aparecerá na Home do Aplicativo e todos os usuários poderão enviar solicitãção para participar do grupo.</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Não quero fazer um grupo agora</a>
-            <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">OK, quero fazer um Grupo Público</a>
-        </div>
+                </li>
+                <li class="bold">
+                    <a href="" class="waves-effect waves-cyan">
+                        <i class="mdi-action-assignment-ind"></i> Alterar Dados
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan">
+        <i class="mdi-navigation-menu"></i>
+    </a>
+</aside>
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <p>O grupo aparecerá na Home do Aplicativo e todos os usuários poderão enviar solicitãção para participar do grupo.</p>
     </div>
-    <div id="modal2" class="modal">
-        <div class="modal-content">
-            <p>O grupo não aparecerá na Home do Aplicativo e os membros deverão ser convidados.</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Não quero fazer um grupo agora</a>
-            <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Ok, quero fazer um grupo Privado</a>
-        </div>
+    <div class="modal-footer">
+        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Não quero fazer um grupo agora</a>
+        <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">OK, quero fazer um Grupo Público</a>
     </div>
-    <div id="modal3" class="modal">
-        <div class="modal-content">
-            <p>Você ainda não criou um grupo de pedal pra administrar.</p>
-        </div>
-        <div class="modal-footer">
-            <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Ok</a>
-
-        </div>
+</div>
+<div id="modal2" class="modal">
+    <div class="modal-content">
+        <p>O grupo não aparecerá na Home do Aplicativo e os membros deverão ser convidados.</p>
     </div>
-    <!--FIM MENU-->
+    <div class="modal-footer">
+        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Não quero fazer um grupo agora</a>
+        <a href="#" class="waves-effect waves-green btn-flat modal-action modal-close">Ok, quero fazer um grupo Privado</a>
+    </div>
+</div>
+<div id="modal3" class="modal">
+    <div class="modal-content">
+        <p>Você ainda não criou um grupo de pedal pra administrar.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Ok</a>
+    </div>
+</div>
+<!--FIM MENU-->
 {% endblock menu_lateral %}
+
 
 <!-- //////////////////////////////////////////////////////////////////////////// -->
 
 {% block conteudo %}
-    <!-- START MAIN -->
-    <div id="main">
-        <!-- START WRAPPER -->
-        <div class="wrapper">
-            <!-- MENU-->
 
-            <aside id="left-sidebar-nav">
-                <ul id="slide-out" class="side-nav fixed leftside-navigation">
-                    <li class="user-details cyan darken-2">
-                        <div class="row">
-                            <div class="col col s4 m4 l4">
-                                <img src=" 
+<!-- START MAIN -->
+<div id="main">
+    <!-- START WRAPPER -->
+    <div class="wrapper">
+        <!-- MENU-->
+        <aside id="left-sidebar-nav">
+            <ul id="slide-out" class="side-nav fixed leftside-navigation">
+                <li class="user-details cyan darken-2">
+                    <div class="row">
+                        <div class="col col s4 m4 l4">
+                            <img src=" 
                                 {% if user.profile.image %}
                                     {{ user.profile.image.url }}
                                 {% else %}
                                     {% static 'images/default-user-image.png' %}
                                 {% endif %}
                                     
-                                "alt="" class="circle responsive-img valign profile-image">
-                            </div>
-                            <div class="col col s8 m8 l8">
-                                <ul id="profile-dropdown" class="dropdown-content">
-                                    <li>
-                                        <a href="#">
-                                            <i class="mdi-action-face-unlock"></i> Perfil</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="mdi-action-assignment-ind"></i>Dados</a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="mdi-hardware-keyboard-tab"></i>Sair</a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="mdi-navigation-cancel"></i>Excluir Conta</a>
-                                    </li>
-                                </ul>
-                                <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">{{ user.profile.nome }}
-                                    <i class="mdi-navigation-arrow-drop-down right"></i>
-                                </a>
-                            </div>
+                                " alt="" class="circle responsive-img valign profile-image">
                         </div>
-                    </li>
-                    <li class="no-padding">
-                        <ul class="collapsible collapsible-accordion">
-                            <li class="bold">
-                                <a class="collapsible-header waves-effect waves-cyan">
-                                    <i class="mdi-maps-directions-bike"></i> Criar grupo de Pedal</a>
-                            </li>
-                            <li class="bold">
-                                <a href="alterar-dados-cadastrais.html" class="waves-effect waves-cyan">
-                                    <i class="mdi-action-assignment-ind"></i> Alterar Dados Usuário</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan">
-                    <i class="mdi-navigation-menu"></i>
-                </a>
-            </aside>
-            <!--FIM MENU-->
-            <!-- //////////////////////////////////////////////////////////////////////////// -->
-            <!-- START CONTENT -->
-            <section id="content" style="min-height: 500px">
-                <!--breadcrumbs start-->
-                <div id="breadcrumbs-wrapper">
-                    <!-- Search for small screen -->
-                    <div class="container">
-                        <div class="row">
-                            <div class="col s12 m12 l12">
-                                <h5 class="breadcrumbs-title">Perfil Usuário</h5>
-                                <ol class="breadcrumbs">
-                                    <li>
-                                        <a href="{% url 'core:home' %}">Bikeunit</a>
-                                    </li>
-                                    <li class="active">Perfil Usuário</li>
-                                </ol>
-                            </div>
+                        <div class="col col s8 m8 l8">
+                            <ul id="profile-dropdown" class="dropdown-content">
+                                <li>
+                                    <a href="#">
+                                        <i class="mdi-action-face-unlock"></i> Perfil
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="mdi-action-assignment-ind"></i>Dados
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="#">
+                                        <i class="mdi-hardware-keyboard-tab"></i>Sair
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="mdi-navigation-cancel"></i>Excluir Conta
+                                    </a>
+                                </li>
+                            </ul>
+                            <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">{{ user.profile.nome }}
+
+                                <i class="mdi-navigation-arrow-drop-down right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+                <li class="no-padding">
+                    <ul class="collapsible collapsible-accordion">
+                        <li class="bold">
+                            <a class="collapsible-header waves-effect waves-cyan">
+                                <i class="mdi-maps-directions-bike"></i> Criar grupo de Pedal
+                            </a>
+                        </li>
+                        <li class="bold">
+                            <a href="alterar-dados-cadastrais.html" class="waves-effect waves-cyan">
+                                <i class="mdi-action-assignment-ind"></i> Alterar Dados Usuário
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan">
+                <i class="mdi-navigation-menu"></i>
+            </a>
+        </aside>
+        <!--FIM MENU-->
+        <!-- //////////////////////////////////////////////////////////////////////////// -->
+        <!-- START CONTENT -->
+        <section id="content" style="min-height: 500px">
+            <!--breadcrumbs start-->
+            <div id="breadcrumbs-wrapper">
+                <!-- Search for small screen -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 m12 l12">
+                            <h5 class="breadcrumbs-title">Perfil Usuário</h5>
+                            <ol class="breadcrumbs">
+                                <li>
+                                    <a href="{% url 'core:home' %}">Bikeunit</a>
+                                </li>
+                                <li class="active">Perfil Usuário</li>
+                            </ol>
                         </div>
                     </div>
                 </div>
-                <!--breadcrumbs end-->
-                <!-- END LEFT SIDEBAR NAV-->
-                <div class="row">
-                    <!-- INÍCIO DA SECTION DE LISTAS -->
-                    <section id="listas" class="col s12 m6 l4 section" >
-                        <!--lista-->
-                        <ul class="collapsible popout" data-collapsible="accordion" watch>
-                            <!--1º item-->
-                            <li ng-repeat="single in collapsibleElements">
-                                <div class="collapsible-header">
-                                    <i class="{{single.icon}} mdi-communication-location-on"></i>Pesquise Grupos por Cidade
+            </div>
+            <!--breadcrumbs end-->
+            <!-- END LEFT SIDEBAR NAV-->
+            <div class="row">
+                <!-- INÍCIO DA SECTION DE LISTAS -->
+                <section id="listas" class="col s12 m6 l4 section">
+                    <!--lista-->
+                    <ul class="collapsible popout" data-collapsible="accordion" watch>
+                        <!--1º item-->
+                        <li ng-repeat="single in collapsibleElements">
+                            <div class="collapsible-header">
+                                <i class="{{single.icon}} mdi-communication-location-on"></i>Pesquise Grupos por Cidade
+
+                            </div>
+                            <div class="collapsible-body">
+                                <div class="row margin">
+                                    <div class="col s10 right">
+                                        <div class="select-wrapper">
+                                            <select name="estado" class='browser-default col s4' id="id_estado">
+                                                <option disabled selected>UF</option>
+                                            </select>
+                                            <select name="cidade" class='browser-default col s8' id="id_cidade">
+                                                <option disabled selected>Município</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="collapsible-body">
-                                    <div class="row margin">
-                                        <div class="col s10 right">
-                                            <div class="select-wrapper">
-                                                    <select name="estado" class='browser-default col s4' id="id_estado">
-                                                        <option disabled selected>UF</option>
-                                                    </select>
-                                                    <select name="cidade" class='browser-default col s8' id="id_cidade">
-                                                        <option disabled selected>Município</option>
-                                                    </select>
+                            </div>
+                        </li>
+                        <!--fim 1º item-->
+                        {% if meus_grupos %}
+
+                        <!--2º item-->
+                        <li ng-repeat="single in collapsibleElements">
+                            <div class="collapsible-header $(" #range_02 ").ionRangeSlider({               });">
+                                <i class="{{single.icon}} mdi-maps-directions-bike"></i>Grupos de Pedal que Participo
+
+                            </div>
+                            <div class="collapsible-body row lista-com-scroll">
+                                <!--conteudo-->
+                                <!--inicio iframe-->
+                                <!--1º grupo-->
+                                {% for grupo in meus_grupos %}
+
+                                <div class="col s12 m12 l12">
+                                    <div id="profile-card" class="card">
+                                        <div class="card-image waves-effect waves-block waves-light">
+                                            <img class="activator" src="{{ grupo.capa.url }}" alt="user background">
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="row">
+                                                <img src="{{ grupo.logo.url }}" alt="" class="circle responsive-img activator card-profile-image left-align">
+                                                <div style="text-align: right; margin-top: -50px;">
+                                                    <span class="card-title activator grey-text text-darken-4"> {{ grupo.nome }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="text-align: center;">
+                                                <a class="btn-floating waves-effect waves-light light-blue">
+                                                    <i class="mdi-social-notifications-on"></i>
+                                                </a>
+                                                <a class="btn-floating waves-effect waves-light green accent-4">
+                                                    <i class="mdi-social-person-add"></i>
+                                                </a>
+                                                <a class="btn-floating waves-effect waves-light red accent-2">
+                                                    <i class="mdi-action-delete"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </li>
-                            <!--fim 1º item-->
-                            {% if meus_grupos %}
-                            <!--2º item-->
-                                <li ng-repeat="single in collapsibleElements">
-                                    <div class="collapsible-header $(" #range_02 ").ionRangeSlider({               });">
+                                {% endfor %}
 
-                                        <i class="{{single.icon}} mdi-maps-directions-bike"></i>Grupos de Pedal que Participo
-                                    </div>
-                                    <div class="collapsible-body row lista-com-scroll">
-                                        <!--conteudo-->
-                                        <!--inicio iframe-->
-                                        <!--1º grupo-->
-                                        {% for grupo in meus_grupos %}
-                                        <div class="col s12 m12 l12">
-                                            <div id="profile-card" class="card">
-                                                <div class="card-image waves-effect waves-block waves-light">
-                                                    <img class="activator" src="{{ grupo.capa.url }}" alt="user background">
-                                                </div>
+                            </div>
+                        </li>
+                        <!--fim 2º item-->
+                        {% endif %}
 
-                                                <div class="card-content">
-                                                    <div class="row">
-                                                        
-                                                        
-                                                        <img src="{{ grupo.logo.url }}" alt="" class="circle responsive-img activator card-profile-image left-align">
-                                                        <div style="text-align: right; margin-top: -50px;">
-                                                            <span class="card-title activator grey-text text-darken-4"> {{ grupo.nome }}</span>
-                                                        </div>
+                        <!--3º item-->
 
-                                                    </div>
+                        {% if pedais_agendados %}
 
+                        <li ng-repeat="single in collapsibleElements">
+                            <div class="collapsible-header">
+                                <i class="{{single.icon}} mdi-action-done"></i>Pedais que Confirmei Presença
 
-                                                    <div class="row" style="text-align: center;">
-                                                        <a class="btn-floating waves-effect waves-light light-blue">
-                                                            <i class="mdi-social-notifications-on"></i>
-                                                        </a>
-                                                        <a class="btn-floating waves-effect waves-light green accent-4">
-                                                            <i class="mdi-social-person-add"></i>
-                                                        </a>
-                                                        <a class="btn-floating waves-effect waves-light red accent-2">
-                                                            <i class="mdi-action-delete"></i>
-                                                        </a>
-                                                    </div>
+                            </div>
+                            <div class="collapsible-body row lista-com-scroll">
+                                <!--conteúdo-->
+                                <!--1º pedal confirmado-->
+                                {% for pedal in pedais_agendados %}
 
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                    </div>
-                                </li>
-                                <!--fim 2º item-->
-                            {% endif %}
-                            <!--3º item-->
-
-                            {% if pedais_agendados %}
-                            <li ng-repeat="single in collapsibleElements">
-                                <div class="collapsible-header">
-                                    <i class="{{single.icon}} mdi-action-done"></i>Pedais que Confirmei Presença
-                                </div>
-                                <div class="collapsible-body row lista-com-scroll">
-                                    <!--conteúdo-->
-                                    <!--1º pedal confirmado-->
-                                    {% for pedal in pedais_agendados %}
-                                    <div class="col s12 m12 l12">
-                                        <div id="card-alert" class="card deep-purple">
-                                            <div class="card-content white-text">
-                                                <div class="row">
-                                                    <span style="float: left;">
-                                                        <img src="{{ pedal.grupo.logo.url }}" alt="avatar" class="alert-circle responsive-img valign profile-image" />
-                                                        <span class="white-text darken-1">
-                                                            <b>{{ pedal.grupo.nome }}</b>
-                                                        </span>
+                                <div class="col s12 m12 l12">
+                                    <div id="card-alert" class="card deep-purple">
+                                        <div class="card-content white-text">
+                                            <div class="row">
+                                                <span style="float: left;">
+                                                    <img src="{{ pedal.grupo.logo.url }}" alt="avatar" class="alert-circle responsive-img valign profile-image" />
+                                                    <span class="white-text darken-1">
+                                                        <b>{{ pedal.grupo.nome }}</b>
                                                     </span>
-                                                    <ul class="card-action-buttons" style="float: right;">
-                                                        <li>
-                                                            <a class="btn-floating waves-effect  waves-light red accent-2">
-                                                                <i class="mdi-action-info activator"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                                <span class="card-title white-text darken-1" style="clear: both;">{{ pedal.destino }}</span>
-                                                <ul>
-                                                    <li>Dia: {{ pedal.data|date:" d/j/Y - l" }}</li>
-                                                    <li>Às {{ pedal.hora|time:"H:i" }} hs </li>
-                                                    <li>Distância: {{ pedal.quilometragem}}km</li>
-                                                    <li>Terreno: {{ pedal.get_terreno_display }}</li>
-                                                    <li>Concentração: {{ pedal.concentracao }}</li>
+                                                </span>
+                                                <ul class="card-action-buttons" style="float: right;">
+                                                    <li>
+                                                        <a class="btn-floating waves-effect  waves-light red accent-2">
+                                                            <i class="mdi-action-info activator"></i>
+                                                        </a>
+                                                    </li>
                                                 </ul>
                                             </div>
-                                            <div class="card-action deep-purple darken-2 center">
-                                                <a class="btn-flat btn waves-effect light-blue white-text activator">
-                                                    <i class="mdi-social-group-add"></i>
-                                                    <span class="letra-pequena"></span>
-                                                </a>
-                                                <a class="btn btn-warning-cancel btn-flat btn waves-effect red accent-2 white-text letra-pequena ">
-                                                    <i class="mdi-content-clear left"></i>
-                                                </a>
-                                            </div>
-                                            <div class="card-reveal">
-                                                <span class="card-title grey-text text-darken-4">
-                                                    <i class="mdi-navigation-close right"></i> Aviso</span>
-                                                <p>{{ pedal.info }}</p>
-                                            </div>
+                                            <span class="card-title white-text darken-1" style="clear: both;">{{ pedal.destino }}</span>
+                                            <ul>
+                                                <li>Dia: {{ pedal.data|date:" d/j/Y - l" }}</li>
+                                                <li>Às {{ pedal.hora|time:"H:i" }} hs </li>
+                                                <li>Distância: {{ pedal.quilometragem}}km</li>
+                                                <li>Terreno: {{ pedal.get_terreno_display }}</li>
+                                                <li>Concentração: {{ pedal.concentracao }}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="card-action deep-purple darken-2 center">
+                                            <a class="btn-flat btn waves-effect light-blue white-text activator">
+                                                <i class="mdi-social-group-add"></i>
+                                                <span class="letra-pequena"></span>
+                                            </a>
+                                            <a class="btn btn-warning-cancel btn-flat btn waves-effect red accent-2 white-text letra-pequena ">
+                                                <i class="mdi-content-clear left"></i>
+                                            </a>
+                                        </div>
+                                        <div class="card-reveal">
+                                            <span class="card-title grey-text text-darken-4">
+                                                <i class="mdi-navigation-close right"></i> Aviso
+                                            </span>
+                                            <p>{{ pedal.info }}</p>
                                         </div>
                                     </div>
-
-                                    {% endfor %}
                                 </div>
-                            </li>
-                            <!--fim 3º item-->
-                            {% endif %}
 
-                            {% if convites_enviados %}
-                            <!--4º item-->
-                            <li ng-repeat="single in collapsibleElements">
-                                <div class="collapsible-header">
-                                    <i class="{{single.icon}} mdi-content-markunread"></i>Status Convites Enviados
+                                {% endfor %}
+
+                            </div>
+                        </li>
+                        <!--fim 3º item-->
+                        {% endif %} {% if convites_de_grupos %}
+
+                        <!--4º item-->
+                        <li ng-repeat="single in collapsibleElements">
+                            <div class="collapsible-header">
+                                <i class="{{single.icon}} mdi-content-markunread"></i>Status de Convites
+
+                            </div>
+                            <div class="collapsible-body row lista-com-scroll">
+                                <div class="col s12 m12 l12">
+                                    <ul id="task-card" class="collection with-header">
+                                        {% for convite in convites_de_grupos %}
+
+                                        <li class="collection-item dismissable">
+                                            <span class="task-cat 
+                                                {% if convite.get_status_display == 'Pendente' %}
+                                                pink
+                                                {% else %}
+                                                teal
+                                                {% endif %}" style="margin-left:0px;">{{ convite.get_status_display }}</span>
+                                            <h6>{{ convite.criador }}</h6>
+                                            <label for="task1">Participar {{ convite.grupo_que_convidou }}.
+                                            </label>
+                                        </li>
+                                        {% endfor %} {% comment %}
+                                        <li class="collection-item dismissable">
+                                            <span class="task-cat teal" style="margin-left:0px;">CONFIRMADO</span>
+                                            <h6>Fulano de tal </h6>
+                                            <label for="task1">Participar Pedal Jusita.
+                                            </label>
+                                            <label for="task1">Grupo Pedal Alto da XV
+                                            </label>
+                                        </li>
+                                        <li class="collection-item dismissable">
+                                            <span class="task-cat pink" style="margin-left:0px;">PENDENTE</span>
+                                            <h6>Fulano de Nome Grande </h6>
+                                            <label for="task1">Participar Pedal Quiriri.
+                                            </label>
+                                            <label for="task1">Grupo Pedal Norte
+                                            </label>
+                                        </li> {% endcomment %}
+
+
+                                    </ul>
                                 </div>
-                                <div class="collapsible-body row lista-com-scroll">
-
-                                    <div class="col s12 m12 l12">
-                                        <ul id="task-card" class="collection with-header">
-
-                                            <li class="collection-item dismissable">
-                                                <span class="task-cat teal" style="margin-left:0px;">CONFIRMADO</span>
-                                                <h6>Fulano de tal </h6>
-                                                <label for="task1">Participar Grupo Alto da XV.
-                                                </label>
+                            </div>
+                        </li>
+                        <!--fim 4º item-->
+                        {% endif %}
 
 
-                                            </li>
 
-                                            <li class="collection-item dismissable">
-                                                <span class="task-cat teal" style="margin-left:0px;">CONFIRMADO</span>
-                                                <h6>Fulano de tal </h6>
-                                                <label for="task1">Participar Pedal Jusita.
-                                                </label>
-                                                <label for="task1">Grupo Pedal Alto da XV
-                                                </label>
+                    </ul>
+                </section>
+                <div id="timeline"></div>
+            </div>
+        </section>
+    </div>
+</div>
+<!-- START FOOTER -->
+<footer class="page-footer">
+    <div class="footer-copyright">
+        <div class="container">
+            <span>Copyright © 2018
 
-                                            </li>
-                                            <li class="collection-item dismissable">
-                                                <span class="task-cat pink" style="margin-left:0px;">PENDENTE</span>
-                                                <h6>Fulano de Nome Grande </h6>
-                                                <label for="task1">Participar Pedal Quiriri.
-                                                </label>
-                                                <label for="task1">Grupo Pedal Norte
-                                                </label>
+                <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">GeeksLabs</a> All rights reserved.
+            </span>
+            <span class="right"> Design and Developed by
 
-
-                                            </li>
-
-                                        </ul>
-                                    </div>
-
-                                </div>
-                            </li>
-                            <!--fim 4º item-->
-                            {% endif %}
-
-
-                        </ul>
-                    </section>
-
-                    <div id="timeline">
-
-                    </div>
-                </div>
-            </section>
+                <a class="grey-text text-lighten-4" href="http://geekslabs.com/">GeeksLabs</a>
+            </span>
         </div>
     </div>
-    <!-- START FOOTER -->
-    <footer class="page-footer">
-        <div class="footer-copyright">
-            <div class="container">
-                <span>Copyright © 2018
-                    <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs"
-                        target="_blank">GeeksLabs</a> All rights reserved.</span>
-                <span class="right"> Design and Developed by
-                    <a class="grey-text text-lighten-4" href="http://geekslabs.com/">GeeksLabs</a>
-                </span>
-            </div>
-        </div>
-    </footer>
+</footer>
 <!-- END FOOTER -->
-{% endblock conteudo %}
+{% endblock conteudo %} 
 
 {% block scripts_adicionais %}
-  <script>
+
+<script>
 
     $(function () {
 
@@ -416,8 +435,8 @@
             url: '{% url "core:atualiza" %}',
             data: {
                 'cidade': '{{ user.profile.cidade }}',
-                'primeira':'True',
-                'page':'{{ page_obj.next_page_number }}'
+                'primeira': 'True',
+                'page': '{{ page_obj.next_page_number }}'
             },
             success: function (data) {
                 $("#timeline").html(data)
@@ -426,20 +445,20 @@
     })
 
 
-    $(function() {
+    $(function () {
 
-        $('#id_cidade').on('change', function(e){
+        $('#id_cidade').on('change', function (e) {
 
-           $.ajax({
-               type: 'GET',
-               url: '{% url "core:atualiza" %}',
-               data: {
-                   'cidade':e.target.value,
-                   'page':'{{ page_obj.next_page_number }}'
+            $.ajax({
+                type: 'GET',
+                url: '{% url "core:atualiza" %}',
+                data: {
+                    'cidade': e.target.value,
+                    'page': '{{ page_obj.next_page_number }}'
                 },
-               success: function(data){
+                success: function (data) {
                     $("#timeline").html(data)
-               },
+                },
             })
         })
     })

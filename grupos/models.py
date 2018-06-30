@@ -88,12 +88,12 @@ class ConviteDeGrupo(models.Model):
     convidado = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='convidado', on_delete=models.CASCADE, verbose_name='Convidado')
     
     PENDENTE = 0
-    ACEITO = 1
+    AGUARDANDO_APROVAÇÃO = 1
     APROVADO = 2
     REGEITADO = 3
     status_choices = (
         (PENDENTE, 'Pendente'),
-        (ACEITO, 'Aceito'),
+        (AGUARDANDO_APROVAÇÃO, 'Aguardando Aprovação'),
         (APROVADO, 'Aprovado'),
         (REGEITADO, 'Regeitado'),
     )
@@ -126,13 +126,13 @@ def adiciona_usuario_ao_grupo_apos_confirmacao(instance, created, **kwargs):
         transaction.on_commit(
             lambda: adiciona_convite_a_lista_do_usuario_e_do_grupo(instance))
 
-    if instance.criador.is_admin and instance.status == ConviteDeGrupo.ACEITO:
+    if instance.criador.is_admin and instance.status == ConviteDeGrupo.AGUARDANDO_APROVAÇÃO:
         transaction.on_commit(
             lambda: adiciona_usuario_ao_grupo(instance)
         )
         return
 
-    if instance.status == ConviteDeGrupo.ACEITO:
+    if instance.status == ConviteDeGrupo.AGUARDANDO_APROVAÇÃO:
         transaction.on_commit(
             lambda: adiciona_convite_a_lista_aguardamdo_aprovacao(instance))
 
@@ -144,7 +144,6 @@ def adiciona_usuario_ao_grupo_apos_confirmacao(instance, created, **kwargs):
 
     if instance.status == ConviteDeGrupo.REGEITADO:
         instance.delete()
-    
 
 models.signals.post_save.connect(
     adiciona_usuario_ao_grupo_apos_confirmacao, sender=ConviteDeGrupo, dispatch_uid='adiciona_usuario_ao_grupo_apos_confirmacao'
