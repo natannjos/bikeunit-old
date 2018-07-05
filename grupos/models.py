@@ -73,7 +73,7 @@ def atualiza_membros_apos_commit(instance, **kwargs):
         lambda: add_grupo_a_lista_de_grupos_do_admin(instance))
 
 models.signals.post_save.connect(
-    atualiza_membros_apos_commit, sender=Grupos, dispatch_uid='atualizaparticipantes_apos_commit'
+    atualiza_membros_apos_commit, sender=Grupos, dispatch_uid='atualiza_membros_apos_commit'
 )
 
 class ConviteDeGrupo(models.Model):
