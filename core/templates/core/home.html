@@ -253,11 +253,16 @@
                                 <div class="col s12 m12 l12">
                                     <div id="profile-card" class="card">
                                         <div class="card-image waves-effect waves-block waves-light">
+                                            {% if grupo.capa %}
                                             <img class="activator" src="{{ grupo.capa.url }}" alt="user background">
+                                              
+                                            {% endif %}
                                         </div>
                                         <div class="card-content">
                                             <div class="row">
+                                                {% if grupo.logo %}
                                                 <img src="{{ grupo.logo.url }}" alt="" class="circle responsive-img activator card-profile-image left-align">
+                                                {% endif %}
                                                 <div style="text-align: right; margin-top: -50px;">
                                                     <span class="card-title activator grey-text text-darken-4"> {{ grupo.nome }}</span>
                                                 </div>
@@ -302,7 +307,9 @@
                                         <div class="card-content white-text">
                                             <div class="row">
                                                 <span style="float: left;">
+                                                    {% if pedal.grupo.logo %}
                                                     <img src="{{ pedal.grupo.logo.url }}" alt="avatar" class="alert-circle responsive-img valign profile-image" />
+                                                    {% endif %}
                                                     <span class="white-text darken-1">
                                                         <b>{{ pedal.grupo.nome }}</b>
                                                     </span>
@@ -347,7 +354,8 @@
                             </div>
                         </li>
                         <!--fim 3º item-->
-                        {% endif %} {% if convites_de_grupos %}
+                        {% endif %}
+                        {% if solicitacoes_grupo or solicitacoes_pedal %}
 
                         <!--4º item-->
                         <li ng-repeat="single in collapsibleElements">
@@ -358,37 +366,36 @@
                             <div class="collapsible-body row lista-com-scroll">
                                 <div class="col s12 m12 l12">
                                     <ul id="task-card" class="collection with-header">
-                                        {% for convite in convites_de_grupos %}
-
+                                        {% for solicitacao in solicitacoes_grupo %}
                                         <li class="collection-item dismissable">
                                             <span class="task-cat 
-                                                {% if convite.get_status_display == 'Pendente' %}
+                                                {% if solicitacao.get_status_display == 'Pendente' %}
                                                 pink
                                                 {% else %}
                                                 teal
-                                                {% endif %}" style="margin-left:0px;">{{ convite.get_status_display }}</span>
-                                            <h6>{{ convite.criador }}</h6>
-                                            <label for="task1">Participar {{ convite.grupo_que_convidou }}.
+                                                {% endif %}" style="margin-left:0px;">{{ solicitacao.get_status_display }}</span>
+                                            <h6>{{ solicitacao.criador }}</h6>
+                                            <label for="task1">Participar {{ solicitacao.grupo }}.
                                             </label>
                                         </li>
-                                        {% endfor %} {% comment %}
-                                        <li class="collection-item dismissable">
-                                            <span class="task-cat teal" style="margin-left:0px;">CONFIRMADO</span>
-                                            <h6>Fulano de tal </h6>
-                                            <label for="task1">Participar Pedal Jusita.
-                                            </label>
-                                            <label for="task1">Grupo Pedal Alto da XV
-                                            </label>
-                                        </li>
-                                        <li class="collection-item dismissable">
-                                            <span class="task-cat pink" style="margin-left:0px;">PENDENTE</span>
-                                            <h6>Fulano de Nome Grande </h6>
-                                            <label for="task1">Participar Pedal Quiriri.
-                                            </label>
-                                            <label for="task1">Grupo Pedal Norte
-                                            </label>
-                                        </li> {% endcomment %}
+                                        {% endfor %} 
 
+                                        {% for solicitacao in solicitacoes_pedal %}
+                                        <li class="collection-item dismissable">
+                                            <span class="task-cat 
+                                            {% if solicitacao.get_status_display == 'Pendente' %}
+                                                pink
+                                                {% else %}
+                                                teal
+                                                {% endif %}" style="margin-left:0px;
+                                            " style="margin-left:0px;">{{ solicitacao.get_status_display }}</span>
+                                            <h6>{{ solicitacao.criador }}</h6>
+                                            <label for="task1">Participar de pedal para {{ solicitacao.pedal.destino }}.
+                                            </label>
+                                            <label for="task1">{{ solicitacao.pedal.grupo }}
+                                            </label>
+                                        </li>
+                                        {% endfor %}
 
                                     </ul>
                                 </div>
@@ -396,8 +403,6 @@
                         </li>
                         <!--fim 4º item-->
                         {% endif %}
-
-
 
                     </ul>
                 </section>

@@ -3,7 +3,7 @@
         {% for grupo in grupos_da_cidade %}
             {% if grupo not in user.profile.grupos_deletados.all %}
                 {% for pedal in grupo.pedais_ativos %}
-                    {% if pedal not in user.profile.pedais_deletados.all %}
+                {% if pedal not in user.profile.pedais_deletados.all and pedal not in user.profile.pedais_agendados.all %}
                         <div id="profile-page-wall-post" class="card" style="width: 100%; height:100%; box-sizing: content-box">
                             <div class="card-profile-title">
                                 <div class="row" style="margin:10px">
@@ -46,9 +46,11 @@
 
                                                 <div class="card">
                                                     <div class="card-image" style="margin:0px">
+                                                        {% if grupo.capa %}
+                                                          
                                                         <img src="{{grupo.capa.url}}" alt="sample">
-
-                                                        <!--logo tela grande-->
+                                                        {% endif %}
+                                                        {% if grupo.logo %}
                                                         <img src="{{grupo.logo.url}}" alt="profile image" class="circle z-depth-2 hide-on-med-and-down " style="
                                                             width:100px;
                                                             position: relative;
@@ -56,6 +58,9 @@
                                                             left: 10px;
                                                             border-radius: 50%;
                                                             ">
+                                                          
+                                                        {% endif %}
+                                                        <!--logo tela grande-->
                                                         <!--fim logo tela grande-->
                                                         <!--Nome do Grupo p/ tela grande-->
                                                         <h4 class="card-title grey-text text-darken-4 activator hide-on-med-and-down" style=" margin-left: 130px">{{grupo.nome}}</h4>
@@ -172,14 +177,19 @@
                         <div class="col s12 m12 l12">
                             <div class="card">
                                 <div class="card-image">
+                                    {% if grupo.capa %}
                                     <img src="{{ grupo.capa.url }}" alt="sample">
+                                    {% endif %}
+                                    {% if grupo.logo %}
+                                      
                                     <img src="{{ grupo.logo.url }}" alt="profile image" class="circle z-depth-2 " style="
-                                                        width:100px;
-                                                        position: relative;
-                                                        top:-10px;
-                                                        left: 5px;
-                                                        border-radius: 50%;">
-                                <h4 class="card-title grey-text text-darken-4 activator hide-on-med-and-down" style="margin-left: 250px;">{{ grupo.nome }}</h4>
+                                    width:100px;
+                                    position: relative;
+                                    top:-10px;
+                                    left: 5px;
+                                    border-radius: 50%;">
+                                    {% endif %}
+                                    <h4 class="card-title grey-text text-darken-4 activator hide-on-med-and-down" style="margin-left: 250px;">{{ grupo.nome }}</h4>
         
                                 </div>
                                 <div class="card-content">
@@ -218,7 +228,6 @@
                 </div>
                 {% endif %}
             {% endif %}
-        
         {% empty %}
         <div><h3>Parece que o pessoal de {{ cidade  }} anda meio preguiçoso</h3></div>
         {% endfor %}
@@ -233,8 +242,7 @@
         {% endif %}
 </section>
 
-
-<section class="col s12 m4 l8 hide-on-med-and-up timeline infinite-container" style="overflow-y: scroll; max-height: 1000px">
+<section class="col s12 m4 l8 hide-on-med-and-up timeline" style="overflow-y: scroll; max-height: 1000px">
     {% for grupo in grupos_da_cidade %}
         <div id="profile-page-wall-post " class="card novo-grupo">
                 <div class="card-profile-title">
@@ -267,14 +275,20 @@
                     <div class="col s12 m12 l12">
                         <div class="card">
                             <div class="card-image">
+                                {% if grupo.capa %}
                                 <img src="{{ grupo.capa.url }}" alt="sample">
+                                  
+                                {% endif %}
+                                {% if grupo.logo %}
+                                  
                                 <img src="{{ grupo.logo.url }}" alt="profile image" class="circle z-depth-2 " style="
-                                    width:60px;
-                                    position: absolute;
-                                    top: 120px;
-                                    left: 10px;
-                                    border-radius: 50%;
-                                    ">
+                                width:60px;
+                                position: absolute;
+                                top: 120px;
+                                left: 10px;
+                                border-radius: 50%;
+                                ">
+                                {% endif %}
                             </div>
                             <div class="card-content">
                                 <div class="row">

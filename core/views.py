@@ -60,8 +60,13 @@ class Home(LoginRequiredMixin, TemplateView):
         user = self.request.user
         context['meus_grupos'] = user.profile.meus_grupos.all()
         context['pedais_agendados'] = user.profile.pedais_agendados.all()
-        context['convites_de_grupos'] = user.profile.convites_de_grupo_recebidos.all()
+        user.profile.convites_de_grupo_recebidos.all()
+        user.profile.pedidos_participar_grupo.all()
+        user.profile.convites_de_pedal_recebidos.all()
+        user.profile.pedidos_participar_pedal.all()
 
+        context['solicitacoes_grupo'] = user.profile.convites_de_grupo_recebidos.all() | user.profile.pedidos_participar_grupo.all()
+        context['solicitacoes_pedal'] =  user.profile.convites_de_pedal_recebidos.all() | user.profile.pedidos_participar_pedal.all()
         return context
 
 class Contato(TemplateView):
