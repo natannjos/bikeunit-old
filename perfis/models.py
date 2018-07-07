@@ -31,7 +31,18 @@ class Profile(TimestampedModel):
         blank=True
     )
 
-    convites_de_grupo_recebidos = models.ManyToManyField('grupos.ConviteDeGrupo', verbose_name='Convites de Grupo', related_name='convites_de_grupo_recebidos', blank=True)
+    convites_de_grupo_recebidos = models.ManyToManyField(
+        'grupos.SolicitacaoParticipacaoDeGrupo', verbose_name='Convites de Grupo', related_name='convites_de_grupo_recebidos', blank=True)
+
+    pedidos_participar_grupo = models.ManyToManyField(
+        'grupos.SolicitacaoParticipacaoDeGrupo', verbose_name='Pedidos para entrar em Grupo', related_name='pedidos_participar_grupo', blank=True)
+    
+    convites_de_pedal_recebidos = models.ManyToManyField(
+        'grupos.SolicitacaoParticipacaoDePedal', verbose_name='Convites de Pedal', related_name='convites_de_pedal_recebidos', blank=True)
+
+    pedidos_participar_pedal = models.ManyToManyField(
+        'grupos.SolicitacaoParticipacaoDePedal', verbose_name='Pedidos de Participação de Pedal', related_name='pedidos_participar_grupo', blank=True)
+    
 
     pedais_agendados = models.ManyToManyField(
         'grupos.Pedal',

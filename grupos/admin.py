@@ -1,6 +1,5 @@
 from django.contrib import admin
-from .models import Grupos, Pedal, ConviteDeGrupo
-
+from .models import Grupos, Pedal, SolicitacaoParticipacaoDeGrupo, SolicitacaoParticipacaoDePedal
 
 # Register your models here.
 class GruposAdmin(admin.ModelAdmin):   
@@ -27,4 +26,5 @@ class PedalAdmin(admin.ModelAdmin):
     
 admin.site.register(Grupos, GruposAdmin)
 admin.site.register(Pedal, PedalAdmin)
-admin.site.register(ConviteDeGrupo)
+admin.site.register(SolicitacaoParticipacaoDeGrupo)
+admin.site.register(SolicitacaoParticipacaoDePedal)
