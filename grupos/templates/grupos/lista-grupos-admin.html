@@ -1,5 +1,5 @@
 {% extends "core/parent_forms/base.html" %}
-
+{% load static %}
 
 {% block menu_lateral %}
     <aside id="left-sidebar-nav">
@@ -7,15 +7,22 @@
                 <li class="user-details cyan darken-2">
                     <div class="row">
                         <div class="col col s4 m4 l4">
-                            <img src="{{ user.profile.image.url }}" alt="" class="circle responsive-img valign profile-image">
+                            <img src="
+                            {% if user.profile.image %}
+                            {{ user.profile.image.url }}
+                            {% else %}
+                            {% static 'images/default-user-image.png' %}
+                            {% endif %}
+                                
+                            " alt="" class="circle responsive-img valign profile-image">
                         </div>
                         <div class="col col s8 m8 l8">
                             <ul id="profile-dropdown" class="dropdown-content">
                                 <li><a href="#"><i class="mdi-action-face-unlock"></i> Perfil</a>
                                 </li>
                                 <li><a href="#"><i class="mdi-action-assignment-ind"></i>Dados</a>
-                                </li>                                
-                                <li class="divider"></li>                              
+                                </li>
+                                <li class="divider"></li
                                 <li><a href="#"><i class="mdi-hardware-keyboard-tab"></i>Sair</a>
                               
                             </ul>
@@ -84,8 +91,6 @@
         <div class="row">
             
             <div class="col s12 m12 l12">
-                {% if meus_grupos %}
-               
                     {% for grupo in meus_grupos %}
                     <a href="{% url 'grupos:grupo_info' grupo.slug %}">
                         <div class="col s12 m6 l4">
@@ -108,18 +113,18 @@
                             </div>
                         </div>
                     </a>
-
-                    {% endfor %}
-                {% else %}
+                    {% empty %}
                     <h3>Você ainda não é admin de nenhum grupo</h3>
                     <a href="" class="btn waves-effect waves-light blue">Criar Grupo</a>
-                {% endif %}
+                    {% endfor %}
 
             </div>
         </div>
     </div>
     <!-- Fim dos pedais que o Adm possui-->
 
-</section>
+        </section>
+    </div>
+</div>
 
 {% endblock conteudo %}

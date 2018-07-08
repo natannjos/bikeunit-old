@@ -22,14 +22,14 @@ class GrupoInfo(LoginRequiredMixin, DetailView):
 
     template_name = 'grupos/tela-grupo.html'
     context_object_name = 'grupo'
-    queryset = Grupos.objects.all()
+    model = Grupos
 
     def dispatch(self, request, *args, **kwargs):
         u"""Checa se o usuário é admin do grupo escolhido."""
         """Se não for retorna um erro 403."""
         user = request.user
         grupo = self.get_object()
-        if user.profile.is_admin and user in grupo.admin.all():
+        if user.is_anonymous or user.profile.is_admin and user in grupo.admin.all():
             return super(GrupoInfo, self).dispatch(request, *args, **kwargs)
         return HttpResponseForbidden()
 

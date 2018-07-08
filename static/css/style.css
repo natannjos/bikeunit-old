@@ -2500,3 +2500,7 @@ tr.group:hover {
     opacity: 1;
   }
 }
+
+.item-inline {
+  display: inherit;
+}

@@ -1,9 +1,213 @@
+{% extends "core/parent_forms/base.html" %} 
+{% load static %}
+{% block menu_lateral %}
+<aside id="left-sidebar-nav">
+    <ul id="slide-out" class="side-nav fixed leftside-navigation">
+        <li class="user-details cyan darken-2">
+            <div class="row">
+                <div class="col col s4 m4 l4">
+                    <img src="
+                            {% if user.profile.image %}
+                            {{ user.profile.image.url }}
+                            {% else %}
+                            {% static 'images/default-user-image.png' %}
+                            {% endif %}
+                                
+                            " alt="" class="circle responsive-img valign profile-image">
+                </div>
+                <div class="col col s8 m8 l8">
+                    <ul id="profile-dropdown" class="dropdown-content">
+                        <li>
+                            <a href="#">
+                                <i class="mdi-action-face-unlock"></i> Perfil</a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="mdi-action-assignment-ind"></i>Dados</a>
+                        </li>
+                        <li class="divider"></li <li>
+                        <a href="#">
+                            <i class="mdi-hardware-keyboard-tab"></i>Sair</a>
 
-<html>
-<head>
-    
-</head>
-<body>
-    <h1>{{ grupo.nome }}</h1>
-</body>
-</html>
+                    </ul>
+                    <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">{{ user.profile.nome }}
+                        <i class="mdi-navigation-arrow-drop-down right"></i>
+                    </a>
+                </div>
+            </div>
+        </li>
+        <li class="bold ">
+            <a href="{% url 'core:home' %}" class="waves-effect waves-cyan">
+                <i class="mdi-action-home"></i>Home App</a>
+        </li>
+        <li class="bold">
+            <a href="" class="waves-effect waves-cyan">
+                <i class="mdi-maps-local-library"></i> Home Administrador</a>
+        </li>
+        <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li class="bold">
+                    <a class="collapsible-header waves-effect waves-cyan">
+                        <i class="mdi-maps-directions-bike"></i> Criar grupo de Pedal</a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a href="criar-grupo-de-pedal.html">Público</a>
+                            </li>
+                            <li>
+                                <a href="criar-grupo-de-pedal.html">Privado</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="bold">
+                    <a href="alterar-dados-cadastrais.html" class="waves-effect waves-cyan">
+                        <i class="mdi-action-assignment-ind"></i> Alterar Dados</a>
+                </li>
+                <li class="bold">
+                    <a href="perfil-usuario-com-grupo.html" class="waves-effect waves-cyan">
+                        <i class="mdi-action-account-circle"></i>Voltar Perfil</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan">
+        <i class="mdi-navigation-menu"></i>
+    </a>
+</aside>
+{% endblock menu_lateral %}
+
+{% block conteudo %}
+    <!--start container-->
+    <style>
+        .item-inline{
+            display: inline;
+        }
+    </style>
+    <div id="main">
+    <div class="wrapper">
+        <div class="container">
+            <div class="section">
+                <!--Pedais Agendados-->
+                <div class="card">
+                    <div class="card-image ">
+                        {% if grupo.capa %}
+                        <img src="{{ grupo.capa.url }}" alt="sample">
+                        {% endif %}
+                        {% if grupo.logo %}
+                        <img src="{{ grupo.logo.url }}" alt="profile image" class="circle z-depth-2 responsive-img hide-on-med-and-down" style="
+                        width:100px;
+                        position: absolute;
+                        top: 420px;
+                        left: 50px;
+                        border-radius: 50%;
+                        ">
+                        {% endif %}
+                    </div>
+
+                    <div class="card-content">
+                        <div class="row">
+                            <div class="col s12 l3 offset-l2">
+                                <div class="col s12 l12 center-align">
+                                    <h4 class="card-title grey-text text-darken-4 activator">{{ grupo.nome|title }}</h4>
+                                </div>
+                            </div>
+                            <div class="col s4 l2 center-align">
+                                <h4 class="card-title grey-text text-darken-4 ">{{ grupo.realizados.count }}</h4>
+                                <p class="medium-small grey-text ">Peda{{ grupo.realizados.count|pluralize:'l,is' }} Realizado{{ grupo.realizados.count|pluralize }}</p>
+                            </div>
+                            <div class="col s4 l2 center-align">
+                                <h4 class="card-title grey-text text-darken-4">{{ grupo.pedais_ativos.count }}</h4>
+                                <p class="medium-small grey-text">Peda{{ grupo.pedais_ativos.count|pluralize:'l,is' }} Agendado{{ grupo.pedais_ativos.count|pluralize }}</p>
+                            </div>
+
+                            <div class="col s4 l2 center-align">
+                                <h4 class="card-title grey-text text-darken-4">{{ grupo.participantes.count }}</h4>
+                                <p class="medium-small grey-text">Membro{{ grupo.participantes.count|pluralize }}</p>
+                            </div>
+                            <div class="col s1 right-align hide-on-med-and-down">
+                                <a class="btn-floating activator waves-effect waves-light darken-2 right">
+                                    <i class="mdi-action-perm-identity"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-reveal">
+                        <p>
+                            <span class="card-title grey-text text-darken-4">{{ grupo.admin.first.profile.nome }}
+                                <i class="mdi-navigation-close right"></i>
+                            </span>
+                            <span>
+                                <i class="mdi-action-perm-identity cyan-text text-darken-2"></i> Admin</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div id="ui-alert">
+                        <div class="col s12 m4 l4">
+                            <div class="divider"></div>
+                            <div class="row">
+                                {% for pedal in grupo.pedais_ativos %}
+                                <div class="col s12 m4 l4">
+                                    <div id="card-alert" class="card deep-purple">
+                                        <div class="row">
+                                            <div class="col s9 m9 l9">
+                                                <div class="card-content white-text">
+                                                    <span class="card-title white-text darken-1">{{ pedal.destino }}</span>
+                                                    <ul>
+                                                        <li>Nível: {{pedal.get_nivel_display}}</li>
+                                                        <li>Distância: {{pedal.quilometragem}}km</li>
+                                                        <li>Terreno {{pedal.get_terreno_display}}</li>
+                                                        <li>Concentração: {{pedal.concentracao}}</li>
+                                                        <li>Dia: {{pedal.data|date:"d/m/Y - D"}}</li>
+                                                        <li>Às {{pedal.hora|time:"H:i"}} hrs</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            {% if pedal.pago %}
+                                            <div class="col s3 m3 l3">
+                                                <a href="#" class="btn-floating btn-large btn-price waves-effect waves-light  pink accent-2 letra-pequena preco-card letra-menor preco-card">R${{pedal.preco}}</a>
+                                            </div>
+                                            {% endif %}
+                                            <div class="col s12 m12 l12">
+                                                <div class="card-action deep-purple darken-2 center">
+                                                    <ul class="card-action-buttons">
+                                                        <li class="item-inline">
+                                                            <a class="btn-floating waves-effect activator waves-light green accent-4">
+                                                                <i class="mdi-content-content-paste"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-inline">
+                                                            <a class="btn-floating waves-effect waves-light green accent-4">
+                                                                <i class="mdi-social-share"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-inline">
+                                                            <a class="btn-floating waves-effect waves-light green accent-4">
+                                                                <i class="mdi-content-create"></i>
+                                                            </a>
+                                                        </li>
+                                                        <li class="item-inline">
+                                                            <a class="btn-floating waves-effect waves-light red accent-2">
+                                                                <i class="mdi-action-delete"></i>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="card-reveal">
+                                                        <p>{{ pedal.info }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock conteudo %}
