@@ -1,0 +1,20 @@
+{% load static %}
+
+<div class="modal-header">
+        <h4>Confirmação de exclusão de pedal</h4>
+    </div>
+<form method="POST" action="{% url 'perfis:sair-de-pedal' pedal.pk %}" class="js-perfil-sair-pedal-form">
+    {% csrf_token %}
+
+    <div class="modal-content">
+        <p>
+            Você tem certeza que deseja sair do pedal para <strong>{{pedal.destino}}</strong>?
+        </p>
+    </div>
+
+    <div class="modal-footer">
+        <button class="modal-close waves-effect waves-green btn-flat">Excluir Pedal</button>
+        <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancelar</a>
+    </div>
+</form>
+<script src="{% static 'js/custom-ajax-scripts/sair-pedal.js' %}"></script>

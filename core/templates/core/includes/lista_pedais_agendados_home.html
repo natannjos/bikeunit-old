@@ -1,0 +1,51 @@
+{% load static %}
+{% for pedal in pedais_agendados %}
+
+<div class="col s12 m12 l12">
+    <div id="card-alert" class="card deep-purple">
+        <div class="card-content white-text">
+            <div class="row">
+                <span style="float: left;">
+                    {% if pedal.grupo.logo %}
+                    <img src="{{ pedal.grupo.logo.url }}" alt="avatar" class="alert-circle responsive-img valign profile-image" />
+                    {% endif %}
+                    <span class="white-text darken-1">
+                        <b>{{ pedal.grupo.nome }}</b>
+                    </span>
+                </span>
+                <ul class="card-action-buttons" style="float: right;">
+                    <li>
+                        <a class="btn-floating waves-effect  waves-light red accent-2">
+                            <i class="mdi-action-info activator"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <span class="card-title white-text darken-1" style="clear: both;">{{ pedal.destino }}</span>
+            <ul>
+                <li>Dia: {{ pedal.data|date:" d/j/Y - l" }}</li>
+                <li>Às {{ pedal.hora|time:"H:i" }} hs </li>
+                <li>Distância: {{ pedal.quilometragem}}km</li>
+                <li>Terreno: {{ pedal.get_terreno_display }}</li>
+                <li>Concentração: {{ pedal.concentracao }}</li>
+            </ul>
+        </div>
+        <div class="card-action deep-purple darken-2 center">
+            <a class="btn-flat btn waves-effect light-blue white-text activator">
+                <i class="mdi-social-group-add"></i>
+                <span class="letra-pequena"></span>
+            </a>
+            <a class="waves-effect waves-light btn modal-trigger js-perfil-sair-pedal"  href="#modal4" data-url="{% url 'perfis:sair-de-pedal' pedal.pk %}">Sair do Pedal</a>
+            {% comment %} <a class="btn btn-flat btn waves-effect red accent-2 white-text letra-pequena js-perfil-sair-pedal modal-trigger" data-url="{% url 'perfis:sair-de-pedal' pedal.pk %}" data-target="modal4" href="#modal4">
+                Sair do Pedal
+            </a> {% endcomment %}
+        </div>
+        <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">
+                <i class="mdi-navigation-close right"></i> Aviso
+            </span>
+            <p>{{ pedal.info }}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}

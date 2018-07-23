@@ -1,0 +1,43 @@
+<li ng-repeat="single in collapsibleElements">
+    <div class="collapsible-header">
+        <i class="{{single.icon}} mdi-content-markunread"></i>Status de Convites
+
+    </div>
+    <div class="collapsible-body row lista-com-scroll">
+        <div class="col s12 m12 l12">
+            <ul id="task-card" class="collection with-header">
+                {% for solicitacao in solicitacoes_grupo %}
+                <li class="collection-item dismissable">
+                    <span class="task-cat 
+                        {% if solicitacao.get_status_display == 'Pendente' %}
+                        pink
+                        {% else %}
+                        teal
+                        {% endif %}" style="margin-left:0px;">{{ solicitacao.get_status_display }}</span>
+                    <h6>{{ solicitacao.criador }}</h6>
+                    <label for="task1">Participar {{ solicitacao.grupo }}.
+                    </label>
+                </li>
+                {% endfor %} 
+
+                {% for solicitacao in solicitacoes_pedal %}
+                <li class="collection-item dismissable">
+                    <span class="task-cat 
+                    {% if solicitacao.get_status_display == 'Pendente' %}
+                        pink
+                        {% else %}
+                        teal
+                        {% endif %}" style="margin-left:0px;
+                    " style="margin-left:0px;">{{ solicitacao.get_status_display }}</span>
+                    <h6>{{ solicitacao.criador }}</h6>
+                    <label for="task1">Participar de pedal para {{ solicitacao.pedal.destino }}.
+                    </label>
+                    <label for="task1">{{ solicitacao.pedal.grupo }}
+                    </label>
+                </li>
+                {% endfor %}
+
+            </ul>
+        </div>
+    </div>
+</li>

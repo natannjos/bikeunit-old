@@ -83,6 +83,14 @@
         <i class="mdi-navigation-menu"></i>
     </a>
 </aside>
+
+<!--FIM MENU-->
+{% endblock menu_lateral %}
+
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+{% block conteudo %}
 <div id="modal1" class="modal">
     <div class="modal-content">
         <p>O grupo aparecerá na Home do Aplicativo e todos os usuários poderão enviar solicitãção para participar do grupo.</p>
@@ -109,14 +117,11 @@
         <a href="#" class="waves-effect waves-red btn-flat modal-action modal-close">Ok</a>
     </div>
 </div>
-<!--FIM MENU-->
-{% endblock menu_lateral %}
+<div id="modal4" class="modal">
+    <div class="modal-body">
 
-
-<!-- //////////////////////////////////////////////////////////////////////////// -->
-
-{% block conteudo %}
-
+    </div>
+</div>
 <!-- START MAIN -->
 <div id="main">
     <!-- START WRAPPER -->
@@ -218,7 +223,6 @@
                         <li ng-repeat="single in collapsibleElements">
                             <div class="collapsible-header">
                                 <i class="{{single.icon}} mdi-communication-location-on"></i>Pesquise Grupos por Cidade
-
                             </div>
                             <div class="collapsible-body">
                                 <div class="row margin">
@@ -235,174 +239,31 @@
                                 </div>
                             </div>
                         </li>
-                        <!--fim 1º item-->
+                        
+                        <!--Lista de grupos que participo-->
                         {% if meus_grupos %}
-
-                        <!--2º item-->
-                        <li ng-repeat="single in collapsibleElements">
-                            <div class="collapsible-header $(" #range_02 ").ionRangeSlider({               });">
-                                <i class="{{single.icon}} mdi-maps-directions-bike"></i>Grupos de Pedal que Participo
-
-                            </div>
-                            <div class="collapsible-body row lista-com-scroll">
-                                <!--conteudo-->
-                                <!--inicio iframe-->
-                                <!--1º grupo-->
-                                {% for grupo in meus_grupos %}
-
-                                <div class="col s12 m12 l12">
-                                    <div id="profile-card" class="card">
-                                        <div class="card-image waves-effect waves-block waves-light">
-                                            {% if grupo.capa %}
-                                            <img class="activator" src="{{ grupo.capa.url }}" alt="user background">
-                                              
-                                            {% endif %}
-                                        </div>
-                                        <div class="card-content">
-                                            <div class="row">
-                                                {% if grupo.logo %}
-                                                <img src="{{ grupo.logo.url }}" alt="" class="circle responsive-img activator card-profile-image left-align">
-                                                {% endif %}
-                                                <div style="text-align: right; margin-top: -50px;">
-                                                    <span class="card-title activator grey-text text-darken-4"> {{ grupo.nome }}</span>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="text-align: center;">
-                                                <a class="btn-floating waves-effect waves-light light-blue">
-                                                    <i class="mdi-social-notifications-on"></i>
-                                                </a>
-                                                <a class="btn-floating waves-effect waves-light green accent-4">
-                                                    <i class="mdi-social-person-add"></i>
-                                                </a>
-                                                <a class="btn-floating waves-effect waves-light red accent-2">
-                                                    <i class="mdi-action-delete"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-
-                            </div>
-                        </li>
-                        <!--fim 2º item-->
+                        {% include 'core/includes/lista_grupos_home.html' %}
                         {% endif %}
+                        <!--Fim lista de grupos que participo-->
 
-                        <!--3º item-->
-
+                        <!-- Lista de pedais agendados-->
                         {% if pedais_agendados %}
-
-                        <li ng-repeat="single in collapsibleElements">
+                        <li ng-repeat="single in collapsibleElements" id="pedais-agendados-li">
                             <div class="collapsible-header">
                                 <i class="{{single.icon}} mdi-action-done"></i>Pedais que Confirmei Presença
-
                             </div>
-                            <div class="collapsible-body row lista-com-scroll">
-                                <!--conteúdo-->
-                                <!--1º pedal confirmado-->
-                                {% for pedal in pedais_agendados %}
-
-                                <div class="col s12 m12 l12">
-                                    <div id="card-alert" class="card deep-purple">
-                                        <div class="card-content white-text">
-                                            <div class="row">
-                                                <span style="float: left;">
-                                                    {% if pedal.grupo.logo %}
-                                                    <img src="{{ pedal.grupo.logo.url }}" alt="avatar" class="alert-circle responsive-img valign profile-image" />
-                                                    {% endif %}
-                                                    <span class="white-text darken-1">
-                                                        <b>{{ pedal.grupo.nome }}</b>
-                                                    </span>
-                                                </span>
-                                                <ul class="card-action-buttons" style="float: right;">
-                                                    <li>
-                                                        <a class="btn-floating waves-effect  waves-light red accent-2">
-                                                            <i class="mdi-action-info activator"></i>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <span class="card-title white-text darken-1" style="clear: both;">{{ pedal.destino }}</span>
-                                            <ul>
-                                                <li>Dia: {{ pedal.data|date:" d/j/Y - l" }}</li>
-                                                <li>Às {{ pedal.hora|time:"H:i" }} hs </li>
-                                                <li>Distância: {{ pedal.quilometragem}}km</li>
-                                                <li>Terreno: {{ pedal.get_terreno_display }}</li>
-                                                <li>Concentração: {{ pedal.concentracao }}</li>
-                                            </ul>
-                                        </div>
-                                        <div class="card-action deep-purple darken-2 center">
-                                            <a class="btn-flat btn waves-effect light-blue white-text activator">
-                                                <i class="mdi-social-group-add"></i>
-                                                <span class="letra-pequena"></span>
-                                            </a>
-                                            <a class="btn btn-warning-cancel btn-flat btn waves-effect red accent-2 white-text letra-pequena ">
-                                                <i class="mdi-content-clear left"></i>
-                                            </a>
-                                        </div>
-                                        <div class="card-reveal">
-                                            <span class="card-title grey-text text-darken-4">
-                                                <i class="mdi-navigation-close right"></i> Aviso
-                                            </span>
-                                            <p>{{ pedal.info }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                {% endfor %}
-
+                            <div class="collapsible-body row lista-com-scroll" id="meus-pedais-agendados">
+                                {% include "core/includes/lista_pedais_agendados_home.html" %}
                             </div>
                         </li>
-                        <!--fim 3º item-->
                         {% endif %}
+                        <!-- Fim da lista de pedais agendados-->
+                        
+                        <!-- Lista de solicitações de grupo e pedal -->
                         {% if solicitacoes_grupo or solicitacoes_pedal %}
-
-                        <!--4º item-->
-                        <li ng-repeat="single in collapsibleElements">
-                            <div class="collapsible-header">
-                                <i class="{{single.icon}} mdi-content-markunread"></i>Status de Convites
-
-                            </div>
-                            <div class="collapsible-body row lista-com-scroll">
-                                <div class="col s12 m12 l12">
-                                    <ul id="task-card" class="collection with-header">
-                                        {% for solicitacao in solicitacoes_grupo %}
-                                        <li class="collection-item dismissable">
-                                            <span class="task-cat 
-                                                {% if solicitacao.get_status_display == 'Pendente' %}
-                                                pink
-                                                {% else %}
-                                                teal
-                                                {% endif %}" style="margin-left:0px;">{{ solicitacao.get_status_display }}</span>
-                                            <h6>{{ solicitacao.criador }}</h6>
-                                            <label for="task1">Participar {{ solicitacao.grupo }}.
-                                            </label>
-                                        </li>
-                                        {% endfor %} 
-
-                                        {% for solicitacao in solicitacoes_pedal %}
-                                        <li class="collection-item dismissable">
-                                            <span class="task-cat 
-                                            {% if solicitacao.get_status_display == 'Pendente' %}
-                                                pink
-                                                {% else %}
-                                                teal
-                                                {% endif %}" style="margin-left:0px;
-                                            " style="margin-left:0px;">{{ solicitacao.get_status_display }}</span>
-                                            <h6>{{ solicitacao.criador }}</h6>
-                                            <label for="task1">Participar de pedal para {{ solicitacao.pedal.destino }}.
-                                            </label>
-                                            <label for="task1">{{ solicitacao.pedal.grupo }}
-                                            </label>
-                                        </li>
-                                        {% endfor %}
-
-                                    </ul>
-                                </div>
-                            </div>
-                        </li>
-                        <!--fim 4º item-->
+                        {% include 'core/includes/lista_solicitacoes_home.html' %}
                         {% endif %}
+                        <!-- Fim da lista de solicitações de grupo e pedal -->
 
                     </ul>
                 </section>
@@ -415,13 +276,9 @@
 <footer class="page-footer">
     <div class="footer-copyright">
         <div class="container">
-            <span>Copyright © 2018
+            <span class="right"> Design and Developed by BikeUnit
 
-                <a class="grey-text text-lighten-4" href="http://themeforest.net/user/geekslabs/portfolio?ref=geekslabs" target="_blank">GeeksLabs</a> All rights reserved.
-            </span>
-            <span class="right"> Design and Developed by
-
-                <a class="grey-text text-lighten-4" href="http://geekslabs.com/">GeeksLabs</a>
+                <a class="grey-text text-lighten-4" href="http://bikeunit.com.br/">BikeUnit</a>
             </span>
         </div>
     </div>
@@ -467,6 +324,9 @@
             })
         })
     })
+
 </script>
+
+<script src="{% static 'js/custom-ajax-scripts/sair-pedal.js' %}"></script>
 
 {% endblock scripts_adicionais %}

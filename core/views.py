@@ -28,7 +28,7 @@ class BuscaGruposLocalidadeAjax(LoginRequiredMixin, ListView):
 
             # convites_para_participar_grupo
             # convites_para_participar_pedal
-            
+
             grupos_da_cidade_do_usuario = Grupos.objects.filter(
                 cidade=user.profile.cidade, estado=user.profile.estado, publico=True).annotate(num_pedais=Count('pedais')).order_by('-num_pedais')
 
@@ -71,8 +71,6 @@ class Home(LoginRequiredMixin, TemplateView):
 
 class Contato(TemplateView):
     template_name = 'core/contato.html'
-
-
 
 home = Home.as_view()
 contato = Contato.as_view()

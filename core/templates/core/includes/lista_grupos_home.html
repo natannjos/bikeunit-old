@@ -1,0 +1,46 @@
+<li ng-repeat="single in collapsibleElements">
+    <div class="collapsible-header $(" #range_02 ").ionRangeSlider({               });">
+        <i class="{{single.icon}} mdi-maps-directions-bike"></i>Grupos de Pedal que Participo
+
+    </div>
+    <div class="collapsible-body row lista-com-scroll">
+        <!--conteudo-->
+        <!--inicio iframe-->
+        <!--1º grupo-->
+        {% for grupo in meus_grupos %}
+
+        <div class="col s12 m12 l12">
+            <div id="profile-card" class="card">
+                <div class="card-image waves-effect waves-block waves-light">
+                    {% if grupo.capa %}
+                    <img class="activator" src="{{ grupo.capa.url }}" alt="user background">
+                      
+                    {% endif %}
+                </div>
+                <div class="card-content">
+                    <div class="row">
+                        {% if grupo.logo %}
+                        <img src="{{ grupo.logo.url }}" alt="" class="circle responsive-img activator card-profile-image left-align">
+                        {% endif %}
+                        <div style="text-align: right; margin-top: -50px;">
+                            <span class="card-title activator grey-text text-darken-4"> {{ grupo.nome }}</span>
+                        </div>
+                    </div>
+                    <div class="row" style="text-align: center;">
+                        <a class="btn-floating waves-effect waves-light light-blue">
+                            <i class="mdi-social-notifications-on"></i>
+                        </a>
+                        <a class="btn-floating waves-effect waves-light green accent-4">
+                            <i class="mdi-social-person-add"></i>
+                        </a>
+                        <a class="btn-floating waves-effect waves-light red accent-2">
+                            <i class="mdi-action-delete"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</li>

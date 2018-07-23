@@ -21,17 +21,19 @@
     <meta name="msapplication-TileImage" content="{% static 'images/favicon/mstile-144x144.png' %}">
     <!-- For Windows Phone -->
 
-
+    
     <link href="{% static 'css/materialize.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="{% static 'css/style.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
     <!-- Custome CSS-->
     <link href="{% static 'css/custom/custom.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
-
+    
     <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
     <link href="{% static 'js/plugins/prism/prism.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="{% static 'js/plugins/perfect-scrollbar/perfect-scrollbar.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="{% static 'js/plugins/chartist-js/chartist.min.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
     <link href="{% static 'js/plugins/sweetalert/sweetalert.css' %}" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- jQuery Library -->
+    <script type="text/javascript" src="{% static 'js/plugins/jquery-1.11.2.min.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/jquery.mCustomScrollbar.css' %}">
 
     <!--you can use custom css from js/plugins/sweetalert/themes/-->
@@ -121,8 +123,7 @@
     Scripts
     ================================================ -->
 
-<!-- jQuery Library -->
-<script type="text/javascript" src="{% static 'js/plugins/jquery-1.11.2.min.js' %}"></script>
+
 <!--angularjs-->
 <script type="text/javascript" src="{% static 'js/plugins/angular.min.js' %}"></script>
 <!--materialize js-->
@@ -134,13 +135,13 @@
 <!-- chartist -->
 <script type="text/javascript" src="{% static 'js/plugins/chartist-js/chartist.min.js' %}"></script>
 <!--sweetalert -->
-<script type="text/javascript" src="{% static 'js/plugins/sweetalert/sweetalert.min.js' %}"></script>
+{% comment %} <script type="text/javascript" src="{% static 'js/plugins/sweetalert/sweetalert.min.js' %}"></script> {% endcomment %}
 <!--plugins.js - Some Specific JS codes for Plugin Settings-->
 <script type="text/javascript" src="{% static 'js/plugins.min.js' %}"></script>
 <!--custom-script.js - Add your own theme custom JS-->
 <script type="text/javascript" src="{% static 'js/custom-script.js' %}"></script>
 
-<script type="text/javascript">
+{% comment %} <script type="text/javascript">
     $(document).ready(function () {
         "use strict";
 
@@ -180,14 +181,15 @@
                 });
         });
 
-        $('.btn-warning-cancel').click(function () {
+        $('.btn-warning-cancel').click(function (e) {
+            
             swal({
                     title: "Você tem certeza?",
                     text: "Seu nome sairá da lista para esse pedal!",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'sim, pode tirar meu nome da lista!',
+                    confirmButtonText: 'Sim, pode tirar meu nome da lista!',
                     cancelButtonText: "Continuar no pedal!",
                     closeOnConfirm: false,
                     closeOnCancel: false
@@ -205,11 +207,11 @@
         $('.btn-warning-cancel-sair-do-grupo').click(function () {
             swal({
                     title: "Você tem certeza?",
-                    text: "você realmente deseja sair desse grupo?",
+                    text: "Você realmente deseja sair desse grupo?",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: '#DD6B55',
-                    confirmButtonText: 'sim, quero sair desse grupo!',
+                    confirmButtonText: 'Sim, quero sair desse grupo!',
                     cancelButtonText: "Continuar no grupo!",
                     closeOnConfirm: false,
                     closeOnCancel: false
@@ -288,8 +290,8 @@
         });
 
     });
-</script>
-
+  
+</script> {% endcomment %}
 
 {% block scripts_adicionais %}
 
