@@ -10,9 +10,13 @@ from django.views.generic import TemplateView
 from django.urls import reverse_lazy
 
 # Create your views here.
+
+
 class SairDePedal(LoginRequiredMixin, TemplateView):
-    template_name = 'perfis/includes/parcial_perfil_sair_pedal_update.html'    
+
+    template_name = 'perfis/includes/parcial_perfil_sair_pedal_update.html'
     model = Pedal
+
     def get_object(self):
         pk = self.kwargs['pk']
         try:
@@ -27,19 +31,21 @@ class SairDePedal(LoginRequiredMixin, TemplateView):
             data = {}
             pedal = self.get_object()
             data['html_form'] = render_to_string(
-                self.template_name, 
-                {'pedal':pedal}, 
+                self.template_name,
+                {'pedal': pedal},
                 request=request
             )
             return JsonResponse(data)
 
-
     def post(self, request, *args, **kwargs):
         try:
+            ''
             pedal = self.get_object()
             request.user.profile.pedais_agendados.remove(pedal)
-            pedal.participantes.remove(request.user)
-        except: pass
+            pedal.participantes.remove(request.user.profile)
+        except:
+            pass
+
         data = {}
 
         pedais = request.user.profile.pedais_agendados.all()
@@ -49,8 +55,10 @@ class SairDePedal(LoginRequiredMixin, TemplateView):
             data['tem_pedais'] = True
         data['html_pedais_agendados_list'] = render_to_string(
             'core/includes/lista_pedais_agendados_home.html', {
-            'pedais_agendados': pedais
-        })
+                'pedais_agendados': pedais
+            })
 
         return JsonResponse(data)
+
+
 sair_de_pedal = SairDePedal.as_view()

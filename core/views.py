@@ -49,7 +49,6 @@ class BuscaGruposLocalidadeAjax(LoginRequiredMixin, ListView):
 
         return context
 
-
 class Home(LoginRequiredMixin, TemplateView):
 
     template_name = 'core/home.html'

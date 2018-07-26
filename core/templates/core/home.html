@@ -239,11 +239,9 @@
                                 </div>
                             </div>
                         </li>
-                        
+
                         <!--Lista de grupos que participo-->
-                        {% if meus_grupos %}
-                        {% include 'core/includes/lista_grupos_home.html' %}
-                        {% endif %}
+                        {% if meus_grupos %} {% include 'core/includes/lista_grupos_home.html' %} {% endif %}
                         <!--Fim lista de grupos que participo-->
 
                         <!-- Lista de pedais agendados-->
@@ -258,11 +256,9 @@
                         </li>
                         {% endif %}
                         <!-- Fim da lista de pedais agendados-->
-                        
+
                         <!-- Lista de solicitações de grupo e pedal -->
-                        {% if solicitacoes_grupo or solicitacoes_pedal %}
-                        {% include 'core/includes/lista_solicitacoes_home.html' %}
-                        {% endif %}
+                        {% if solicitacoes_grupo or solicitacoes_pedal %} {% include 'core/includes/lista_solicitacoes_home.html' %} {% endif %}
                         <!-- Fim da lista de solicitações de grupo e pedal -->
 
                     </ul>
@@ -284,12 +280,9 @@
     </div>
 </footer>
 <!-- END FOOTER -->
-{% endblock conteudo %} 
-
-{% block scripts_adicionais %}
+{% endblock conteudo %} {% block scripts_adicionais %}
 
 <script>
-
     $(function () {
 
         $.ajax({
@@ -324,9 +317,7 @@
             })
         })
     })
-
 </script>
 
 <script src="{% static 'js/custom-ajax-scripts/sair-pedal.js' %}"></script>
-
 {% endblock scripts_adicionais %}
