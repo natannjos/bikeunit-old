@@ -1,20 +1,11 @@
-coreapi==2.3.3
 Django==2.0.4
 django-annoying==0.10.4
-django-filter==1.1.0
 django-localflavor==2.0
 django-widget-tweaks==1.4.2
-djangorestframework==3.8.2
-djangorestframework-jwt==1.11.0
-djangorestframework-simplejwt==3.2.3
 gunicorn==19.7.1
-ipython==6.3.1
-Markdown==2.6.11
+Pillow==5.2.0
 psycopg2-binary==2.7.4
-PyJWT==1.6.1
-whitenoise==3.3.1
+pytz==2018.5
 dj-database-url==0.5.0
-# docker run -p 6379:6379 -d redis:2.8
-channels==2.1.1
-channels-redis==2.2.1
-pusher
+easy-thumbnails==2.5
+PyJWT==1.6.4

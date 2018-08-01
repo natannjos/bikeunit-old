@@ -47,10 +47,8 @@ INSTALLED_APPS = [
 
     # Libs
     'widget_tweaks',
-    'rest_framework',
     'annoying',
     'easy_thumbnails',
-    #'pusher'
 ]
 
 MIDDLEWARE = [
@@ -95,7 +93,7 @@ if os.environ.get('DATABASE_URL', ''):
     DATABASES = {
         'default': dj_database_url.config()
     }
-else:   
+else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -168,24 +166,6 @@ try:
     from .local_settings import *
 except ImportError:
     pass
-
-
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    ),
-    
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.BasicAuthentication',
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.SessionAuthentication',
-        'contas.api.backends.JWTAuth',
-        # 'rest_framework.authentication.TokenAuthentication',
-    ),
-
-    'EXCEPTION_HANDLER': 'core.api.exceptions.core_exception_handler',
-    'NON_FIELD_ERRORS_KEY': 'error',
-}
 
 
 from django.contrib.messages import constants as  message_contants

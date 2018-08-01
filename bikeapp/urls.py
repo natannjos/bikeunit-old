@@ -17,10 +17,6 @@ urlpatterns = [
                                 'redirect_authenticated_user': True}, name='login'),
     path('sair/', auth_views.logout_then_login, name='logout'),
 
-    # URLs de APIs
-    path('api/autenticacao/', include('contas.api.urls', namespace='api_auth')),
-    path('api/', include('perfis.api.urls', namespace='profiles')),
-
     # URLs dos apps
     path('conta/', include('contas.urls', namespace='contas')),
     path('grupo/', include('grupos.urls', namespace='grupos')),
