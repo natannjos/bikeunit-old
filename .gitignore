@@ -197,3 +197,4 @@ $RECYCLE.BIN/
 .directory
 media/
 __pycache__/
+static/
